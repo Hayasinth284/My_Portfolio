@@ -145,16 +145,16 @@ function seedInitialData() {
   stmtProj.finalize();
 
   const skills = [
-    { category: 'Programming Languages', name: 'Python', proficiency: 90, experience_level: 'Advanced', icon: 'py' },
-    { category: 'Programming Languages', name: 'JavaScript (ES6+)', proficiency: 88, experience_level: 'Advanced', icon: 'js' },
-    { category: 'Database & SQL', name: 'SQL / Relational Databases', proficiency: 85, experience_level: 'Advanced', icon: 'sql' },
-    { category: 'Database & SQL', name: 'SQLite / MySQL', proficiency: 82, experience_level: 'Intermediate', icon: 'db' },
-    { category: 'Web Frontend', name: 'HTML5 & Semantic Markup', proficiency: 95, experience_level: 'Expert', icon: 'html' },
-    { category: 'Web Frontend', name: 'CSS3 / Flexbox / Grid', proficiency: 92, experience_level: 'Expert', icon: 'css' },
-    { category: 'Web Frontend', name: 'React.js & Modern UI', proficiency: 80, experience_level: 'Intermediate', icon: 'react' },
-    { category: 'Backend Development', name: 'Node.js & Express.js', proficiency: 82, experience_level: 'Intermediate', icon: 'node' },
-    { category: 'Developer Tools', name: 'Git & GitHub', proficiency: 85, experience_level: 'Advanced', icon: 'git' },
-    { category: 'Developer Tools', name: 'VS Code & Linux Commands', proficiency: 88, experience_level: 'Advanced', icon: 'terminal' }
+    { category: 'Frontend Development', name: 'HTML5 & Semantic Markup', proficiency: 95, experience_level: 'Expert', icon: 'fa-brands fa-html5' },
+    { category: 'Frontend Development', name: 'CSS3 / Flexbox / CSS Grid', proficiency: 92, experience_level: 'Expert', icon: 'fa-brands fa-css3-alt' },
+    { category: 'Frontend Development', name: 'JavaScript (ES6+ / Modern DOM)', proficiency: 90, experience_level: 'Advanced', icon: 'fa-brands fa-js' },
+    { category: 'Frontend Development', name: 'React.js & Component UI', proficiency: 85, experience_level: 'Advanced', icon: 'fa-brands fa-react' },
+    { category: 'Backend Development', name: 'Python & Flask REST APIs', proficiency: 90, experience_level: 'Advanced', icon: 'fa-brands fa-python' },
+    { category: 'Backend Development', name: 'Node.js & Express.js', proficiency: 85, experience_level: 'Advanced', icon: 'fa-brands fa-node-js' },
+    { category: 'Backend Development', name: 'RESTful API Design & Routing', proficiency: 88, experience_level: 'Advanced', icon: 'fa-solid fa-server' },
+    { category: 'Database Systems', name: 'SQL (Structured Query Language)', proficiency: 92, experience_level: 'Expert', icon: 'fa-solid fa-database' },
+    { category: 'Database Systems', name: 'SQLite & MySQL Optimization', proficiency: 86, experience_level: 'Advanced', icon: 'fa-solid fa-hard-drive' },
+    { category: 'Developer Tools & CS', name: 'Git & GitHub Version Control', proficiency: 88, experience_level: 'Advanced', icon: 'fa-brands fa-github' }
   ];
 
   const stmtSkill = db.prepare(`
