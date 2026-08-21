@@ -69,13 +69,8 @@ export default function SkillsSection({ skills }) {
                     overflow: 'hidden'
                   }}>
                     <div
-                      style={{
-                        width: `${skill.proficiency}%`,
-                        height: '100%',
-                        background: 'var(--accent-gradient)',
-                        borderRadius: 'var(--radius-full)',
-                        transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1)'
-                      }}
+                      className="skill-bar-fill"
+                      style={{ width: `${skill.proficiency}%` }}
                     ></div>
                   </div>
                 </div>

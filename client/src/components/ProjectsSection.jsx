@@ -34,28 +34,18 @@ export default function ProjectsSection({ projects, onSelectProject }) {
         flexWrap: 'wrap',
         gap: '16px',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         marginBottom: '36px'
       }}>
         {/* Category Tabs */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? 'var(--accent-gradient)' : 'rgba(255, 255, 255, 0.05)',
-                color: activeCategory === cat ? '#ffffff' : 'var(--text-secondary)',
-                border: activeCategory === cat ? 'none' : '1px solid var(--border-color)',
-                padding: '8px 18px',
-                borderRadius: 'var(--radius-full)',
-                fontWeight: 600,
-                fontSize: '0.88rem',
-                cursor: 'pointer',
-                transition: 'all 0.25s ease'
-              }}
+              className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
             >
-              {cat}
+              {cat === 'All' ? '⚡ All Projects' : cat}
             </button>
           ))}
         </div>

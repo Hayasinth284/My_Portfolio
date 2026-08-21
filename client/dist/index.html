@@ -255,6 +255,131 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Filter Pill Buttons in Projects and Skills Sections */
+    .filter-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 20px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.5, 0.64, 1);
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.2), transparent);
+      transition: all 0.4s ease;
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      border-color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.12);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 242, 254, 0.3);
+    }
+
+    .filter-btn:hover::before {
+      left: 100%;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #7f56d9 100%);
+      background-size: 200% 200%;
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 22px rgba(0, 242, 254, 0.5);
+      transform: translateY(-2px) scale(1.04);
+      animation: gradientShift 4s ease infinite;
+    }
+
+    .filter-btn:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    /* Project Card Action Button */
+    .project-card-btn {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: rgba(0, 242, 254, 0.06);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      overflow: hidden;
+    }
+
+    .project-card-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.25), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .project-card-btn:hover {
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.22), rgba(127, 86, 217, 0.28));
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 242, 254, 0.35);
+      color: #ffffff;
+    }
+
+    .project-card-btn:hover::before {
+      left: 100%;
+    }
+
+    .project-card-btn:hover i {
+      transform: scale(1.25) rotate(-8deg);
+      color: var(--accent-cyan);
+    }
+
+    .project-card-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+
+    /* Animated Skill Progress Fill with Glowing Beam */
+    @keyframes progressBeam {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00f2fe, #4facfe, #a855f7, #00f2fe);
+      background-size: 300% 100%;
+      animation: progressBeam 3.5s ease-in-out infinite;
+      border-radius: 9999px;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+      transition: width 1s ease-in-out;
+    }
+
     /* Section Container & Center Headings */
     .section-container {
       max-width: 1200px;
@@ -1198,15 +1323,35 @@
               <p>Explore software engineering projects built with Python, SQL, JavaScript, HTML/CSS, Node.js, and React.</p>
             </div>
 
+            {/* Projects Category Filter Toolbar */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'center', marginBottom: '36px' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
                 {['All', 'Python & SQL', 'Full Stack', 'Frontend', 'Database'].map(c => (
-                  <button key={c} onClick={() => setActiveCategory(c)} style={{ background: activeCategory === c ? 'var(--accent-gradient)' : 'rgba(255,255,255,0.05)', color: activeCategory === c ? '#fff' : 'var(--text-secondary)', border: activeCategory === c ? 'none' : '1px solid var(--border-color)', padding: '8px 18px', borderRadius: '9999px', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.2s ease' }}>
-                    {c}
+                  <button
+                    key={c}
+                    onClick={() => setActiveCategory(c)}
+                    className={`filter-btn ${activeCategory === c ? 'active' : ''}`}
+                  >
+                    {c === 'All' ? '⚡ All Projects' : c}
                   </button>
                 ))}
               </div>
-              <input type="text" placeholder="Search projects or tech..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ padding: '10px 18px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '9999px', color: '#fff', outline: 'none', width: '260px' }} />
+              <input
+                type="text"
+                placeholder="Search projects or tech..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                style={{
+                  padding: '10px 18px',
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '9999px',
+                  color: '#fff',
+                  outline: 'none',
+                  width: '260px',
+                  transition: 'all 0.3s ease'
+                }}
+              />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '28px' }}>
@@ -1219,12 +1364,12 @@
                   <div style={{ padding: '20px' }}>
                     <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px' }}>{p.title}</h3>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '16px', lineHeight: 1.5 }}>{p.description}</p>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '18px' }}>
                       {p.tags && p.tags.split(',').map(t => (
                         <span key={t} style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>{t.trim()}</span>
                       ))}
                     </div>
-                    <button className="btn-secondary" style={{ width: '100%', justifyContent: 'center', padding: '8px' }}>
+                    <button className="project-card-btn">
                       <i className="fa-solid fa-eye"></i> View Project Details
                     </button>
                   </div>
@@ -1280,7 +1425,7 @@
                   </div>
                   <div>
                     <h3 style={{ fontSize: '1.15rem', fontWeight: 700 }}>Database Systems</h3>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>SQL, Relational DBMS, SQLite, MySQL</span>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>SQL, SQLite, MySQL</span>
                   </div>
                 </div>
                 <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -1290,22 +1435,12 @@
             </div>
 
             {/* Category Filter Tabs */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '28px', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '28px', justifyContent: 'center' }}>
               {['All', 'Frontend Development', 'Backend Development', 'Database Systems', 'Developer Tools & CS'].map(cat => (
                 <button
                   key={cat}
                   onClick={() => setSkillCategory(cat)}
-                  style={{
-                    background: skillCategory === cat ? 'var(--accent-gradient)' : 'rgba(255,255,255,0.05)',
-                    color: skillCategory === cat ? '#fff' : 'var(--text-secondary)',
-                    border: skillCategory === cat ? 'none' : '1px solid var(--border-color)',
-                    padding: '8px 18px',
-                    borderRadius: '9999px',
-                    fontWeight: 600,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
+                  className={`filter-btn ${skillCategory === cat ? 'active' : ''}`}
                 >
                   {cat === 'All' ? '⚡ All Skills' : cat}
                 </button>
@@ -1317,11 +1452,11 @@
               {skills
                 .filter(s => skillCategory === 'All' || s.category === skillCategory)
                 .map(s => (
-                  <div key={s.id || s.name} className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.2s ease' }}>
+                  <div key={s.id || s.name} className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s ease' }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <i className={s.icon || 'fa-solid fa-code'} style={{ color: s.color || 'var(--accent-cyan)', fontSize: '20px' }}></i>
+                          <i className={s.icon || 'fa-solid fa-code'} style={{ color: s.color || 'var(--accent-cyan)', fontSize: '20px', transition: 'transform 0.3s ease' }}></i>
                           <span style={{ fontWeight: 700, fontSize: '0.98rem' }}>{s.name}</span>
                         </div>
                         <span className="badge badge-cyan" style={{ fontSize: '0.72rem', padding: '3px 8px' }}>{s.experience_level}</span>
@@ -1334,7 +1469,7 @@
                         <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{s.proficiency}%</span>
                       </div>
                       <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '9999px', overflow: 'hidden' }}>
-                        <div style={{ width: `${s.proficiency}%`, height: '100%', background: 'var(--accent-gradient)', borderRadius: '9999px' }}></div>
+                        <div className="skill-bar-fill" style={{ width: `${s.proficiency}%` }}></div>
                       </div>
                     </div>
                   </div>
