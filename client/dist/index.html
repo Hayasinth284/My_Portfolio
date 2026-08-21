@@ -255,6 +255,45 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Section Container & Center Headings */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 90px 24px;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto 50px auto;
+      max-width: 760px;
+    }
+
+    .section-header .badge {
+      margin-bottom: 14px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.2rem, 4.5vw, 2.9rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      text-align: center;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      text-align: center;
+      line-height: 1.65;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-12px); }
@@ -1159,15 +1198,15 @@
               <p>Explore software engineering projects built with Python, SQL, JavaScript, HTML/CSS, Node.js, and React.</p>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'center', marginBottom: '36px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
                 {['All', 'Python & SQL', 'Full Stack', 'Frontend', 'Database'].map(c => (
-                  <button key={c} onClick={() => setActiveCategory(c)} style={{ background: activeCategory === c ? 'var(--accent-gradient)' : 'rgba(255,255,255,0.05)', color: activeCategory === c ? '#fff' : 'var(--text-secondary)', border: activeCategory === c ? 'none' : '1px solid var(--border-color)', padding: '8px 18px', borderRadius: '9999px', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer' }}>
+                  <button key={c} onClick={() => setActiveCategory(c)} style={{ background: activeCategory === c ? 'var(--accent-gradient)' : 'rgba(255,255,255,0.05)', color: activeCategory === c ? '#fff' : 'var(--text-secondary)', border: activeCategory === c ? 'none' : '1px solid var(--border-color)', padding: '8px 18px', borderRadius: '9999px', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.2s ease' }}>
                     {c}
                   </button>
                 ))}
               </div>
-              <input type="text" placeholder="Search projects or tech..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ padding: '10px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '9999px', color: '#fff', outline: 'none', width: '260px' }} />
+              <input type="text" placeholder="Search projects or tech..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ padding: '10px 18px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '9999px', color: '#fff', outline: 'none', width: '260px' }} />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '28px' }}>
