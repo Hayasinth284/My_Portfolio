@@ -171,13 +171,16 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // Explicit Avatar & Favicon Handlers
+  // Explicit Avatar & Favicon Handlers (Serves user profile image as the website icon)
   if (pathname === '/avatar.jpg' || pathname === '/favicon.ico' || pathname === '/apple-touch-icon.png') {
     const avatarFile = path.join(__dirname, '../avatar.jpg');
     if (fs.existsSync(avatarFile)) {
       return serveStaticFile(res, avatarFile, 'image/jpeg');
     }
   }
+
+  // Serve static assets from client/public or client/dist
+  let staticPath = path.join(__dirname, '../client/public', pathname);
   if (fs.existsSync(staticPath) && fs.statSync(staticPath).isFile()) {
     const ext = path.extname(staticPath);
     return serveStaticFile(res, staticPath, mimeTypes[ext] || 'application/octet-stream');
