@@ -11,11 +11,10 @@ export default function SkillsSection({ skills }) {
   }, {});
 
   const categoryIcons = {
-    'Programming Languages': <Code size={20} color="var(--accent-cyan)" />,
-    'Database & SQL': <Database size={20} color="var(--accent-blue)" />,
-    'Web Frontend': <Globe size={20} color="var(--accent-purple)" />,
-    'Backend Development': <Cpu size={20} color="var(--accent-emerald)" />,
-    'Developer Tools': <Terminal size={20} color="var(--accent-cyan)" />
+    'Frontend Development': <Globe size={20} color="var(--accent-cyan)" />,
+    'Backend Development': <Cpu size={20} color="#c084fc" />,
+    'Database Systems': <Database size={20} color="var(--accent-emerald)" />,
+    'Developer Tools & CS': <Terminal size={20} color="#38bdf8" />
   };
 
   return (

@@ -6,6 +6,11 @@
   <title>Hayasinth M | Personal Portfolio - Full Stack & Python Developer</title>
   <meta name="description" content="Personal portfolio of Hayasinth M, 4th-year Computer Science Engineering student at Jeppiaar Engineering College specializing in Python, SQL, JavaScript, HTML/CSS, and Web Development.">
 
+  <!-- Website Icon / Favicon from Profile Image -->
+  <link rel="icon" type="image/jpeg" href="/avatar.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="/avatar.jpg">
+  <link rel="apple-touch-icon" href="/avatar.jpg">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -307,16 +312,20 @@
     ];
 
     const initialSkills = [
-      { id: 1, category: 'Programming Languages', name: 'Python', proficiency: 90, experience_level: 'Advanced', icon: 'py' },
-      { id: 2, category: 'Programming Languages', name: 'JavaScript (ES6+)', proficiency: 88, experience_level: 'Advanced', icon: 'js' },
-      { id: 3, category: 'Database & SQL', name: 'SQL / Relational Databases', proficiency: 85, experience_level: 'Advanced', icon: 'sql' },
-      { id: 4, category: 'Database & SQL', name: 'SQLite / MySQL', proficiency: 82, experience_level: 'Intermediate', icon: 'db' },
-      { id: 5, category: 'Web Frontend', name: 'HTML5 & Semantic Markup', proficiency: 95, experience_level: 'Expert', icon: 'html' },
-      { id: 6, category: 'Web Frontend', name: 'CSS3 / Flexbox / Grid', proficiency: 92, experience_level: 'Expert', icon: 'css' },
-      { id: 7, category: 'Web Frontend', name: 'React.js & Modern UI', proficiency: 80, experience_level: 'Intermediate', icon: 'react' },
-      { id: 8, category: 'Backend Development', name: 'Node.js & Express.js', proficiency: 82, experience_level: 'Intermediate', icon: 'node' },
-      { id: 9, category: 'Developer Tools', name: 'Git & GitHub', proficiency: 85, experience_level: 'Advanced', icon: 'git' },
-      { id: 10, category: 'Developer Tools', name: 'VS Code & Linux Commands', proficiency: 88, experience_level: 'Advanced', icon: 'terminal' }
+      { id: 1, category: 'Frontend Development', name: 'HTML5 & Semantic Markup', proficiency: 95, experience_level: 'Expert', icon: 'fa-brands fa-html5', color: '#e34f26' },
+      { id: 2, category: 'Frontend Development', name: 'CSS3 / Flexbox / CSS Grid', proficiency: 92, experience_level: 'Expert', icon: 'fa-brands fa-css3-alt', color: '#1572b6' },
+      { id: 3, category: 'Frontend Development', name: 'JavaScript (ES6+ / Modern DOM)', proficiency: 90, experience_level: 'Advanced', icon: 'fa-brands fa-js', color: '#f7df1e' },
+      { id: 4, category: 'Frontend Development', name: 'React.js & Component UI', proficiency: 85, experience_level: 'Advanced', icon: 'fa-brands fa-react', color: '#61dafb' },
+      { id: 5, category: 'Frontend Development', name: 'Responsive & Glassmorphic UI', proficiency: 88, experience_level: 'Advanced', icon: 'fa-solid fa-wand-magic-sparkles', color: '#c084fc' },
+      { id: 6, category: 'Backend Development', name: 'Python & Flask REST APIs', proficiency: 90, experience_level: 'Advanced', icon: 'fa-brands fa-python', color: '#3776ab' },
+      { id: 7, category: 'Backend Development', name: 'Node.js & Express.js', proficiency: 85, experience_level: 'Advanced', icon: 'fa-brands fa-node-js', color: '#339933' },
+      { id: 8, category: 'Backend Development', name: 'RESTful API Design & Routing', proficiency: 88, experience_level: 'Advanced', icon: 'fa-solid fa-server', color: '#00f2fe' },
+      { id: 9, category: 'Database Systems', name: 'SQL (Structured Query Language)', proficiency: 92, experience_level: 'Expert', icon: 'fa-solid fa-database', color: '#00b4d8' },
+      { id: 10, category: 'Database Systems', name: 'Relational Database Management (RDBMS)', proficiency: 88, experience_level: 'Advanced', icon: 'fa-solid fa-table', color: '#4facfe' },
+      { id: 11, category: 'Database Systems', name: 'SQLite & MySQL Optimization', proficiency: 86, experience_level: 'Advanced', icon: 'fa-solid fa-hard-drive', color: '#10b981' },
+      { id: 12, category: 'Database Systems', name: 'Database Schema Design & Indexing', proficiency: 85, experience_level: 'Advanced', icon: 'fa-solid fa-diagram-project', color: '#a855f7' },
+      { id: 13, category: 'Developer Tools & CS', name: 'Git & GitHub Version Control', proficiency: 88, experience_level: 'Advanced', icon: 'fa-brands fa-github', color: '#ffffff' },
+      { id: 14, category: 'Developer Tools & CS', name: 'VS Code & Linux Commands', proficiency: 86, experience_level: 'Advanced', icon: 'fa-solid fa-terminal', color: '#38bdf8' }
     ];
 
     function App() {
@@ -326,6 +335,7 @@
       const [stats, setStats] = useState(null);
       const [selectedProject, setSelectedProject] = useState(null);
       const [activeCategory, setActiveCategory] = useState('All');
+      const [skillCategory, setSkillCategory] = useState('All');
       const [searchQuery, setSearchQuery] = useState('');
       const [adminOpen, setAdminOpen] = useState(false);
       const [toast, setToast] = useState('');
@@ -834,8 +844,31 @@
           <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--bg-card)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-color)' }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--accent-gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold' }}>
-                  <i className="fa-solid fa-code" style={{ fontSize: '20px' }}></i>
+                <div style={{ position: 'relative', width: '42px', height: '42px' }}>
+                  <img 
+                    src="/avatar.jpg" 
+                    alt="Hayasinth M" 
+                    style={{ 
+                      width: '42px', 
+                      height: '42px', 
+                      borderRadius: '50%', 
+                      objectFit: 'cover', 
+                      border: '2px solid var(--accent-cyan)',
+                      boxShadow: '0 0 14px rgba(0, 242, 254, 0.45)',
+                      display: 'block'
+                    }} 
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '-1px',
+                    right: '-1px',
+                    width: '13px',
+                    height: '13px',
+                    borderRadius: '50%',
+                    background: 'var(--accent-emerald)',
+                    border: '2px solid var(--bg-primary)',
+                    boxShadow: '0 0 8px var(--accent-emerald)'
+                  }}></div>
                 </div>
                 <div>
                   <span style={{ fontSize: '1.25rem', fontWeight: 800 }}>Hayasinth<span className="gradient-text">.M</span></span>
@@ -1015,27 +1048,112 @@
             </div>
           </section>
 
-          {/* Skills Section */}
+          {/* Technical Skills Section */}
           <section id="skills" className="section-container">
             <div className="section-header">
-              <div className="badge badge-purple" style={{ marginBottom: '12px' }}>Technical Proficiency</div>
-              <h2>Skills & <span className="gradient-text">Competencies</span></h2>
-              <p>Comprehensive breakdown of core programming languages, database systems, web frameworks, and developer tools.</p>
+              <div className="badge badge-purple" style={{ marginBottom: '12px' }}><i className="fa-solid fa-layer-group"></i> Technical Competencies</div>
+              <h2>Technical <span className="gradient-text">Skills</span></h2>
+              <p>Specialized in modern Frontend web interfaces, robust Backend services, and optimized Relational Database systems.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-              {skills.map(s => (
-                <div key={s.name} className="glass-panel" style={{ padding: '20px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ fontWeight: 700 }}>{s.name}</span>
-                    <span style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>{s.proficiency}%</span>
+            {/* 3 Major Domain Highlight Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '36px' }}>
+              <div className="glass-panel" style={{ padding: '24px', borderTop: '3px solid var(--accent-cyan)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+                  <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(0, 242, 254, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-cyan)', fontSize: '20px' }}>
+                    <i className="fa-solid fa-code"></i>
                   </div>
-                  <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '9999px', overflow: 'hidden' }}>
-                    <div style={{ width: `${s.proficiency}%`, height: '100%', background: 'var(--accent-gradient)' }}></div>
+                  <div>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 700 }}>Frontend Development</h3>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>HTML5, CSS3, JavaScript, React.js</span>
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '6px' }}>Category: {s.category} ({s.experience_level})</div>
                 </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  Designing responsive, high-performance user interfaces with clean semantic HTML, modern CSS Grid/Flexbox, and dynamic React components.
+                </p>
+              </div>
+
+              <div className="glass-panel" style={{ padding: '24px', borderTop: '3px solid var(--accent-purple)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+                  <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(127, 86, 217, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c084fc', fontSize: '20px' }}>
+                    <i className="fa-solid fa-server"></i>
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 700 }}>Backend Development</h3>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Python, Node.js, Express, REST APIs</span>
+                  </div>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  Architecting secure, scalable server applications, asynchronous backend processing, and modular RESTful API endpoints.
+                </p>
+              </div>
+
+              <div className="glass-panel" style={{ padding: '24px', borderTop: '3px solid var(--accent-emerald)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+                  <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-emerald)', fontSize: '20px' }}>
+                    <i className="fa-solid fa-database"></i>
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 700 }}>Database Systems</h3>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>SQL, Relational DBMS, SQLite, MySQL</span>
+                  </div>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  Writing complex relational queries, subqueries, database schemas in 3NF, fast indexing, and persistent database storage.
+                </p>
+              </div>
+            </div>
+
+            {/* Category Filter Tabs */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '28px', justifyContent: 'center' }}>
+              {['All', 'Frontend Development', 'Backend Development', 'Database Systems', 'Developer Tools & CS'].map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setSkillCategory(cat)}
+                  style={{
+                    background: skillCategory === cat ? 'var(--accent-gradient)' : 'rgba(255,255,255,0.05)',
+                    color: skillCategory === cat ? '#fff' : 'var(--text-secondary)',
+                    border: skillCategory === cat ? 'none' : '1px solid var(--border-color)',
+                    padding: '8px 18px',
+                    borderRadius: '9999px',
+                    fontWeight: 600,
+                    fontSize: '0.85rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {cat === 'All' ? '⚡ All Skills' : cat}
+                </button>
               ))}
+            </div>
+
+            {/* Individual Skill Cards Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: '20px' }}>
+              {skills
+                .filter(s => skillCategory === 'All' || s.category === skillCategory)
+                .map(s => (
+                  <div key={s.id || s.name} className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.2s ease' }}>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <i className={s.icon || 'fa-solid fa-code'} style={{ color: s.color || 'var(--accent-cyan)', fontSize: '20px' }}></i>
+                          <span style={{ fontWeight: 700, fontSize: '0.98rem' }}>{s.name}</span>
+                        </div>
+                        <span className="badge badge-cyan" style={{ fontSize: '0.72rem', padding: '3px 8px' }}>{s.experience_level}</span>
+                      </div>
+                      <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginBottom: '12px' }}>{s.category}</div>
+                    </div>
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', marginBottom: '6px', fontFamily: 'var(--font-mono)' }}>
+                        <span style={{ color: 'var(--text-muted)' }}>Proficiency</span>
+                        <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{s.proficiency}%</span>
+                      </div>
+                      <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '9999px', overflow: 'hidden' }}>
+                        <div style={{ width: `${s.proficiency}%`, height: '100%', background: 'var(--accent-gradient)', borderRadius: '9999px' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
           </section>
 

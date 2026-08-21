@@ -31,20 +31,33 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
         justifyContent: 'space-between'
       }}>
         {/* Brand Logo */}
-        <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '10px',
-            background: 'var(--accent-gradient)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontWeight: 'bold',
-            boxShadow: '0 4px 12px rgba(0,242,254,0.3)'
-          }}>
-            <Code2 size={22} />
+        {/* Brand Logo with Profile Image */}
+        <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit' }}>
+          <div style={{ position: 'relative', width: '42px', height: '42px' }}>
+            <img
+              src="/avatar.jpg"
+              alt="Hayasinth M"
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid var(--accent-cyan)',
+                boxShadow: '0 0 14px rgba(0, 242, 254, 0.45)',
+                display: 'block'
+              }}
+            />
+            <div style={{
+              position: 'absolute',
+              bottom: '-1px',
+              right: '-1px',
+              width: '13px',
+              height: '13px',
+              borderRadius: '50%',
+              background: 'var(--accent-emerald)',
+              border: '2px solid var(--bg-primary)',
+              boxShadow: '0 0 8px var(--accent-emerald)'
+            }}></div>
           </div>
           <div>
             <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px' }}>
