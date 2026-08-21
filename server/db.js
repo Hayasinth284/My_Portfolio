@@ -85,7 +85,7 @@ function seedInitialData() {
 
   const projects = [
     {
-      title: 'My Portfolio — 3D Cyber Space & Full-Stack Web App',
+      title: 'My Portfolio',
       description: 'A high-performance modern developer portfolio featuring 3D Deep Space starfield warp animations, interactive HTML5 Canvas particle physics, Express REST API backend, persistent SQL/JSON storage, and responsive glassmorphism UI.',
       category: 'Full Stack',
       image: '/project2.jpg',
