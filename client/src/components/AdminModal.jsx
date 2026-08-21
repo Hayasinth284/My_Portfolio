@@ -332,22 +332,9 @@ export default function AdminModal({ isOpen, onClose, projects, onRefreshData, s
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{proj.category}</div>
                 </div>
 
-                <button
-                  onClick={() => handleDeleteProject(proj.id)}
-                  style={{
-                    background: 'rgba(239, 68, 68, 0.1)',
-                    border: '1px solid rgba(239, 68, 68, 0.3)',
-                    color: '#f87171',
-                    padding: '6px 12px',
-                    borderRadius: 'var(--radius-sm)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <Trash2 size={14} /> Delete
-                </button>
+                <span className="badge badge-cyan" style={{ fontSize: '0.78rem' }}>
+                  {proj.category}
+                </span>
               </div>
             ))}
           </div>

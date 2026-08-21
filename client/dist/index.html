@@ -1291,7 +1291,7 @@
                   {projects.map(p => (
                     <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px' }}>
                       <span style={{ fontWeight: 600 }}>{p.title}</span>
-                      <button onClick={() => handleDeleteProject(p.id)} style={{ background: 'rgba(239,68,68,0.2)', border: 'none', color: '#f87171', padding: '4px 10px', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
+                      <span className="badge badge-cyan" style={{ fontSize: '0.75rem' }}>{p.category || 'Active'}</span>
                     </div>
                   ))}
                 </div>
