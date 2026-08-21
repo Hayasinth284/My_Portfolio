@@ -15,6 +15,19 @@ import Footer from './components/Footer';
 const initialProjects = [
   {
     id: 1,
+    title: 'My Portfolio — 3D Cyber Space & Full-Stack Web App',
+    description: 'A high-performance modern developer portfolio featuring 3D Deep Space starfield warp animations, interactive HTML5 Canvas particle physics, Express REST API backend, persistent SQL/JSON storage, and responsive glassmorphism UI.',
+    category: 'Full Stack',
+    image: '/project2.jpg',
+    tags: 'JavaScript, React, Node.js, Express, HTML5 Canvas 3D, CSS3, REST API, SQL',
+    github_url: 'https://github.com/hayasinth284/My_Portfolio',
+    demo_url: 'http://localhost:5000',
+    featured: 1,
+    architecture: 'Node.js & Express REST Backend + React & Vanilla CSS UI + GPU-Accelerated 3D Canvas Graphics Engine',
+    key_features: '3D Deep Space warp flight animation; Multi-mode animation switcher (Space, 3D Quantum, Magnetic Vortex); Live Contact Form with persistent DB; Admin Content Manager; Light/Dark theme engine; Mobile-responsive design'
+  },
+  {
+    id: 2,
     title: 'Smart Data Analytics & Query Platform',
     description: 'A robust Python and SQL-driven analytics dashboard designed for complex relational database queries, real-time data processing, and interactive visual reporting.',
     category: 'Python & SQL',
@@ -25,19 +38,6 @@ const initialProjects = [
     featured: 1,
     architecture: 'Python Flask API + SQL Query Engine + Frontend Data Visualizer',
     key_features: 'Automated SQL Query execution; Real-time charts; Custom report export; Database performance profiling'
-  },
-  {
-    id: 2,
-    title: 'Interactive Web Portfolio & Content Manager',
-    description: 'A dynamic, high-performance web app crafted with HTML, CSS, JavaScript, and Node.js REST API with SQLite relational database backend.',
-    category: 'Full Stack',
-    image: '/project2.jpg',
-    tags: 'JavaScript, Node.js, Express, HTML5, CSS3, REST API',
-    github_url: 'https://github.com/hayasinth284/personal-portfolio',
-    demo_url: '#',
-    featured: 1,
-    architecture: 'Express.js Backend + Modular Vanilla CSS UI + SQLite Database Layer',
-    key_features: 'Dark/Light Theme switch; Live Project Search & Filter; Real-time Contact Form; Admin Content Manager'
   },
   {
     id: 3,
