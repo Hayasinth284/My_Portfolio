@@ -22,21 +22,20 @@ export default function Footer() {
           gap: '20px',
           marginBottom: '30px'
         }}>
-          {/* Logo & Info */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '8px',
-              background: 'var(--accent-gradient)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontWeight: 'bold'
-            }}>
-              <Code2 size={18} />
-            </div>
+          {/* Logo & Profile Avatar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img
+              src="/avatar.jpg"
+              alt="Hayasinth M"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid var(--accent-cyan)',
+                boxShadow: '0 0 10px rgba(0, 242, 254, 0.4)'
+              }}
+            />
             <div>
               <div style={{ fontWeight: 800, color: 'var(--text-primary)', fontSize: '1.1rem' }}>Hayasinth M</div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Jeppiaar Engineering College (BE CSE)</div>

@@ -171,8 +171,13 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // Serve static assets from client/public or client/dist
-  let staticPath = path.join(__dirname, '../client/public', pathname);
+  // Explicit Avatar & Favicon Handlers
+  if (pathname === '/avatar.jpg' || pathname === '/favicon.ico' || pathname === '/apple-touch-icon.png') {
+    const avatarFile = path.join(__dirname, '../avatar.jpg');
+    if (fs.existsSync(avatarFile)) {
+      return serveStaticFile(res, avatarFile, 'image/jpeg');
+    }
+  }
   if (fs.existsSync(staticPath) && fs.statSync(staticPath).isFile()) {
     const ext = path.extname(staticPath);
     return serveStaticFile(res, staticPath, mimeTypes[ext] || 'application/octet-stream');
