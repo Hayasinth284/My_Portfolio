@@ -61,24 +61,25 @@ export default function ProjectsSection({ projects, onSelectProject }) {
             left: '12px',
             top: '50%',
             transform: 'translateY(-50%)',
-            color: 'var(--text-muted)'
-          }} />
+        {/* Animated Search Bar */}
+        <div className="search-wrapper">
+          <Search size={16} className="search-icon-left" />
           <input
             type="text"
+            className="search-input-field"
             placeholder="Search projects or tech..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px 16px 10px 38px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid var(--border-color)',
-              borderRadius: 'var(--radius-full)',
-              color: 'var(--text-primary)',
-              fontSize: '0.88rem',
-              outline: 'none'
-            }}
           />
+          {searchQuery && (
+            <button
+              className="search-clear-btn"
+              onClick={() => setSearchQuery('')}
+              title="Clear search"
+            >
+              ✕
+            </button>
+          )}
         </div>
       </div>
 
