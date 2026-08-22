@@ -199,136 +199,79 @@ export default function ContactSection({ showToast }) {
               )}
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
-                    Your Name *
-                  </label>
+                <div className="input-group-animated">
+                  <User size={16} className="form-input-icon" />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="e.g. Alex Rivera"
+                    placeholder="Your Name *"
                     required
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: 'var(--radius-sm)',
-                      color: 'var(--text-primary)',
-                      fontSize: '0.9rem',
-                      outline: 'none'
-                    }}
+                    className="form-input-animated"
                   />
                 </div>
 
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
-                    Email Address *
-                  </label>
+                <div className="input-group-animated">
+                  <Mail size={16} className="form-input-icon" />
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="alex@example.com"
+                    placeholder="Email Address *"
                     required
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: 'var(--radius-sm)',
-                      color: 'var(--text-primary)',
-                      fontSize: '0.9rem',
-                      outline: 'none'
-                    }}
+                    className="form-input-animated"
                   />
                 </div>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
-                    Phone / Mobile
-                  </label>
+                <div className="input-group-animated">
+                  <Phone size={16} className="form-input-icon" />
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+91 9876543210"
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: 'var(--radius-sm)',
-                      color: 'var(--text-primary)',
-                      fontSize: '0.9rem',
-                      outline: 'none'
-                    }}
+                    placeholder="Phone / Mobile (Optional)"
+                    className="form-input-animated"
                   />
                 </div>
 
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
-                    Subject
-                  </label>
+                <div className="input-group-animated">
+                  <MessageSquare size={16} className="form-input-icon" />
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Project Inquiry / Hiring"
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: 'var(--radius-sm)',
-                      color: 'var(--text-primary)',
-                      fontSize: '0.9rem',
-                      outline: 'none'
-                    }}
+                    placeholder="Subject (Optional)"
+                    className="form-input-animated"
                   />
                 </div>
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
-                  Your Message *
-                </label>
+              <div className="input-group-animated">
+                <MessageSquare size={16} className="form-textarea-icon" />
                 <textarea
                   name="message"
                   rows="4"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Hi Hayasinth, I would like to discuss..."
+                  placeholder="Your Message *"
                   required
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: 'var(--radius-sm)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    resize: 'vertical'
-                  }}
+                  className="form-textarea-animated"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="btn-primary"
+                className="btn-primary btn-send-message"
                 disabled={loading}
-                style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}
               >
                 {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
-                {loading ? 'Submitting...' : 'Send Message'}
+                <span>{loading ? 'Submitting...' : 'Send Message'}</span>
               </button>
             </form>
           )}

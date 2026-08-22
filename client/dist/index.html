@@ -684,6 +684,131 @@
       transform: scale(1.15) rotate(90deg);
     }
 
+    /* Animated Form Inputs (Send a Message Area) */
+    .input-group-animated {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    .form-input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--text-muted);
+      font-size: 15px;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      z-index: 2;
+    }
+
+    .form-textarea-icon {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      color: var(--text-muted);
+      font-size: 15px;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      z-index: 2;
+    }
+
+    .input-group-animated:focus-within .form-input-icon,
+    .input-group-animated:focus-within .form-textarea-icon {
+      color: var(--accent-cyan);
+      transform: scale(1.25) rotate(10deg);
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+    }
+
+    .form-input-animated {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-input-animated::placeholder {
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .form-input-animated:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(0, 242, 254, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 12px rgba(0, 242, 254, 0.15);
+    }
+
+    .form-input-animated:focus {
+      background: rgba(5, 7, 15, 0.85);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .form-textarea-animated {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      backdrop-filter: blur(10px);
+      resize: vertical;
+      min-height: 105px;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-textarea-animated::placeholder {
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .form-textarea-animated:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(0, 242, 254, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 12px rgba(0, 242, 254, 0.15);
+    }
+
+    .form-textarea-animated:focus {
+      background: rgba(5, 7, 15, 0.85);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-send-message {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      font-size: 1rem;
+      margin-top: 4px;
+    }
+
+    .btn-send-message i {
+      transition: transform 0.35s cubic-bezier(0.34, 1.5, 0.64, 1);
+    }
+
+    .btn-send-message:hover i {
+      transform: translateX(6px) translateY(-3px) rotate(15deg);
+      color: #ffffff;
+    }
+
     /* Section Container & Center Headings */
     .section-container {
       max-width: 1200px;
@@ -1865,13 +1990,56 @@
                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Thank you! Your message has been received.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleContactSubmit} style={{ display: 'grid', gap: '14px' }}>
-                    <input type="text" placeholder="Your Name *" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required style={{ padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '8px', color: '#fff' }} />
-                    <input type="email" placeholder="Email Address *" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} required style={{ padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '8px', color: '#fff' }} />
-                    <input type="tel" placeholder="Mobile Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} style={{ padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '8px', color: '#fff' }} />
-                    <textarea rows="3" placeholder="Message *" value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} required style={{ padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', borderRadius: '8px', color: '#fff', resize: 'vertical' }}></textarea>
-                    <button type="submit" className="btn-primary" style={{ justifyContent: 'center' }}>
-                      <i className="fa-solid fa-paper-plane"></i> Send Message
+                  <form onSubmit={handleContactSubmit} style={{ display: 'grid', gap: '16px' }}>
+                    <div className="input-group-animated">
+                      <i className="fa-solid fa-user form-input-icon"></i>
+                      <input
+                        type="text"
+                        className="form-input-animated"
+                        placeholder="Your Name *"
+                        value={formData.name}
+                        onChange={e => setFormData({...formData, name: e.target.value})}
+                        required
+                      />
+                    </div>
+                    
+                    <div className="input-group-animated">
+                      <i className="fa-solid fa-envelope form-input-icon"></i>
+                      <input
+                        type="email"
+                        className="form-input-animated"
+                        placeholder="Email Address *"
+                        value={formData.email}
+                        onChange={e => setFormData({...formData, email: e.target.value})}
+                        required
+                      />
+                    </div>
+
+                    <div className="input-group-animated">
+                      <i className="fa-solid fa-phone form-input-icon"></i>
+                      <input
+                        type="tel"
+                        className="form-input-animated"
+                        placeholder="Mobile Number (Optional)"
+                        value={formData.phone}
+                        onChange={e => setFormData({...formData, phone: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="input-group-animated">
+                      <i className="fa-solid fa-comment-dots form-textarea-icon"></i>
+                      <textarea
+                        rows="3"
+                        className="form-textarea-animated"
+                        placeholder="Your Message *"
+                        value={formData.message}
+                        onChange={e => setFormData({...formData, message: e.target.value})}
+                        required
+                      ></textarea>
+                    </div>
+
+                    <button type="submit" className="btn-primary btn-send-message">
+                      <i className="fa-solid fa-paper-plane" style={{ marginRight: '8px' }}></i> Send Message
                     </button>
                   </form>
                 )}
