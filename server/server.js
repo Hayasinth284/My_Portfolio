@@ -173,29 +173,49 @@ const server = http.createServer(async (req, res) => {
 
   // Explicit Avatar & Favicon Handlers (Serves user profile image as the website icon)
   if (pathname === '/avatar.jpg' || pathname === '/favicon.ico' || pathname === '/apple-touch-icon.png') {
-    const avatarFile = path.join(__dirname, '../avatar.jpg');
-    if (fs.existsSync(avatarFile)) {
-      return serveStaticFile(res, avatarFile, 'image/jpeg');
+    const possiblePaths = [
+      path.join(__dirname, '../avatar.jpg'),
+      path.join(__dirname, 'avatar.jpg'),
+      path.join(__dirname, '../client/dist/avatar.jpg'),
+      path.join(__dirname, '../client/public/avatar.jpg'),
+      path.join(process.cwd(), 'avatar.jpg'),
+      path.join(process.cwd(), 'client/dist/avatar.jpg'),
+      path.join(process.cwd(), 'client/public/avatar.jpg')
+    ];
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) {
+        return serveStaticFile(res, p, 'image/jpeg');
+      }
     }
   }
 
-  // Serve static assets from client/public or client/dist
-  let staticPath = path.join(__dirname, '../client/public', pathname);
-  if (fs.existsSync(staticPath) && fs.statSync(staticPath).isFile()) {
-    const ext = path.extname(staticPath);
-    return serveStaticFile(res, staticPath, mimeTypes[ext] || 'application/octet-stream');
-  }
+  // Serve static assets from client/dist or client/public
+  const assetPaths = [
+    path.join(__dirname, '../client/dist', pathname === '/' ? 'index.html' : pathname),
+    path.join(__dirname, '../client/public', pathname),
+    path.join(process.cwd(), 'client/dist', pathname === '/' ? 'index.html' : pathname),
+    path.join(process.cwd(), 'client/public', pathname)
+  ];
 
-  let distPath = path.join(__dirname, '../client/dist', pathname === '/' ? 'index.html' : pathname);
-  if (fs.existsSync(distPath) && fs.statSync(distPath).isFile()) {
-    const ext = path.extname(distPath);
-    return serveStaticFile(res, distPath, mimeTypes[ext] || 'application/octet-stream');
+  for (const asset of assetPaths) {
+    if (fs.existsSync(asset) && fs.statSync(asset).isFile()) {
+      const ext = path.extname(asset);
+      return serveStaticFile(res, asset, mimeTypes[ext] || 'application/octet-stream');
+    }
   }
 
   // Fallback to index.html or API welcome page
-  const indexHtml = path.join(__dirname, '../client/dist/index.html');
-  if (fs.existsSync(indexHtml)) {
-    return serveStaticFile(res, indexHtml, 'text/html');
+  const indexPaths = [
+    path.join(__dirname, '../client/dist/index.html'),
+    path.join(process.cwd(), 'client/dist/index.html'),
+    path.join(__dirname, '../client/index.html'),
+    path.join(process.cwd(), 'client/index.html')
+  ];
+
+  for (const idx of indexPaths) {
+    if (fs.existsSync(idx) && fs.statSync(idx).isFile()) {
+      return serveStaticFile(res, idx, 'text/html');
+    }
   }
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
