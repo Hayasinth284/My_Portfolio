@@ -101,28 +101,26 @@ export default function Hero() {
             <div style={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: '20px',
+              gap: '10px',
               paddingTop: '20px',
-              borderTop: '1px solid var(--border-color)',
-              color: 'var(--text-muted)',
-              fontSize: '0.88rem'
+              borderTop: '1px solid var(--border-color)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <a href="mailto:hayasinth284@gmail.com" className="contact-chip">
                 <Mail size={16} color="var(--accent-cyan)" />
-                <a href="mailto:hayasinth284@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>hayasinth284@gmail.com</a>
-              </div>
+                <span>hayasinth284@gmail.com</span>
+              </a>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <a href="tel:+918122208962" className="contact-chip">
                 <Phone size={16} color="var(--accent-cyan)" />
-                <a href="tel:+918122208962" style={{ color: 'inherit', textDecoration: 'none' }}>+91 8122208962</a>
-              </div>
+                <span>+91 8122208962</span>
+              </a>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <a href="https://www.linkedin.com/in/hayasinth284" target="_blank" rel="noreferrer" className="contact-chip">
                 <Linkedin size={16} color="#00f2fe" />
-                <a href="https://www.linkedin.com/in/hayasinth284" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>hayasinth284</a>
-              </div>
+                <span>hayasinth284</span>
+              </a>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div className="contact-chip">
                 <MapPin size={16} color="var(--accent-cyan)" />
                 <span>Chennai, Tamil Nadu</span>
               </div>
@@ -185,16 +183,7 @@ export default function Hero() {
                 {['Python', 'SQL', 'JavaScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'React', 'SQLite'].map((tech) => (
                   <span
                     key={tech}
-                    style={{
-                      background: 'rgba(0, 242, 254, 0.08)',
-                      border: '1px solid rgba(0, 242, 254, 0.2)',
-                      color: 'var(--text-primary)',
-                      padding: '4px 10px',
-                      borderRadius: 'var(--radius-full)',
-                      fontSize: '0.78rem',
-                      fontFamily: 'var(--font-mono)',
-                      fontWeight: 500
-                    }}
+                    className="tech-tag-chip"
                   >
                     #{tech}
                   </span>
