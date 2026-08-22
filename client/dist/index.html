@@ -434,6 +434,178 @@
       color: #fff;
     }
 
+    /* Animated Navbar Links & Row Buttons */
+    .nav-brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .nav-brand-link:hover {
+      transform: scale(1.03);
+    }
+    .nav-brand-link:hover img {
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.75) !important;
+      border-color: #ffffff !important;
+    }
+
+    .nav-link {
+      position: relative;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 9999px;
+      transform: translateX(-50%);
+      transition: width 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      box-shadow: 0 0 8px var(--accent-cyan);
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+      background: rgba(0, 242, 254, 0.08);
+      transform: translateY(-2px);
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+    }
+
+    .nav-link:hover::after {
+      width: 60%;
+    }
+
+    .nav-link:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    /* Navbar Background Switcher Button */
+    .nav-fx-btn {
+      position: relative;
+      background: rgba(127, 86, 217, 0.15);
+      border: 1px solid rgba(127, 86, 217, 0.35);
+      color: #c084fc;
+      padding: 7px 16px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.84rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      overflow: hidden;
+    }
+
+    .nav-fx-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .nav-fx-btn:hover {
+      background: rgba(127, 86, 217, 0.28);
+      border-color: #c084fc;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 20px rgba(127, 86, 217, 0.45), 0 0 12px rgba(0, 242, 254, 0.3);
+      color: #ffffff;
+    }
+
+    .nav-fx-btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-fx-btn i {
+      transition: transform 0.4s ease;
+    }
+    .nav-fx-btn:hover i {
+      transform: rotate(35deg) scale(1.25);
+      color: var(--accent-cyan);
+    }
+
+    .nav-fx-btn:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    /* Navbar Icon Action Buttons (Theme, Admin DB) */
+    .nav-icon-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    .nav-icon-btn:hover {
+      background: rgba(0, 242, 254, 0.12);
+      border-color: var(--accent-cyan);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 6px 18px rgba(0, 242, 254, 0.35);
+      color: #ffffff;
+    }
+
+    .nav-icon-btn i {
+      transition: transform 0.3s ease;
+    }
+    .nav-icon-btn:hover i {
+      transform: rotate(20deg) scale(1.15);
+      color: var(--accent-cyan);
+    }
+
+    .nav-icon-btn:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    /* Blinking Status Indicator Dot */
+    @keyframes statusBlink {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 8px #10b981;
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.3);
+        box-shadow: 0 0 16px #10b981;
+      }
+    }
+
+    .status-dot-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+      animation: statusBlink 2s ease-in-out infinite;
+    }
+
     /* Section Container & Center Headings */
     .section-container {
       max-width: 1200px;
@@ -1207,8 +1379,8 @@
           <div style={{ position: 'relative', zIndex: 1 }}>
             {/* Header Navbar */}
           <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--bg-card)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-color)' }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit' }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <a href="#hero" className="nav-brand-link">
                 <div style={{ position: 'relative', width: '42px', height: '42px' }}>
                   <img 
                     src={AVATAR_IMAGE} 
@@ -1220,7 +1392,8 @@
                       objectFit: 'cover', 
                       border: '2px solid var(--accent-cyan)',
                       boxShadow: '0 0 14px rgba(0, 242, 254, 0.45)',
-                      display: 'block'
+                      display: 'block',
+                      transition: 'all 0.3s ease'
                     }} 
                   />
                   <div style={{
@@ -1241,44 +1414,31 @@
                 </div>
               </a>
 
-              <nav style={{ display: 'flex', gap: '28px', alignItems: 'center' }}>
-                <a href="#hero" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500 }}>About</a>
-                <a href="#projects" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500 }}>Projects</a>
-                <a href="#skills" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500 }}>Skills</a>
-                <a href="#experience" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500 }}>Experience</a>
-                <a href="#contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500 }}>Contact</a>
+              <nav style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <a href="#hero" className="nav-link">About</a>
+                <a href="#projects" className="nav-link">Projects</a>
+                <a href="#skills" className="nav-link">Skills</a>
+                <a href="#experience" className="nav-link">Experience</a>
+                <a href="#contact" className="nav-link">Contact</a>
               </nav>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <button
                   onClick={cycleBgMode}
+                  className="nav-fx-btn"
                   title="Click to Switch Background Animation (Deep Space, 3D Quantum Waves, Magnetic Nebula Vortex)"
-                  style={{
-                    background: 'rgba(127, 86, 217, 0.15)',
-                    border: '1px solid rgba(127, 86, 217, 0.35)',
-                    color: '#c084fc',
-                    padding: '6px 14px',
-                    borderRadius: '9999px',
-                    cursor: 'pointer',
-                    fontSize: '0.82rem',
-                    fontWeight: 600,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    transition: 'all 0.2s ease'
-                  }}
                 >
-                  <i className="fa-solid fa-wand-magic-sparkles" style={{ color: 'var(--accent-cyan)' }}></i>
+                  <i className="fa-solid fa-wand-magic-sparkles"></i>
                   <span>{bgModeNames[bgMode]}</span>
                 </button>
 
-                <span className="badge badge-cyan">
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-emerald)', display: 'inline-block' }}></span> 4th Year CSE
+                <span className="badge badge-cyan" style={{ padding: '6px 14px', cursor: 'default' }}>
+                  <span className="status-dot-pulse" style={{ marginRight: '6px' }}></span> 4th Year CSE
                 </span>
-                <button onClick={toggleTheme} title="Toggle Theme" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer' }}>
+                <button onClick={toggleTheme} className="nav-icon-btn" title="Toggle Theme">
                   <i className={`fa-solid ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
                 </button>
-                <button onClick={() => setAdminOpen(true)} title="Content Manager / Admin" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer' }}>
+                <button onClick={() => setAdminOpen(true)} className="nav-icon-btn" title="Content Manager / Admin">
                   <i className="fa-solid fa-database"></i>
                 </button>
               </div>

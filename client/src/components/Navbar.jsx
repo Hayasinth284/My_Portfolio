@@ -32,7 +32,7 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
       }}>
         {/* Brand Logo */}
         {/* Brand Logo with Profile Image */}
-        <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit' }}>
+        <a href="#hero" className="nav-brand-link">
           <div style={{ position: 'relative', width: '42px', height: '42px' }}>
             <img
               src="/avatar.jpg"
@@ -44,7 +44,8 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
                 objectFit: 'cover',
                 border: '2px solid var(--accent-cyan)',
                 boxShadow: '0 0 14px rgba(0, 242, 254, 0.45)',
-                display: 'block'
+                display: 'block',
+                transition: 'all 0.3s ease'
               }}
             />
             <div style={{
@@ -70,20 +71,12 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
         </a>
 
         {/* Desktop Links */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '28px' }} className="desktop-nav">
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="desktop-nav">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              style={{
-                color: 'var(--text-secondary)',
-                textDecoration: 'none',
-                fontWeight: 500,
-                fontSize: '0.95rem',
-                transition: 'color 0.2s ease'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-cyan)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+              className="nav-link"
             >
               {link.name}
             </a>
@@ -96,21 +89,8 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
           {cycleBgMode && (
             <button
               onClick={cycleBgMode}
+              className="nav-fx-btn"
               title="Click to Switch Background Animation (3D Quantum, Code Matrix, Aurora)"
-              style={{
-                background: 'rgba(127, 86, 217, 0.15)',
-                border: '1px solid rgba(127, 86, 217, 0.35)',
-                color: '#c084fc',
-                padding: '6px 12px',
-                borderRadius: '9999px',
-                cursor: 'pointer',
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease'
-              }}
             >
               <Sparkles size={14} color="#00f2fe" />
               <span>{bgModeNames ? bgModeNames[bgMode] : 'Effects'}</span>
@@ -118,58 +98,30 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
           )}
 
           {/* Status Badge */}
-          <div className="badge badge-cyan" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-emerald)',
-              boxShadow: '0 0 8px var(--accent-emerald)'
-            }}></span>
+          <div className="badge badge-cyan" style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 14px', cursor: 'default' }}>
+            <span className="status-dot-pulse" style={{ marginRight: '4px' }}></span>
             <span>4th Year CSE</span>
           </div>
 
           {/* Theme Switcher */}
           <button
             onClick={toggleTheme}
+            className="nav-icon-btn"
             title="Toggle Light/Dark Theme"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--text-primary)',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
           >
-            {theme === 'dark' ? <Sun size={18} color="#00f2fe" /> : <Moon size={18} color="#7c3aed" />}
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {/* Admin Content Manager Toggle */}
-          <button
-            onClick={openAdmin}
-            title="Content Manager / Database Admin"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--text-primary)',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            <Settings size={18} />
-          </button>
+          {/* Admin Database Trigger */}
+          {openAdmin && (
+            <button
+              onClick={openAdmin}
+              className="nav-icon-btn"
+              title="Content Manager / Database"
+            >
+              <Settings size={18} />
+            </button>
+          )}
 
           {/* Mobile Menu Toggle */}
           <button
