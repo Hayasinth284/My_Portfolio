@@ -42,6 +42,12 @@ A high-performance, responsive full-stack developer portfolio web application bu
 * **Repository**: [github.com/hayasinth284/Task_Management](https://github.com/hayasinth284/Task_Management)
 * **Highlights**: Interactive 5-column drag-and-drop Kanban board (`Backlog`, `To Do`, `In Progress`, `In Review`, `Done`), real-time subtask checklists with percentage progress calculation, productivity analytics with HTML5 Canvas charts, calendar scheduling, and secure Django user authentication.
 
+### 3. 🛍️ ShopVibe - Full-Stack E-Commerce Web Application
+* **Category**: Full Stack
+* **Tech Stack**: `Python 3, SQL (SQLite / MySQL), JavaScript (ES6+), HTML5, CSS3, REST API, Shopping Cart, Admin Suite`
+* **Repository**: [github.com/Hayasinth284/E-Commerce-Web-Application](https://github.com/Hayasinth284/E-Commerce-Web-Application)
+* **Highlights**: Dynamic product catalog with instant search & multi-category filters, slide-out shopping cart drawer with coupon engine & free shipping threshold progress bar, multi-step checkout with live credit card preview simulator, real-time parcel order tracking timeline, and full role-based Admin Management Suite.
+
 ---
 
 ## 🛠️ Complete Tech Stack

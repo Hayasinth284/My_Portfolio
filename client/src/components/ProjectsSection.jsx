@@ -50,17 +50,6 @@ export default function ProjectsSection({ projects, onSelectProject }) {
           ))}
         </div>
 
-        {/* Search Bar */}
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: '300px'
-        }}>
-          <Search size={18} style={{
-            position: 'absolute',
-            left: '12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
         {/* Animated Search Bar */}
         <div className="search-wrapper">
           <Search size={16} className="search-icon-left" />

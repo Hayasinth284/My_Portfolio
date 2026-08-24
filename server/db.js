@@ -107,6 +107,18 @@ function seedInitialData() {
       featured: 1,
       architecture: 'Django 5 REST & Session Backend + SQLite Relational Database + Vanilla JS Kanban & Analytics Canvas Engine + Glassmorphism UI',
       key_features: 'Interactive Drag-and-Drop Kanban Board across 5 status columns; Dynamic Subtask Checklist with real-time progress bar; Real-Time Productivity Analytics with HTML5 Canvas charts; Interactive Calendar timeline & deadline scheduling; Multi-parameter filtering, sorting & live search; Secure Django user authentication, session security & role isolation'
+    },
+    {
+      title: 'ShopVibe - E-Commerce Web Application',
+      description: 'A modern, full-stack e-commerce web application built with Python 3, SQL (SQLite / MySQL), HTML5, Vanilla CSS3, and JavaScript (ES6+). Features dynamic product catalogs with instant search and multi-filtering, slide-out shopping cart with promo coupon engines & free shipping progress bar, interactive multi-step checkout with live credit card preview simulator, real-time parcel order tracking timeline, and a comprehensive role-based Admin Management Suite with inventory CRUD and live order status management.',
+      category: 'Full Stack',
+      image: '/project_ecommerce.jpg',
+      tags: 'E-Commerce, Python, SQL, SQLite, JavaScript, HTML5, CSS3, REST API, Shopping Cart, Admin Suite',
+      github_url: 'https://github.com/Hayasinth284/E-Commerce-Web-Application',
+      demo_url: 'https://github.com/Hayasinth284/E-Commerce-Web-Application',
+      featured: 1,
+      architecture: 'Python REST & API Architecture + SQLite Relational Database + Vanilla JS Dynamic Cart & Real-Time Tracking Engine + Glassmorphism Storefront UI',
+      key_features: 'Interactive Storefront with instant search, price sliders & multi-category filters; Dynamic Slide-Out Shopping Cart with coupon codes & free shipping meter; Multi-Step Checkout with real-time interactive credit card simulator; Real-Time Order Tracking timeline & customer order history lookup; Comprehensive Admin Suite for product inventory CRUD & live order status updates; Role-Based Access Control (Admin vs. Customer) with instant demo auth'
     }
   ];
 
