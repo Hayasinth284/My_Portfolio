@@ -55,47 +55,12 @@ def seed():
             'architecture': 'Django 5 REST & Session Backend + SQLite Relational Database + Vanilla JS Kanban & Analytics Canvas Engine + Glassmorphism UI',
             'key_features': 'Interactive Drag-and-Drop Kanban Board across 5 status columns; Dynamic Subtask Checklist with real-time progress bar; Real-Time Productivity Analytics with HTML5 Canvas charts; Interactive Calendar timeline & deadline scheduling; Multi-parameter filtering, sorting & live search; Secure Django user authentication, session security & role isolation',
             'order': 2
-        },
-        {
-            'title': 'Smart Data Analytics & Query Platform',
-            'description': 'A robust Python and SQL-driven analytics dashboard designed for complex relational database queries, real-time data processing, and interactive visual reporting.',
-            'category': 'Python & SQL',
-            'image': '/static/images/project1.jpg',
-            'tags': 'Python, SQL, SQLite, Pandas, Flask, Data Analytics',
-            'github_url': 'https://github.com/hayasinth284/smart-analytics-platform',
-            'demo_url': '#',
-            'featured': True,
-            'architecture': 'Python Flask API + SQL Query Engine + Frontend Data Visualizer',
-            'key_features': 'Automated SQL Query execution; Real-time charts; Custom report export; Database performance profiling',
-            'order': 3
-        },
-        {
-            'title': 'Relational Database Management System (RDBMS)',
-            'description': 'An efficient database engine schema and management tool built with SQL and Python for managing student records, course enrollments, and performance metrics.',
-            'category': 'Database',
-            'image': '/static/images/project1.jpg',
-            'tags': 'SQL, Python, MySQL, Relational Database, Indexing',
-            'github_url': 'https://github.com/hayasinth284/rdbms-student-manager',
-            'demo_url': '#',
-            'featured': False,
-            'architecture': 'Normalized SQL Database Schema + Python CLI & GUI interface',
-            'key_features': 'Third normal form schema; Stored procedures & triggers; Fast indexed queries; Data backup export',
-            'order': 4
-        },
-        {
-            'title': 'Responsive E-Commerce Frontend',
-            'description': 'A modern, responsive e-commerce storefront web application featuring dynamic shopping cart logic, product filtering, and glassmorphic UI design.',
-            'category': 'Frontend',
-            'image': '/static/images/project2.jpg',
-            'tags': 'HTML5, CSS3, JavaScript, DOM Manipulation, UX/UI',
-            'github_url': 'https://github.com/hayasinth284/ecommerce-frontend',
-            'demo_url': '#',
-            'featured': False,
-            'architecture': 'Vanilla JavaScript SPA + LocalStorage State + CSS Grid System',
-            'key_features': 'Interactive product catalog; Shopping cart checkout simulation; Mobile-responsive navigation',
-            'order': 5
         }
     ]
+
+    # Clean old projects that are not in projects_data
+    valid_titles = [p['title'] for p in projects_data]
+    Project.objects.exclude(title__in=valid_titles).delete()
 
     for p in projects_data:
         Project.objects.update_or_create(
