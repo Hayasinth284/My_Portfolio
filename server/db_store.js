@@ -43,6 +43,19 @@ const initialData = {
       featured: 1,
       architecture: 'Python REST & API Architecture + SQLite Relational Database + Vanilla JS Dynamic Cart & Real-Time Tracking Engine + Glassmorphism Storefront UI',
       key_features: 'Interactive Storefront with instant search, price sliders & multi-category filters; Dynamic Slide-Out Shopping Cart with coupon codes & free shipping meter; Multi-Step Checkout with real-time interactive credit card simulator; Real-Time Order Tracking timeline & customer order history lookup; Comprehensive Admin Suite for product inventory CRUD & live order status updates; Role-Based Access Control (Admin vs. Customer) with instant demo auth'
+    },
+    {
+      id: 4,
+      title: 'Chronicle - Full-Stack Blog & Publishing Platform',
+      description: 'A modern, responsive full-stack blogging platform and engineering journal built with Python, SQL (SQLite / PostgreSQL schema), HTML5, Vanilla CSS3, and JavaScript (ES6+). Features full CRUD article management with split-pane live Markdown preview & reading-time calculation, nested threaded discussions with comment replies and author badges, 1-click multi-user demo authentication with PBKDF2 hashing, topic category filtering, debounced instant search, reading progress indicator, and an interactive Author Studio dashboard with live analytics.',
+      category: 'Full Stack',
+      image: '/project_blogplatform.jpg',
+      tags: 'Blog_Platform, Python, SQL, SQLite, JavaScript, HTML5, CSS3, REST API, Markdown, Auth',
+      github_url: 'https://github.com/Hayasinth284/Blog-Platform.git',
+      demo_url: 'https://github.com/Hayasinth284/Blog-Platform',
+      featured: 1,
+      architecture: 'Python REST & Session Architecture + SQLite Relational Database + Vanilla JS Markdown Parsing & Discussion Engine + Glassmorphism UI',
+      key_features: 'Full CRUD Story Management with split-pane live Markdown preview & cover presets; Threaded Nested Comment System with reply trees, upvotes & verified author badges; 1-Click Multi-User Demo Authentication with PBKDF2 hashing & session security; Author Studio Dashboard with KPI metrics (Views, Likes, Comments, Stories); Instant Debounced Search, Category Filtering & Reading Progress Depth Bar; Dark & Light mode theme engine with responsive glassmorphic cards'
     }
   ],
   skills: [

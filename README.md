@@ -48,6 +48,12 @@ A high-performance, responsive full-stack developer portfolio web application bu
 * **Repository**: [github.com/Hayasinth284/E-Commerce-Web-Application](https://github.com/Hayasinth284/E-Commerce-Web-Application)
 * **Highlights**: Dynamic product catalog with instant search & multi-category filters, slide-out shopping cart drawer with coupon engine & free shipping threshold progress bar, multi-step checkout with live credit card preview simulator, real-time parcel order tracking timeline, and full role-based Admin Management Suite.
 
+### 4. ✍️ Chronicle - Full-Stack Blog & Publishing Platform
+* **Category**: Full Stack
+* **Tech Stack**: `Python, SQL (SQLite / PostgreSQL), JavaScript (ES6+), HTML5, CSS3, REST API, Markdown, Auth`
+* **Repository**: [github.com/Hayasinth284/Blog-Platform](https://github.com/Hayasinth284/Blog-Platform.git)
+* **Highlights**: Full CRUD story management with split-pane live Markdown preview & reading-time calculation, nested threaded discussions with comment replies and author badges, 1-click multi-user demo authentication with PBKDF2 hashing, topic category filtering, debounced instant search, reading progress depth bar, and an interactive Author Studio dashboard with KPI analytics.
+
 ---
 
 ## 🛠️ Complete Tech Stack
