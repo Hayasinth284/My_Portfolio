@@ -1,70 +1,121 @@
 # 🚀 Hayasinth M — Personal Developer Portfolio
 
-[![Portfolio](https://img.shields.io/badge/Live_Preview-http%3A%2F%2Flocalhost%3A5000-00f2fe?style=for-the-badge&logo=googlechrome&logoColor=white)](#)
+[![Django](https://img.shields.io/badge/Django-5.x-092E20?style=for-the-badge&logo=django&logoColor=white)](#)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)](#)
+[![SQL](https://img.shields.io/badge/SQL-SQLite_3-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS3](https://img.shields.io/badge/CSS3-Vanilla_Glassmorphism-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Hayasinth_M-0077b5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hayasinth284)
 [![GitHub](https://img.shields.io/badge/GitHub-hayasinth284-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hayasinth284)
-[![Node.js](https://img.shields.io/badge/Node.js-v20-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](#)
-[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)](#)
-[![SQL](https://img.shields.io/badge/SQL-Relational_DB-CC292B?style=for-the-badge&logo=sqlite&logoColor=white)](#)
 
-A high-performance, dynamic full-stack developer portfolio web application built with **Node.js, Express REST API, Vanilla CSS / React UI, persistent SQL/JSON storage, and GPU-accelerated interactive HTML5 Canvas 3D background animations**.
+A high-performance, responsive full-stack developer portfolio web application built with **Python, Django 5, SQL (SQLite), HTML5, Vanilla CSS3 (Glassmorphism design system), and Modern JavaScript (ES6+)** featuring **GPU-accelerated interactive HTML5 Canvas 3D background animations**.
 
 ---
 
 ## 🌟 Key Features
 
-- 🌌 **Multi-Mode 3D Background Animations**:
-  - **Deep Cyber Space Flight**: 3D hyper-drive starfield with speed streaks, floating code keywords (`Python`, `SQL`, `React`, `Node`), interactive mouse steering, and shooting comets.
+- 🌌 **Multi-Mode 3D Canvas Background Graphics**:
+  - **Deep Cyber Space Flight**: 3D hyper-drive perspective starfield with speed streaks, floating code keywords (`Python`, `Django`, `SQL`, `React`), interactive mouse steering, and shooting comets.
   - **3D Quantum Waves**: Harmonic sine wave energy ribbons with tumbling 3D wireframe polyhedra.
   - **Magnetic Nebula Vortex**: Swirling stardust particle vortex with magnetic cursor gravity.
-- 🌓 **Dark & Light Mode**: Instant toggle with smooth transitions and persistent visual contrast.
-- 💼 **Interactive Project Showcase**: Filterable portfolio gallery with search, tech tags, and detailed modal views with architecture diagrams.
-- ⚡ **Skills & Experience Matrix**: Interactive skill proficiencies and academic journey at **Jeppiaar Engineering College (B.E. CSE 2023 - 2027)**.
-- 📨 **Live Contact Form & REST API Backend**: Messages submitted via the contact form are validated and persisted to the backend store.
-- 🛠️ **Database Content Manager (Admin Modal)**: Live CRUD interface to add and manage projects directly from the UI.
+- 🌓 **Dark & Light Theme Engine**: Instant theme switcher with smooth transitions and persistent visual contrast stored in `localStorage`.
+- 💼 **Interactive Project Showcase**: Filterable portfolio gallery with search, tech tags, and detailed modal views with architecture diagrams and feature checklists.
+- ⚡ **Skills & Technical Arsenal**: Interactive skill proficiencies across Programming Languages, Database Systems, Web Frontend, and Backend Development.
+- 🎓 **Education & Academic Background**: Specialization at **Jeppiaar Engineering College (B.E. CSE 2023 - 2027)**.
+- 📨 **Live Contact Form & SQLite Persistence**: Contact messages submitted via the form are validated via Django and stored in SQLite.
+- 🛠️ **Django Admin Dashboard**: Built-in visual content management interface at `/admin/` for CRUD operations on projects, skills, and messages.
 
 ---
 
-## 🛠️ Tech Stack
+## 📂 Featured Projects Showcase
 
-- **Frontend**: HTML5, CSS3 (Modern Glassmorphism, Flexbox, Grid), JavaScript (ES6+), React 18, FontAwesome & Lucide Icons
-- **Backend**: Node.js, Express.js REST API
-- **Database / Storage**: Persistent JSON / SQLite relational store with in-memory fallback
-- **Graphics & Animation**: GPU-accelerated HTML5 Canvas 2D / 3D Perspective Projection
+### 1. 🚀 My Portfolio
+* **Category**: Full Stack
+* **Tech Stack**: `JavaScript, React, Node.js, Express, HTML5 Canvas 3D, CSS3, REST API, SQL`
+* **Repository**: [github.com/hayasinth284/My_Portfolio](https://github.com/hayasinth284/My_Portfolio)
+* **Highlights**: 3D Deep Space starfield warp animations, multi-mode background switcher, live contact form with persistent DB, and mobile-responsive glassmorphic UI.
+
+### 2. 📋 TaskFlow - Task Management System
+* **Category**: Full Stack
+* **Tech Stack**: `Python, Django 5, SQLite, JavaScript (ES6+), HTML5, CSS3, REST API, Kanban`
+* **Repository**: [github.com/hayasinth284/Task_Management](https://github.com/hayasinth284/Task_Management)
+* **Highlights**: Interactive 5-column drag-and-drop Kanban board (`Backlog`, `To Do`, `In Progress`, `In Review`, `Done`), real-time subtask checklists with percentage progress calculation, productivity analytics with HTML5 Canvas charts, calendar scheduling, and secure Django user authentication.
 
 ---
 
-## 🚀 Getting Started
+## 🛠️ Complete Tech Stack
+
+| Layer | Technologies & Tools |
+| :--- | :--- |
+| **Backend & Framework** | Python 3, Django 5, Django ORM, REST/AJAX API Endpoints, Django Admin |
+| **Database & SQL** | SQL (Structured Query Language), SQLite 3 (`db.sqlite3`) |
+| **Frontend & Markup** | HTML5 (Semantic Templates), Vanilla CSS3 (Design Tokens, Glassmorphism, CSS Grid & Flexbox) |
+| **Client Scripting & 3D** | JavaScript (ES6+), HTML5 Canvas 2D/3D Perspective Math, Fetch API |
+| **Typography & Icons** | Google Fonts (`Plus Jakarta Sans`, `Inter`, `JetBrains Mono`), Lucide & FontAwesome Icons |
+| **Alternative Server** | Node.js, Express.js REST API |
+
+---
+
+## 🚀 Getting Started & How to Run
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/hayasinth284/personal-portfolio.git
-cd personal-portfolio
+git clone https://github.com/hayasinth284/My_Portfolio.git
+cd My_Portfolio
 ```
 
-### 2. Run the Server
-Using the bundled batch runner:
+---
+
+### 2. Running with Python & Django (Recommended)
+
+#### **Quick Start (Windows Batch File):**
+Simply double-click:
 ```bash
-start.bat
+start_django.bat
 ```
-Or directly using Node:
+
+#### **Manual Terminal Commands:**
 ```bash
+# 1. Install dependencies
+python -m pip install django pillow
+
+# 2. Run migrations
+python manage.py migrate
+
+# 3. Seed initial projects and skills into SQLite
+python populate_db.py
+
+# 4. Start the Django server
+python manage.py runserver 127.0.0.1:8000
+```
+Open **[http://127.0.0.1:8000](http://127.0.0.1:8000)** in your browser!  
+*(Access Django Admin at **[http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)**)*
+
+---
+
+### 3. Running with Node.js & Express
+
+```bash
+# Quick batch start
+start.bat
+
+# Or direct Node command
 node server/server.js
 ```
-
-### 3. Open in Browser
-Visit **[http://localhost:5000](http://localhost:5000)** in your browser!
+Open **[http://localhost:5000](http://localhost:5000)** in your browser!
 
 ---
 
 ## 👤 About the Author
 
-- **Name**: Hayasinth M
-- **Education**: B.E. Computer Science & Engineering (2023 – 2027)
-- **College**: Jeppiaar Engineering College, Chennai, India
-- **LinkedIn**: [linkedin.com/in/hayasinth284](https://www.linkedin.com/in/hayasinth284)
-- **GitHub**: [github.com/hayasinth284](https://github.com/hayasinth284)
-- **Email**: [hayasinth284@gmail.com](mailto:hayasinth284@gmail.com)
+* **Developer**: **Hayasinth M**
+* **Education**: B.E. Computer Science & Engineering (2023 – 2027)
+* **College**: Jeppiaar Engineering College, Chennai, India
+* **LinkedIn**: [linkedin.com/in/hayasinth284](https://www.linkedin.com/in/hayasinth284)
+* **GitHub**: [github.com/hayasinth284](https://github.com/hayasinth284)
+* **Email**: [hayasinth284@gmail.com](mailto:hayasinth284@gmail.com)
+* **Phone**: +91 8122208962
 
 ---
 
