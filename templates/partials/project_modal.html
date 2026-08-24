@@ -1,0 +1,58 @@
+<div id="project-modal" class="modal-overlay">
+  <div class="glass-panel" style="width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; padding: 0; position: relative; border: 1px solid var(--border-accent);">
+    <!-- Close Button -->
+    <button id="close-project-modal" class="modal-close-btn" title="Close">✕</button>
+
+    <!-- Modal Header Image -->
+    <div style="position: relative; height: 260px; width: 100%;">
+      <img
+        id="modal-project-img"
+        src=""
+        alt="Project Preview"
+        style="width: 100%; height: 100%; object-fit: cover;"
+      >
+      <div style="position: absolute; bottom: 16px; left: 20px;">
+        <span id="modal-project-cat" class="badge badge-cyan">Category</span>
+      </div>
+    </div>
+
+    <!-- Modal Body Content -->
+    <div style="padding: 28px;">
+      <h2 id="modal-project-title" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;"></h2>
+
+      <!-- Tags Container -->
+      <div id="modal-project-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;"></div>
+
+      <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">
+        Overview
+      </h4>
+      <p id="modal-project-desc" style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;"></p>
+
+      <!-- Architecture Block -->
+      <div id="modal-project-arch-container" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-md); margin-bottom: 24px; display: none;">
+        <div style="display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); font-weight: 700; margin-bottom: 6px;">
+          ⚡ System Architecture
+        </div>
+        <p id="modal-project-arch" style="color: var(--text-secondary); font-size: 0.92rem; font-family: var(--font-mono);"></p>
+      </div>
+
+      <!-- Key Highlights List -->
+      <div id="modal-project-features-container" style="margin-bottom: 28px; display: none;">
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Key Highlights & Features</h4>
+        <div id="modal-project-features" style="display: grid; gap: 10px;"></div>
+      </div>
+
+      <!-- Links Footer -->
+      <div style="display: flex; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+        <a id="modal-project-github" href="#" target="_blank" rel="noreferrer" class="btn-primary" style="display: none;">
+          🐙 View Code on GitHub
+        </a>
+
+        <a id="modal-project-demo" href="#" target="_blank" rel="noreferrer" class="btn-secondary" style="display: none;">
+          🔗 Live Demonstration
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

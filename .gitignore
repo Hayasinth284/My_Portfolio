@@ -18,3 +18,11 @@ yarn-error.log*
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Python & Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+media/
+staticfiles/

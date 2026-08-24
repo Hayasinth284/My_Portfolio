@@ -131,6 +131,18 @@ function seedInitialData() {
       featured: 0,
       architecture: 'Vanilla JavaScript SPA + LocalStorage State + CSS Grid System',
       key_features: 'Interactive product catalog; Shopping cart checkout simulation; Mobile-responsive navigation'
+    },
+    {
+      title: 'TaskFlow - Task Management System',
+      description: 'A full-featured, responsive, real-time task management web application built with Python, Django 5, SQLite, HTML5, Vanilla CSS3, and Modern JavaScript (ES6+). Features interactive drag-and-drop Kanban boards, live subtask checklists with progress tracking, dynamic HTML5 Canvas productivity analytics, interactive calendar timeline, and role-based user authentication.',
+      category: 'Full Stack',
+      image: '/project_taskmanagement.jpg',
+      tags: 'Task_Management, Python, Django, SQLite, JavaScript, HTML5, CSS3, REST API, Kanban',
+      github_url: 'https://github.com/hayasinth284/Task_Management',
+      demo_url: 'https://github.com/hayasinth284/Task_Management',
+      featured: 1,
+      architecture: 'Django 5 REST & Session Backend + SQLite Relational Database + Vanilla JS Kanban & Analytics Canvas Engine + Glassmorphism UI',
+      key_features: 'Interactive Drag-and-Drop Kanban Board across 5 status columns; Dynamic Subtask Checklist with real-time progress bar; Real-Time Productivity Analytics with HTML5 Canvas charts; Interactive Calendar timeline & deadline scheduling; Multi-parameter filtering, sorting & live search; Secure Django user authentication, session security & role isolation'
     }
   ];
 

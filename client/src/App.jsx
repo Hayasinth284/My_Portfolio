@@ -27,6 +27,19 @@ const initialProjects = [
     key_features: '3D Deep Space warp flight animation; Multi-mode animation switcher (Space, 3D Quantum, Magnetic Vortex); Live Contact Form with persistent DB; Admin Content Manager; Light/Dark theme engine; Mobile-responsive design'
   },
   {
+    id: 5,
+    title: 'TaskFlow - Task Management System',
+    description: 'A full-featured, responsive, real-time task management web application built with Python, Django 5, SQLite, HTML5, Vanilla CSS3, and Modern JavaScript (ES6+). Features interactive drag-and-drop Kanban boards, live subtask checklists with progress tracking, dynamic HTML5 Canvas productivity analytics, interactive calendar timeline, and role-based user authentication.',
+    category: 'Full Stack',
+    image: '/project_taskmanagement.jpg',
+    tags: 'Task_Management, Python, Django, SQLite, JavaScript, HTML5, CSS3, REST API, Kanban',
+    github_url: 'https://github.com/hayasinth284/Task_Management',
+    demo_url: 'https://github.com/hayasinth284/Task_Management',
+    featured: 1,
+    architecture: 'Django 5 REST & Session Backend + SQLite Relational Database + Vanilla JS Kanban & Analytics Canvas Engine + Glassmorphism UI',
+    key_features: 'Interactive Drag-and-Drop Kanban Board across 5 status columns; Dynamic Subtask Checklist with real-time progress bar; Real-Time Productivity Analytics with HTML5 Canvas charts; Interactive Calendar timeline & deadline scheduling; Multi-parameter filtering, sorting & live search; Secure Django user authentication, session security & role isolation'
+  },
+  {
     id: 2,
     title: 'Smart Data Analytics & Query Platform',
     description: 'A robust Python and SQL-driven analytics dashboard designed for complex relational database queries, real-time data processing, and interactive visual reporting.',
@@ -242,10 +255,10 @@ export default function App() {
     }
 
     // 3D Geometry definitions for Quantum Waves mode
-    const cubeVerts = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
-    const cubeEdges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
-    const octaVerts = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
-    const octaEdges = [[0,2],[0,3],[0,4],[0,5],[1,2],[1,3],[1,4],[1,5],[2,4],[4,3],[3,5],[5,2]];
+    const cubeVerts = [[-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1], [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]];
+    const cubeEdges = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
+    const octaVerts = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+    const octaEdges = [[0, 2], [0, 3], [0, 4], [0, 5], [1, 2], [1, 3], [1, 4], [1, 5], [2, 4], [4, 3], [3, 5], [5, 2]];
 
     const shapes = [];
     const shapeModels = [{ verts: cubeVerts, edges: cubeEdges }, { verts: octaVerts, edges: octaEdges }];
@@ -419,8 +432,8 @@ export default function App() {
           ctx.shadowBlur = 14;
 
           for (let x = 0; x <= w; x += 10) {
-            const y = (h * wave.yRatio) + 
-              Math.sin(x * wave.freq1 + time * wave.speed1) * wave.amp1 + 
+            const y = (h * wave.yRatio) +
+              Math.sin(x * wave.freq1 + time * wave.speed1) * wave.amp1 +
               Math.cos(x * wave.freq2 + time * wave.speed2) * wave.amp2;
             if (x === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);

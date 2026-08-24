@@ -1,0 +1,35 @@
+{% load static %}
+<section id="skills" class="section-container">
+  <div class="section-header">
+    <div class="badge badge-purple" style="margin-bottom: 12px;">
+      <span>⚡ Technical Arsenal</span>
+    </div>
+    <h2>Skills & <span class="gradient-text">Proficiencies</span></h2>
+    <p>Core competencies across Full Stack Development, Relational Databases, and CS fundamentals.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;">
+    {% for category_name, category_skills in categories_skills.items %}
+    <div class="glass-panel" style="padding: 24px;">
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 18px; color: var(--accent-cyan); display: flex; align-items: center; gap: 8px;">
+        <span>🚀</span> {{ category_name }}
+      </h3>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        {% for skill in category_skills %}
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-weight: 600; font-size: 0.92rem;">{{ skill.name }}</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">{{ skill.proficiency }}%</span>
+          </div>
+          <!-- Progress Bar Meter -->
+          <div style="width: 100%; height: 7px; background: rgba(255, 255, 255, 0.06); border-radius: 4px; overflow: hidden;">
+            <div style="width: {{ skill.proficiency }}%; height: 100%; background: var(--accent-gradient); border-radius: 4px;"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

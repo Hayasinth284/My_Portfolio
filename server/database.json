@@ -51,19 +51,112 @@
       "featured": 0,
       "architecture": "Vanilla JavaScript SPA + LocalStorage State + CSS Grid System",
       "key_features": "Interactive product catalog; Shopping cart checkout simulation; Mobile-responsive navigation"
+    },
+    {
+      "id": 5,
+      "title": "TaskFlow - Task Management System",
+      "description": "A full-featured, responsive, real-time task management web application built with Python, Django 5, SQLite, HTML5, Vanilla CSS3, and Modern JavaScript (ES6+). Features interactive drag-and-drop Kanban boards, live subtask checklists with progress tracking, dynamic HTML5 Canvas productivity analytics, interactive calendar timeline, and role-based user authentication.",
+      "category": "Full Stack",
+      "image": "/project_taskmanagement.jpg",
+      "tags": "Task_Management, Python, Django, SQLite, JavaScript, HTML5, CSS3, REST API, Kanban",
+      "github_url": "https://github.com/hayasinth284/Task_Management",
+      "demo_url": "https://github.com/hayasinth284/Task_Management",
+      "featured": 1,
+      "architecture": "Django 5 REST & Session Backend + SQLite Relational Database + Vanilla JS Kanban & Analytics Canvas Engine + Glassmorphism UI",
+      "key_features": "Interactive Drag-and-Drop Kanban Board across 5 status columns; Dynamic Subtask Checklist with real-time progress bar; Real-Time Productivity Analytics with HTML5 Canvas charts; Interactive Calendar timeline & deadline scheduling; Multi-parameter filtering, sorting & live search; Secure Django user authentication, session security & role isolation"
     }
   ],
   "skills": [
-    { "id": 1, "category": "Frontend Development", "name": "HTML5 & Semantic Markup", "proficiency": 95, "experience_level": "Expert", "icon": "fa-brands fa-html5", "color": "#e34f26" },
-    { "id": 2, "category": "Frontend Development", "name": "CSS3 / Flexbox / CSS Grid", "proficiency": 92, "experience_level": "Expert", "icon": "fa-brands fa-css3-alt", "color": "#1572b6" },
-    { "id": 3, "category": "Frontend Development", "name": "JavaScript (ES6+ / Modern DOM)", "proficiency": 90, "experience_level": "Advanced", "icon": "fa-brands fa-js", "color": "#f7df1e" },
-    { "id": 4, "category": "Frontend Development", "name": "React.js & Component UI", "proficiency": 85, "experience_level": "Advanced", "icon": "fa-brands fa-react", "color": "#61dafb" },
-    { "id": 5, "category": "Backend Development", "name": "Python & Flask REST APIs", "proficiency": 90, "experience_level": "Advanced", "icon": "fa-brands fa-python", "color": "#3776ab" },
-    { "id": 6, "category": "Backend Development", "name": "Node.js & Express.js", "proficiency": 85, "experience_level": "Advanced", "icon": "fa-brands fa-node-js", "color": "#339933" },
-    { "id": 7, "category": "Backend Development", "name": "RESTful API Design & Routing", "proficiency": 88, "experience_level": "Advanced", "icon": "fa-solid fa-server", "color": "#00f2fe" },
-    { "id": 8, "category": "Database Systems", "name": "SQL (Structured Query Language)", "proficiency": 92, "experience_level": "Expert", "icon": "fa-solid fa-database", "color": "#00b4d8" },
-    { "id": 9, "category": "Database Systems", "name": "SQLite & MySQL Optimization", "proficiency": 86, "experience_level": "Advanced", "icon": "fa-solid fa-hard-drive", "color": "#10b981" },
-    { "id": 10, "category": "Developer Tools & CS", "name": "Git & GitHub Version Control", "proficiency": 88, "experience_level": "Advanced", "icon": "fa-brands fa-github", "color": "#ffffff" }
+    {
+      "id": 1,
+      "category": "Frontend Development",
+      "name": "HTML5 & Semantic Markup",
+      "proficiency": 95,
+      "experience_level": "Expert",
+      "icon": "fa-brands fa-html5",
+      "color": "#e34f26"
+    },
+    {
+      "id": 2,
+      "category": "Frontend Development",
+      "name": "CSS3 / Flexbox / CSS Grid",
+      "proficiency": 92,
+      "experience_level": "Expert",
+      "icon": "fa-brands fa-css3-alt",
+      "color": "#1572b6"
+    },
+    {
+      "id": 3,
+      "category": "Frontend Development",
+      "name": "JavaScript (ES6+ / Modern DOM)",
+      "proficiency": 90,
+      "experience_level": "Advanced",
+      "icon": "fa-brands fa-js",
+      "color": "#f7df1e"
+    },
+    {
+      "id": 4,
+      "category": "Frontend Development",
+      "name": "React.js & Component UI",
+      "proficiency": 85,
+      "experience_level": "Advanced",
+      "icon": "fa-brands fa-react",
+      "color": "#61dafb"
+    },
+    {
+      "id": 5,
+      "category": "Backend Development",
+      "name": "Python & Flask REST APIs",
+      "proficiency": 90,
+      "experience_level": "Advanced",
+      "icon": "fa-brands fa-python",
+      "color": "#3776ab"
+    },
+    {
+      "id": 6,
+      "category": "Backend Development",
+      "name": "Node.js & Express.js",
+      "proficiency": 85,
+      "experience_level": "Advanced",
+      "icon": "fa-brands fa-node-js",
+      "color": "#339933"
+    },
+    {
+      "id": 7,
+      "category": "Backend Development",
+      "name": "RESTful API Design & Routing",
+      "proficiency": 88,
+      "experience_level": "Advanced",
+      "icon": "fa-solid fa-server",
+      "color": "#00f2fe"
+    },
+    {
+      "id": 8,
+      "category": "Database Systems",
+      "name": "SQL (Structured Query Language)",
+      "proficiency": 92,
+      "experience_level": "Expert",
+      "icon": "fa-solid fa-database",
+      "color": "#00b4d8"
+    },
+    {
+      "id": 9,
+      "category": "Database Systems",
+      "name": "SQLite & MySQL Optimization",
+      "proficiency": 86,
+      "experience_level": "Advanced",
+      "icon": "fa-solid fa-hard-drive",
+      "color": "#10b981"
+    },
+    {
+      "id": 10,
+      "category": "Developer Tools & CS",
+      "name": "Git & GitHub Version Control",
+      "proficiency": 88,
+      "experience_level": "Advanced",
+      "icon": "fa-brands fa-github",
+      "color": "#ffffff"
+    }
   ],
   "experience": [
     {

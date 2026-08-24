@@ -1,0 +1,35 @@
+{% load static %}
+<section id="experience" class="section-container">
+  <div class="section-header">
+    <div class="badge badge-cyan" style="margin-bottom: 12px;">
+      <span>🎓 Academic Track</span>
+    </div>
+    <h2>Education & <span class="gradient-text">Background</span></h2>
+    <p>Academic milestones and foundational software engineering specialization.</p>
+  </div>
+
+  <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+    {% for exp in experience_list %}
+    <div class="glass-panel" style="padding: 28px; border-left: 4px solid var(--accent-cyan);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 700;">{{ exp.role }}</h3>
+          <p style="color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem;">{{ exp.organization }}</p>
+        </div>
+        <span class="badge badge-purple">{{ exp.duration }}</span>
+      </div>
+
+      <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+        {{ exp.description }}
+      </p>
+
+      <!-- Skills Used Chips -->
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        {% for s in exp.skills_list %}
+        <span class="tech-tag-chip">#{{ s }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayasinth M | Full Stack Developer & Python/SQL Engineer</title>
+  <meta name="description" content="Personal Developer Portfolio of Hayasinth M - BE CSE student at Jeppiaar Engineering College specializing in Full Stack, Python, Django, SQL, and React.">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/avatar.jpg' %}">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS Design System -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <!-- Ambient 3D Graphics Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Navigation Bar -->
+  {% include 'partials/navbar.html' %}
+
+  <!-- Main Content Block -->
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Project Inspection Modal -->
+  {% include 'partials/project_modal.html' %}
+
+  <!-- In-App Admin Modal -->
+  {% include 'partials/admin_modal.html' %}
+
+  <!-- Footer -->
+  {% include 'partials/footer.html' %}
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Embedded JSON Data for Instant Filtering -->
+  <script id="projects-json-data" type="application/json">
+    {{ projects_json|safe }}
+  </script>
+
+  <!-- Core JavaScript Engine -->
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

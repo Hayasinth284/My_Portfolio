@@ -1,0 +1,102 @@
+{% load static %}
+<section id="hero" style="position: relative; overflow: hidden; padding: 120px 24px 70px;">
+  <!-- Background Neon Glow Blobs -->
+  <div style="position: absolute; top: -100px; left: -100px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0,0,0,0) 70%); filter: blur(50px); z-index: -1;"></div>
+  <div style="position: absolute; bottom: 0; right: -100px; width: 450px; height: 450px; border-radius: 50%; background: radial-gradient(circle, rgba(127, 86, 217, 0.15) 0%, rgba(0,0,0,0) 70%); filter: blur(50px); z-index: -1;"></div>
+
+  <div class="section-container" style="padding: 0;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: center;">
+      
+      <!-- Left Column: Bio & Headline -->
+      <div>
+        <div class="badge badge-cyan" style="margin-bottom: 18px; padding: 6px 14px;">
+          <span>✨ {{ profile.badge }}</span>
+        </div>
+
+        <h1 style="font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px;">
+          Hi, I'm <span class="gradient-text">{{ profile.name }}</span>
+        </h1>
+
+        <div style="font-size: 1.2rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+          <span style="color: var(--accent-cyan); font-family: var(--font-mono);">&gt;_</span>
+          <span>{{ profile.headline }}</span>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; margin-bottom: 32px; max-width: 560px;">
+          Currently pursuing <strong>{{ profile.degree }}</strong> at <strong>{{ profile.institution }}</strong>. Passionate about building modern full-stack web applications, database-driven systems using <strong>SQL</strong> and <strong>Python / Django</strong>, and responsive interfaces with <strong>JavaScript, HTML5, and CSS3</strong>.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+          <a href="#projects" class="btn-primary">
+            Explore My Work →
+          </a>
+
+          {% if profile.linkedin_url %}
+          <a href="{{ profile.linkedin_url }}" target="_blank" rel="noreferrer" class="btn-secondary">
+            💼 LinkedIn
+          </a>
+          {% endif %}
+
+          {% if profile.github_url %}
+          <a href="{{ profile.github_url }}" target="_blank" rel="noreferrer" class="btn-secondary">
+            🐙 GitHub
+          </a>
+          {% endif %}
+        </div>
+
+        <!-- Quick Contact Info Grid -->
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <a href="mailto:{{ profile.email }}" class="contact-chip">
+            ✉️ <span>{{ profile.email }}</span>
+          </a>
+
+          <a href="tel:{{ profile.phone }}" class="contact-chip">
+            📞 <span>{{ profile.phone }}</span>
+          </a>
+
+          <div class="contact-chip">
+            📍 <span>{{ profile.location }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Developer Profile Card -->
+      <div style="display: flex; justify-content: center;">
+        <div class="glass-panel" style="position: relative; width: 100%; maxWidth: 420px; padding: 28px; text-align: center; border: 1px solid var(--border-accent);">
+          <!-- Profile Avatar Image -->
+          <div style="position: relative; width: 180px; height: 180px; margin: 0 auto 20px; border-radius: 50%; padding: 4px; background: var(--accent-gradient); box-shadow: var(--shadow-glow);">
+            <img
+              src="{% static 'images/avatar.jpg' %}"
+              alt="{{ profile.name }}"
+              style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+            >
+          </div>
+
+          <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 6px;">{{ profile.name }}</h3>
+          <p style="color: var(--accent-cyan); font-size: 0.9rem; font-weight: 600; margin-bottom: 16px;">
+            Computer Science & Engineering
+          </p>
+
+          <!-- College Pill -->
+          <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); padding: 8px 14px; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+            🎓 {{ profile.institution }} ({{ profile.graduation_year }})
+          </div>
+
+          <!-- Core Skills Badges -->
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+            <span class="tech-tag-chip">#Python</span>
+            <span class="tech-tag-chip">#Django</span>
+            <span class="tech-tag-chip">#SQL</span>
+            <span class="tech-tag-chip">#SQLite</span>
+            <span class="tech-tag-chip">#JavaScript</span>
+            <span class="tech-tag-chip">#HTML5</span>
+            <span class="tech-tag-chip">#CSS3</span>
+            <span class="tech-tag-chip">#React</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+{% load static %}
+<section id="stats" style="padding: 40px 24px; background: rgba(255, 255, 255, 0.01); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+  <div class="section-container" style="padding: 0;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
+      
+      <!-- Metric 1: Projects -->
+      <div class="glass-panel" style="padding: 24px 16px;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 4px; font-family: var(--font-mono);">
+          {{ stats.projects_count }}+
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">
+          Projects Completed
+        </div>
+      </div>
+
+      <!-- Metric 2: Skills -->
+      <div class="glass-panel" style="padding: 24px 16px;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: #a855f7; margin-bottom: 4px; font-family: var(--font-mono);">
+          {{ stats.skills_count }}+
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">
+          Technologies Mastered
+        </div>
+      </div>
+
+      <!-- Metric 3: Academic Standing -->
+      <div class="glass-panel" style="padding: 24px 16px;">
+        <div style="font-size: 2.2rem; font-weight: 800; color: #10b981; margin-bottom: 4px; font-family: var(--font-mono);">
+          4th Year
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">
+          B.E. Computer Science
+        </div>
+      </div>
+
+      <!-- Metric 4: Academic Institution -->
+      <div class="glass-panel" style="padding: 24px 16px;">
+        <div style="font-size: 1.5rem; font-weight: 800; color: #38bdf8; margin-bottom: 4px; line-height: 1.3;">
+          Jeppiaar
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.85rem; font-weight: 600;">
+          Engineering College
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

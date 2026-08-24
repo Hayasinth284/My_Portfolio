@@ -1,0 +1,38 @@
+{% load static %}
+<footer style="padding: 40px 24px; border-top: 1px solid var(--border-color); background: rgba(10, 13, 20, 0.95); text-align: center;">
+  <div class="section-container" style="padding: 0; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+    
+    <a href="#hero" class="nav-brand" style="justify-content: center;">
+      <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan)"></span>
+      <span>Hayasinth<span style="color: var(--accent-cyan)">.dev</span></span>
+    </a>
+
+    <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 500px;">
+      Built with <strong>Python, Django 5, SQLite, HTML5, Vanilla CSS3, and Modern JavaScript</strong>.
+    </p>
+
+    <!-- Social Links -->
+    <div style="display: flex; gap: 14px; margin-top: 8px;">
+      {% if profile.github_url %}
+      <a href="{{ profile.github_url }}" target="_blank" rel="noreferrer" class="icon-btn" title="GitHub">
+        🐙
+      </a>
+      {% endif %}
+
+      {% if profile.linkedin_url %}
+      <a href="{{ profile.linkedin_url }}" target="_blank" rel="noreferrer" class="icon-btn" title="LinkedIn">
+        💼
+      </a>
+      {% endif %}
+
+      <a href="mailto:{{ profile.email }}" class="icon-btn" title="Email">
+        ✉️
+      </a>
+    </div>
+
+    <div style="color: var(--text-muted); font-size: 0.8rem; margin-top: 12px;">
+      &copy; 2026 {{ profile.name }}. All Rights Reserved. Specializing in Computer Science & Engineering.
+    </div>
+
+  </div>
+</footer>
