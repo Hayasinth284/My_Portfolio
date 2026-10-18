@@ -61,7 +61,7 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
           </div>
           <div>
             <span className="nav-brand-name-violet">
-              Hayasinth<span className="nav-brand-dot-violet">.M</span>
+              Hayasinth M
             </span>
             <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
               BE CSE Student @ Jeppiaar
@@ -89,14 +89,14 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
 
         {/* Action Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {/* Animation Mode Switcher */}
+          {/* Animated Background Mode Switcher Button */}
           {cycleBgMode && (
             <button
               onClick={cycleBgMode}
               className="nav-fx-btn"
               title="Click to Switch Background Animation (3D Quantum, Code Matrix, Aurora)"
             >
-              <Sparkles size={14} color="#00f2fe" />
+              <Sparkles size={14} className="nav-fx-icon" />
               <span>{bgModeNames ? bgModeNames[bgMode] : 'Effects'}</span>
             </button>
           )}
@@ -107,25 +107,14 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
             <span>4th Year CSE</span>
           </div>
 
-          {/* Theme Switcher */}
+          {/* Animated Theme Switcher Button */}
           <button
             onClick={toggleTheme}
-            className="nav-icon-btn"
+            className="nav-icon-btn nav-theme-btn"
             title="Toggle Light/Dark Theme"
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === 'dark' ? <Sun size={18} className="theme-icon-animated" /> : <Moon size={18} className="theme-icon-animated" />}
           </button>
-
-          {/* Admin Database Trigger */}
-          {openAdmin && (
-            <button
-              onClick={openAdmin}
-              className="nav-icon-btn"
-              title="Content Manager / Database"
-            >
-              <Settings size={18} />
-            </button>
-          )}
 
           {/* Mobile Menu Toggle */}
           <button

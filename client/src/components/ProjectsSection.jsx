@@ -2,57 +2,35 @@ import React, { useState } from 'react';
 import { Search, Filter, ExternalLink, Github, Layers, Sparkles, Eye, Code } from 'lucide-react';
 
 export default function ProjectsSection({ projects, onSelectProject }) {
-  const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('featured');
-
-  const categories = ['All', 'Python & SQL', 'Full Stack', 'Frontend', 'Database'];
 
   const filteredProjects = (Array.isArray(projects) ? projects : []).filter((project) => {
     if (!project) return false;
-    const matchesCategory = activeCategory === 'All' || project.category === activeCategory;
+    if (!searchQuery.trim()) return true;
     const title = (project.title || '').toLowerCase();
     const desc = (project.description || '').toLowerCase();
     const tags = (project.tags || '').toLowerCase();
     const q = searchQuery.toLowerCase();
-    const matchesSearch = title.includes(q) || desc.includes(q) || tags.includes(q);
-    return matchesCategory && matchesSearch;
+    return title.includes(q) || desc.includes(q) || tags.includes(q);
   });
 
   return (
     <section id="projects" className="section-container">
       {/* Header */}
-      <div className="section-header">
+      <div className="section-header" style={{ marginBottom: '32px' }}>
         <div className="badge badge-cyan" style={{ marginBottom: '12px' }}>
           <Sparkles size={14} /> <span>Featured Work</span>
         </div>
-        <h2>Portfolio <span className="gradient-text">Projects</span></h2>
-        <p>Explore software engineering projects built with Python, SQL, JavaScript, HTML/CSS, Node.js, and React.</p>
+        <h2><span className="gradient-text">Projects</span></h2>
       </div>
 
-      {/* Filter Controls & Search */}
+      {/* Centered Search Bar */}
       <div style={{
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: '16px',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: '36px'
+        marginBottom: '40px'
       }}>
-        {/* Category Tabs */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
-            >
-              {cat === 'All' ? '⚡ All Projects' : cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Animated Search Bar */}
         <div className="search-wrapper">
           <Search size={16} className="search-icon-left" />
           <input

@@ -85,33 +85,40 @@ export default function Hero() {
               Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <strong>Jeppiaar Engineering College</strong>. Passionate about building modern full-stack web applications, database-driven systems using <strong>SQL</strong> and <strong>Python</strong>, and clean responsive frontends with <strong>JavaScript, HTML, CSS, and React</strong>.
             </p>
 
-            {/* CTA Action Buttons with Animated LinkedIn Focus */}
+            {/* CTA Action Buttons with Unified Cohesive Animation */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '32px', alignItems: 'center' }}>
-              <a href="#projects" className="btn-primary">
-                Explore My Work <ArrowRight size={18} />
+              <a
+                href="#projects"
+                className="hero-cta-btn hero-cta-explore"
+                title="Explore My Work"
+              >
+                <span>Explore My Work</span>
+                <ArrowRight size={18} className="hero-cta-icon" />
+                <span className="hero-btn-pulse-dot"></span>
               </a>
 
-              {/* Animated LinkedIn Button */}
               <a
                 href="https://www.linkedin.com/in/hayasinth284"
                 target="_blank"
                 rel="noreferrer"
-                className="btn-linkedin-animated"
+                className="hero-cta-btn hero-cta-linkedin"
                 title="Connect with Hayasinth on LinkedIn"
               >
-                <Linkedin size={18} />
-                <span>LinkedIn Connect</span>
-                <span className="linkedin-radar-pulse"></span>
+                <Linkedin size={18} className="hero-cta-icon" />
+                <span>LinkedIn</span>
+                <span className="hero-btn-pulse-dot"></span>
               </a>
 
               <a
                 href="https://github.com/hayasinth284"
                 target="_blank"
                 rel="noreferrer"
-                className="btn-secondary"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                className="hero-cta-btn hero-cta-github"
+                title="View Hayasinth's GitHub"
               >
-                <Github size={18} /> GitHub
+                <Github size={18} className="hero-cta-icon" />
+                <span>GitHub</span>
+                <span className="hero-btn-pulse-dot"></span>
               </a>
             </div>
 

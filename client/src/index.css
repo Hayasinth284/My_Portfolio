@@ -671,45 +671,190 @@ body {
 }
 
 /* ====================================================
-   TOP BRAND NAME VIOLET FONT COLOR & GLOW
+   TOP BRAND NAME: UNIFORM VIOLET FONT COLOR & RADIANT GLOW
    ==================================================== */
 
 .nav-brand-name-violet {
   font-size: 1.28rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #e879f9 0%, #c084fc 40%, #a855f7 70%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #c084fc !important;
+  -webkit-text-fill-color: #c084fc !important;
   display: inline-block;
-  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.55));
+  text-shadow: 0 0 14px rgba(192, 132, 252, 0.75), 0 0 28px rgba(168, 85, 247, 0.45);
+  filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.7));
   transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
   animation: violetNameGlow 3.5s ease-in-out infinite alternate;
 }
 
 .nav-brand-name-violet:hover {
-  filter: drop-shadow(0 0 20px rgba(192, 132, 252, 0.9)) drop-shadow(0 0 30px rgba(168, 85, 247, 0.65));
+  filter: drop-shadow(0 0 22px rgba(192, 132, 252, 1)) drop-shadow(0 0 32px rgba(168, 85, 247, 0.8));
   transform: scale(1.035);
-}
-
-.nav-brand-dot-violet {
-  color: #e879f9;
-  -webkit-text-fill-color: #e879f9;
-  text-shadow: 0 0 10px #e879f9;
+  color: #d8b4fe !important;
+  -webkit-text-fill-color: #d8b4fe !important;
 }
 
 @keyframes violetNameGlow {
   0% {
-    filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
+    filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.45));
   }
   100% {
-    filter: drop-shadow(0 0 16px rgba(192, 132, 252, 0.8));
+    filter: drop-shadow(0 0 18px rgba(192, 132, 252, 0.85));
   }
 }
 
 @keyframes dotBlink {
   0%, 100% { opacity: 0.5; transform: scale(0.9); }
   50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ====================================================
+   NAVBAR ANIMATED ACTION BUTTONS
+   (Animation Effects Switcher & Dark/Light Theme Button)
+   ==================================================== */
+
+/* Background Animation Mode Switcher Button */
+.nav-fx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #00f2fe;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 14px rgba(0, 242, 254, 0.2);
+  animation: navFxGlowPulse 3s ease-in-out infinite;
+}
+
+.nav-fx-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.35), transparent);
+  transform: skewX(-20deg);
+  animation: fxBeamSweep 3.5s ease-in-out infinite;
+}
+
+.nav-fx-btn:hover {
+  background: rgba(0, 242, 254, 0.2);
+  border-color: #00f2fe;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+}
+
+.nav-fx-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.nav-fx-icon {
+  color: #00f2fe;
+  animation: fxSparkleSpin 4s ease-in-out infinite;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-fx-btn:hover .nav-fx-icon {
+  transform: scale(1.3) rotate(180deg);
+  color: #ffffff;
+  filter: drop-shadow(0 0 8px #00f2fe);
+}
+
+@keyframes navFxGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2), inset 0 0 8px rgba(0, 242, 254, 0.08);
+    border-color: rgba(0, 242, 254, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(0, 242, 254, 0.5), inset 0 0 12px rgba(0, 242, 254, 0.25);
+    border-color: rgba(0, 242, 254, 0.75);
+  }
+}
+
+@keyframes fxBeamSweep {
+  0% { left: -120%; }
+  35%, 100% { left: 220%; }
+}
+
+@keyframes fxSparkleSpin {
+  0%, 100% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 2px #00f2fe); }
+  25% { transform: rotate(20deg) scale(1.15); filter: drop-shadow(0 0 8px #00f2fe); }
+  50% { transform: rotate(-15deg) scale(0.95); filter: drop-shadow(0 0 3px #00f2fe); }
+  75% { transform: rotate(30deg) scale(1.2); filter: drop-shadow(0 0 10px #00f2fe); }
+}
+
+/* Animated Dark/Light Theme Button */
+.nav-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-theme-btn {
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
+  animation: themePulse 3.5s ease-in-out infinite;
+}
+
+.nav-theme-btn:hover {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #f59e0b;
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.55), 0 4px 14px rgba(0, 0, 0, 0.35);
+  color: #fbbf24;
+}
+
+.nav-theme-btn:active {
+  transform: translateY(0) scale(0.92);
+}
+
+.theme-icon-animated {
+  transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1), filter 0.3s ease;
+  animation: sunMoonFloat 4s ease-in-out infinite;
+}
+
+.nav-theme-btn:hover .theme-icon-animated {
+  transform: rotate(45deg) scale(1.25);
+  filter: drop-shadow(0 0 10px #f59e0b);
+}
+
+@keyframes themePulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.18), inset 0 0 6px rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.32);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(245, 158, 11, 0.45), inset 0 0 10px rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.7);
+  }
+}
+
+@keyframes sunMoonFloat {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(14deg) translateY(-2px); }
 }
 
 /* ====================================================
@@ -810,31 +955,33 @@ body {
 }
 
 /* ====================================================
-   LINKEDIN ANIMATED CTA BUTTON & CHIPS
+   UNIFIED HERO CTA ACTION BUTTONS
+   (Explore My Work, LinkedIn, GitHub)
+   Identical Animation, Sweep Light, Hover & Radar Pulse
    ==================================================== */
 
-.btn-linkedin-animated {
+.hero-cta-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #0077b5 0%, #0099e6 50%, #00f2fe 100%);
-  background-size: 200% 200%;
-  color: #ffffff !important;
   font-weight: 700;
-  padding: 12px 26px;
+  padding: 13px 26px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(0, 242, 254, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
   text-decoration: none;
   font-size: 0.95rem;
-  box-shadow: 0 4px 18px rgba(0, 119, 181, 0.4), 0 0 15px rgba(0, 242, 254, 0.2);
-  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
   overflow: hidden;
-  animation: linkedinPulse 3.5s ease-in-out infinite;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  animation: heroCtaSharedPulse 3.6s ease-in-out infinite;
 }
 
-.btn-linkedin-animated::before {
+/* Light sweep reflection across all 3 buttons */
+.hero-cta-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -843,25 +990,75 @@ body {
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
   transform: skewX(-25deg);
-  animation: sweepLight 4s ease-in-out infinite 1.5s;
+  animation: sweepLight 4s ease-in-out infinite;
 }
 
-.btn-linkedin-animated:hover {
+.hero-cta-explore::before { animation-delay: 0s; }
+.hero-cta-linkedin::before { animation-delay: 1.3s; }
+.hero-cta-github::before { animation-delay: 2.6s; }
+
+/* Thematic Color Palettes with High-Contrast Finish */
+.hero-cta-explore {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #7f56d9 100%);
+  background-size: 200% 200%;
+  color: #ffffff !important;
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 4px 18px rgba(0, 242, 254, 0.35), 0 0 15px rgba(79, 172, 254, 0.2);
+}
+
+.hero-cta-linkedin {
+  background: linear-gradient(135deg, #0077b5 0%, #0099e6 50%, #00f2fe 100%);
+  background-size: 200% 200%;
+  color: #ffffff !important;
+  border-color: rgba(0, 119, 181, 0.5);
+  box-shadow: 0 4px 18px rgba(0, 119, 181, 0.4), 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+.hero-cta-github {
+  background: linear-gradient(135deg, #181e2e 0%, #243048 50%, #374151 100%);
+  background-size: 200% 200%;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Hover effects: identical lift, scale, brightened glow */
+.hero-cta-btn:hover {
   transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 12px 30px rgba(0, 119, 181, 0.65), 0 0 25px rgba(0, 242, 254, 0.5);
   background-position: 100% 0%;
-  border-color: #00f2fe;
 }
 
-.btn-linkedin-animated:hover svg {
+.hero-cta-explore:hover {
+  border-color: #00f2fe;
+  box-shadow: 0 12px 30px rgba(0, 242, 254, 0.65), 0 0 25px rgba(127, 86, 217, 0.5);
+}
+
+.hero-cta-linkedin:hover {
+  border-color: #00f2fe;
+  box-shadow: 0 12px 30px rgba(0, 119, 181, 0.65), 0 0 25px rgba(0, 242, 254, 0.5);
+}
+
+.hero-cta-github:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 22px rgba(255, 255, 255, 0.25);
+}
+
+.hero-cta-btn:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+/* Icon rotation & scaling identical for all 3 buttons */
+.hero-cta-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), filter 0.35s ease;
+}
+
+.hero-cta-btn:hover .hero-cta-icon {
   transform: rotate(-12deg) scale(1.25);
   filter: drop-shadow(0 0 8px #ffffff);
 }
 
-.btn-linkedin-animated svg {
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
+/* Pulsing radar dot identical for all 3 buttons */
+.hero-btn-pulse-dot,
 .linkedin-radar-pulse {
   display: inline-block;
   width: 8px;
@@ -870,7 +1067,21 @@ body {
   background: #00f2fe;
   box-shadow: 0 0 8px #00f2fe;
   animation: radarWave 2s infinite;
-  margin-left: 4px;
+  margin-left: 2px;
+}
+
+/* Backward compatibility alias */
+.btn-linkedin-animated {
+  composes: hero-cta-btn hero-cta-linkedin;
+}
+
+@keyframes heroCtaSharedPulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
 @keyframes radarWave {
@@ -882,15 +1093,6 @@ body {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(0, 242, 254, 0);
-  }
-}
-
-@keyframes linkedinPulse {
-  0%, 100% {
-    box-shadow: 0 4px 18px rgba(0, 119, 181, 0.4), 0 0 15px rgba(0, 242, 254, 0.2);
-  }
-  50% {
-    box-shadow: 0 6px 24px rgba(0, 119, 181, 0.65), 0 0 24px rgba(0, 242, 254, 0.4);
   }
 }
 
@@ -1035,4 +1237,163 @@ body {
   animation-duration: 6s;
   border-color: #00f2fe;
 }
+
+/* ====================================================
+   CONTACT SECTION INPUT & FORM ANIMATIONS
+   Focus Glows, Icon Translations/Rotations & Pulses
+   ==================================================== */
+
+.input-group-animated {
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.input-group-animated:focus-within {
+  transform: translateY(-2px);
+}
+
+/* Base Form Inputs (Text, Email, Tel) */
+.form-input-animated {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-input-animated::placeholder {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.form-input-animated:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 242, 254, 0.12);
+}
+
+.form-input-animated:focus {
+  outline: none;
+  background: rgba(0, 242, 254, 0.06);
+  border-color: #00f2fe;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.32), inset 0 0 10px rgba(0, 242, 254, 0.1);
+  color: #ffffff;
+}
+
+.form-input-animated:focus::placeholder {
+  color: rgba(0, 242, 254, 0.7);
+}
+
+/* Textarea with Animated Icon */
+.form-textarea-animated {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-textarea-animated::placeholder {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.form-textarea-animated:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.12);
+}
+
+.form-textarea-animated:focus {
+  outline: none;
+  background: rgba(168, 85, 247, 0.06);
+  border-color: #c084fc;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), inset 0 0 10px rgba(168, 85, 247, 0.1);
+  color: #ffffff;
+}
+
+.form-textarea-animated:focus::placeholder {
+  color: rgba(192, 132, 252, 0.7);
+}
+
+/* Input Icons with Interactive Hover & Focus Animations */
+.form-input-icon {
+  position: absolute;
+  left: 15px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.form-textarea-icon {
+  position: absolute;
+  left: 15px;
+  top: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.input-group-animated:hover .form-input-icon,
+.input-group-animated:hover .form-textarea-icon {
+  color: var(--accent-cyan);
+  transform: scale(1.15);
+}
+
+.input-group-animated:focus-within .form-input-icon {
+  color: #00f2fe;
+  transform: scale(1.25) rotate(12deg);
+  filter: drop-shadow(0 0 8px #00f2fe);
+}
+
+.input-group-animated:focus-within .form-textarea-icon {
+  color: #c084fc;
+  transform: scale(1.25) rotate(-12deg);
+  filter: drop-shadow(0 0 8px #c084fc);
+}
+
+/* Send Message Button Animation */
+.btn-send-message {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.3);
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.btn-send-message:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 242, 254, 0.55), 0 0 25px rgba(127, 86, 217, 0.45);
+}
+
+.btn-send-message:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-send-message svg {
+  transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.btn-send-message:hover svg:not(.animate-spin) {
+  transform: translateX(4px) translateY(-3px) rotate(-15deg);
+}
+
 
