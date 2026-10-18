@@ -1,4 +1,39 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "version": 2
+  "services": {
+    "hayasinth-portfolio": {
+      "root": ".",
+      "framework": "django"
+    },
+    "client": {
+      "root": "client",
+      "framework": "vite"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "hayasinth-portfolio"
+      }
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": {
+        "service": "hayasinth-portfolio"
+      }
+    },
+    {
+      "source": "/static/(.*)",
+      "destination": {
+        "service": "hayasinth-portfolio"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "client"
+      }
+    }
+  ]
 }
