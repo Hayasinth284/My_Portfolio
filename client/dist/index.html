@@ -67,8 +67,23 @@
       --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     body { font-family: var(--font-sans); background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; transition: background 0.3s; }
+
+    /* Performance optimization: Pause heavy CSS animations and hover effects while active scrolling */
+    body.is-scrolling * {
+      animation-play-state: paused !important;
+    }
+    body.is-scrolling {
+      pointer-events: none !important;
+    }
+
+    /* Off-screen rendering containment for maximum scroll throughput */
+    #projects, #skills, #experience, #contact {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 550px;
+    }
     
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -88,13 +103,15 @@
     .glass-panel {
       position: relative;
       background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 16px;
       box-shadow: var(--shadow-card);
       transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
       overflow: hidden;
+      contain: layout style;
+      transform: translateZ(0);
     }
     
     /* Box Light Beam Sweep Reflection on Hover */
@@ -887,11 +904,12 @@
     .aurora-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(90px);
+      filter: blur(24px);
       opacity: 0.32;
       pointer-events: none;
       mix-blend-mode: screen;
       will-change: transform;
+      transform: translateZ(0);
       z-index: 1;
     }
 
@@ -973,8 +991,8 @@
       background-size: 50px 50px;
       mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
       -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
-      animation: gridShift 40s linear infinite;
       z-index: 1;
+      pointer-events: none;
     }
 
     .light .bg-grid-overlay {
@@ -983,9 +1001,29 @@
         linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     }
 
-    @keyframes gridShift {
-      0% { background-position: 0 0; }
-      100% { background-position: 50px 50px; }
+    /* Mobile optimization: dramatically reduce GPU filter workload */
+    @media (max-width: 768px) {
+      .aurora-orb {
+        filter: blur(12px);
+        mix-blend-mode: normal;
+        opacity: 0.16;
+      }
+      .glass-panel {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background: rgba(18, 24, 38, 0.92);
+      }
+      .light .glass-panel {
+        background: rgba(255, 255, 255, 0.96);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 
@@ -1121,38 +1159,87 @@
       useEffect(() => {
         const canvas = document.getElementById('ambient-canvas');
         if (!canvas) return;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+        if (!ctx) return;
         let animId;
         let w = (canvas.width = window.innerWidth);
         let h = (canvas.height = window.innerHeight);
 
-        const onResize = () => {
-          w = canvas.width = window.innerWidth;
-          h = canvas.height = window.innerHeight;
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Smooth in-page anchor navigation without global smooth-scroll
+        const handleAnchorClick = (e) => {
+          const anchor = e.target.closest('a[href^="#"]');
+          if (anchor) {
+            const id = anchor.getAttribute('href');
+            if (id && id !== '#') {
+              const target = document.querySelector(id);
+              if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          }
         };
-        window.addEventListener('resize', onResize);
+        document.addEventListener('click', handleAnchorClick);
+
+        // Passive scroll listener for throttling canvas work while scrolling
+        let isScrollingTimeout;
+        let isCurrentlyScrolling = false;
+        let scrollThrottleCount = 0;
+        const onScroll = () => {
+          isCurrentlyScrolling = true;
+          document.body.classList.add('is-scrolling');
+          clearTimeout(isScrollingTimeout);
+          isScrollingTimeout = setTimeout(() => {
+            isCurrentlyScrolling = false;
+            document.body.classList.remove('is-scrolling');
+          }, 150);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Debounced resize handler with passive event listener
+        let resizeTimer;
+        const onResize = () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+          }, 120);
+        };
+        window.addEventListener('resize', onResize, { passive: true });
 
         let mouse = { x: null, y: null };
         let flightOffsetX = 0;
         let flightOffsetY = 0;
 
-        const onMouseMove = (e) => {
-          mouse.x = e.clientX;
-          mouse.y = e.clientY;
-        };
-        const onMouseLeave = () => {
-          mouse.x = null;
-          mouse.y = null;
-        };
-        window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseleave', onMouseLeave);
+        let onMouseMove = null;
+        let onMouseLeave = null;
+
+        if (!isTouch) {
+          onMouseMove = (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+          };
+          onMouseLeave = () => {
+            mouse.x = null;
+            mouse.y = null;
+          };
+          window.addEventListener('mousemove', onMouseMove, { passive: true });
+          window.addEventListener('mouseleave', onMouseLeave, { passive: true });
+        }
 
         let time = 0;
 
         // ----------------------------------------------------
-        // 1. DEEP CYBER SPACE ENGINE STATE
+        // 1. DEEP CYBER SPACE ENGINE STATE (Scaled for mobile)
         // ----------------------------------------------------
-        const numStars = Math.min(Math.floor(w * 0.4), 400);
+        const numStars = prefersReducedMotion
+          ? 20
+          : isTouch
+          ? Math.min(Math.floor(w * 0.12), 85)
+          : Math.min(Math.floor(w * 0.22), 220);
         const maxZ = 1200;
         const fov = 260;
         const stars = [];
@@ -1178,7 +1265,7 @@
         ];
 
         const floatingCodes = [];
-        const numCodes = 18;
+        const numCodes = isTouch ? 8 : 16;
         for (let i = 0; i < numCodes; i++) {
           floatingCodes.push({
             text: spaceCodeWords[i % spaceCodeWords.length],
@@ -1196,8 +1283,8 @@
           comets.push({
             x: Math.random() * w * 0.9,
             y: Math.random() * h * 0.4,
-            length: 150 + Math.random() * 120,
-            speed: 9 + Math.random() * 6,
+            length: 120 + Math.random() * 100,
+            speed: 8 + Math.random() * 5,
             angle: Math.PI / 4 + (Math.random() - 0.5) * 0.25,
             opacity: 1,
             color: Math.random() > 0.5 ? '#00f2fe' : '#c084fc'
@@ -1205,10 +1292,12 @@
         };
 
         // ----------------------------------------------------
-        // 2. MAGNETIC NEBULA VORTEX PARTICLES
+        // 2. MAGNETIC NEBULA VORTEX PARTICLES (Optimized for mobile)
         // ----------------------------------------------------
         const vortexParticles = [];
-        const numVortex = Math.min(Math.floor(w / 10), 120);
+        const numVortex = isTouch
+          ? Math.min(Math.floor(w / 20), 45)
+          : Math.min(Math.floor(w / 12), 85);
         const vortexColors = ['#00f2fe', '#38bdf8', '#a855f7', '#c084fc', '#34d399', '#f43f5e'];
 
         for (let i = 0; i < numVortex; i++) {
@@ -1217,7 +1306,7 @@
             distance: 40 + Math.random() * Math.min(w, h) * 0.48,
             speed: (Math.random() * 0.015 + 0.006) * (Math.random() > 0.5 ? 1 : -1),
             radialSpeed: (Math.random() - 0.5) * 0.4,
-            size: Math.random() * 2.5 + 1.2,
+            size: Math.random() * 2.2 + 1.1,
             color: vortexColors[i % vortexColors.length],
             trail: []
           });
@@ -1231,20 +1320,30 @@
 
         const shapes = [];
         const shapeModels = [{ verts: cubeVerts, edges: cubeEdges }, { verts: octaVerts, edges: octaEdges }];
-        for (let i = 0; i < 6; i++) {
+        const shapeCount = isTouch ? 3 : 5;
+        for (let i = 0; i < shapeCount; i++) {
           shapes.push({
             x: Math.random() * w, y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
             rx: Math.random() * Math.PI * 2, ry: Math.random() * Math.PI * 2, rz: Math.random() * Math.PI * 2,
-            vrx: 0.01, vry: 0.01, vrz: 0.01, size: 36, color: starColors[i % starColors.length],
+            vrx: 0.008, vry: 0.008, vrz: 0.008, size: 32, color: starColors[i % starColors.length],
             model: shapeModels[i % shapeModels.length]
           });
         }
 
         // ----------------------------------------------------
-        // MAIN ANIMATION LOOP
+        // MAIN ANIMATION LOOP (Hardware-accelerated, no software blurs)
         // ----------------------------------------------------
         const render = () => {
+          // Throttle frames during active touch scroll for butter-smooth mobile 60/120fps
+          if (isTouch && isCurrentlyScrolling) {
+            scrollThrottleCount++;
+            if (scrollThrottleCount % 3 !== 0) {
+              animId = requestAnimationFrame(render);
+              return;
+            }
+          }
+
           time += 0.015;
           ctx.clearRect(0, 0, w, h);
 
@@ -1296,17 +1395,21 @@
                 ctx.lineWidth = size * 0.9;
                 ctx.stroke();
 
-                // Star node glow
+                // Star node
                 ctx.beginPath();
                 ctx.arc(sx, sy, size, 0, Math.PI * 2);
                 ctx.fillStyle = s.color;
                 ctx.globalAlpha = alpha;
-                if (s.z < 450) {
-                  ctx.shadowColor = s.color;
-                  ctx.shadowBlur = 10;
-                }
                 ctx.fill();
-                ctx.shadowBlur = 0;
+
+                // High-performance vector halo glow (no GPU shadow rasterization stall)
+                if (s.z < 450) {
+                  ctx.beginPath();
+                  ctx.arc(sx, sy, size * 2.2, 0, Math.PI * 2);
+                  ctx.fillStyle = s.color;
+                  ctx.globalAlpha = alpha * 0.22;
+                  ctx.fill();
+                }
               }
             }
             ctx.globalAlpha = 1;
@@ -1327,8 +1430,8 @@
               const sy = c.y * k + cy;
 
               if (sx >= -150 && sx <= w + 150 && sy >= -80 && sy <= h + 80) {
-                const fontSize = Math.max(10, Math.min(24, k * 28));
-                const alpha = Math.min(0.92, (1 - c.z / maxZ) * 1.15);
+                const fontSize = Math.max(10, Math.min(22, k * 26));
+                const alpha = Math.min(0.9, (1 - c.z / maxZ) * 1.1);
 
                 ctx.save();
                 ctx.translate(sx, sy);
@@ -1336,8 +1439,6 @@
                 ctx.font = `600 ${fontSize}px "JetBrains Mono", monospace`;
                 ctx.fillStyle = c.color;
                 ctx.globalAlpha = alpha;
-                ctx.shadowColor = c.color;
-                ctx.shadowBlur = c.z < 550 ? 14 : 4;
                 ctx.fillText(c.text, 0, 0);
                 ctx.restore();
               }
@@ -1345,7 +1446,7 @@
             ctx.globalAlpha = 1;
 
             // 3. Shooting Star Comets
-            if (Math.random() < 0.016 && comets.length < 3) {
+            if (Math.random() < 0.012 && comets.length < (isTouch ? 1 : 2)) {
               spawnComet();
             }
 
@@ -1353,7 +1454,7 @@
               const c = comets[i];
               c.x += Math.cos(c.angle) * c.speed;
               c.y += Math.sin(c.angle) * c.speed;
-              c.opacity -= 0.012;
+              c.opacity -= 0.014;
 
               if (c.opacity <= 0 || c.x > w + 100 || c.y > h + 100) {
                 comets.splice(i, 1);
@@ -1372,11 +1473,8 @@
               ctx.moveTo(tailX, tailY);
               ctx.lineTo(c.x, c.y);
               ctx.strokeStyle = cGrad;
-              ctx.lineWidth = 2.8;
-              ctx.shadowColor = c.color;
-              ctx.shadowBlur = 14;
+              ctx.lineWidth = 2.4;
               ctx.stroke();
-              ctx.shadowBlur = 0;
             }
           }
 
@@ -1385,10 +1483,11 @@
           // ====================================================
           else if (bgMode === 'quantum') {
             const waveConfigs = [
-              { yRatio: 0.35, freq1: 0.0028, freq2: 0.006, speed1: 0.8, speed2: -0.6, amp1: 50, amp2: 24, width: 2, c1: 'rgba(0,242,254,0.3)', c2: 'rgba(79,172,254,0.5)', c3: 'rgba(127,86,217,0.1)', glow: 'rgba(0,242,254,0.4)' },
-              { yRatio: 0.65, freq1: 0.0022, freq2: 0.005, speed1: -0.9, speed2: 0.7, amp1: 65, amp2: 30, width: 2.2, c1: 'rgba(127,86,217,0.1)', c2: 'rgba(168,85,247,0.5)', c3: 'rgba(0,242,254,0.35)', glow: 'rgba(168,85,247,0.4)' }
+              { yRatio: 0.35, freq1: 0.0028, freq2: 0.006, speed1: 0.8, speed2: -0.6, amp1: 45, amp2: 20, width: 2, c1: 'rgba(0,242,254,0.3)', c2: 'rgba(79,172,254,0.5)', c3: 'rgba(127,86,217,0.1)' },
+              { yRatio: 0.65, freq1: 0.0022, freq2: 0.005, speed1: -0.9, speed2: 0.7, amp1: 55, amp2: 25, width: 2, c1: 'rgba(127,86,217,0.1)', c2: 'rgba(168,85,247,0.5)', c3: 'rgba(0,242,254,0.35)' }
             ];
 
+            const step = isTouch ? 18 : 12;
             waveConfigs.forEach(wave => {
               ctx.beginPath();
               const grad = ctx.createLinearGradient(0, 0, w, 0);
@@ -1397,10 +1496,8 @@
               grad.addColorStop(1, wave.c3);
               ctx.strokeStyle = grad;
               ctx.lineWidth = wave.width;
-              ctx.shadowColor = wave.glow;
-              ctx.shadowBlur = 14;
 
-              for (let x = 0; x <= w; x += 10) {
+              for (let x = 0; x <= w; x += step) {
                 const y = (h * wave.yRatio) + 
                   Math.sin(x * wave.freq1 + time * wave.speed1) * wave.amp1 + 
                   Math.cos(x * wave.freq2 + time * wave.speed2) * wave.amp2;
@@ -1408,7 +1505,6 @@
                 else ctx.lineTo(x, y);
               }
               ctx.stroke();
-              ctx.shadowBlur = 0;
             });
 
             shapes.forEach(s => {
@@ -1457,17 +1553,23 @@
               const px = vortexCenterX + Math.cos(p.angle) * p.distance;
               const py = vortexCenterY + Math.sin(p.angle) * (p.distance * 0.7);
 
-              // Draw particle glow
+              // Draw particle
               ctx.beginPath();
               ctx.arc(px, py, p.size, 0, Math.PI * 2);
               ctx.fillStyle = p.color;
-              ctx.shadowColor = p.color;
-              ctx.shadowBlur = 10;
               ctx.fill();
-              ctx.shadowBlur = 0;
 
-              // Connect near vortex neighbors
-              for (let j = i + 1; j < Math.min(i + 8, vortexParticles.length); j++) {
+              // Light vector halo instead of shadowBlur
+              ctx.beginPath();
+              ctx.arc(px, py, p.size * 2, 0, Math.PI * 2);
+              ctx.fillStyle = p.color;
+              ctx.globalAlpha = 0.25;
+              ctx.fill();
+              ctx.globalAlpha = 1;
+
+              // Connect near vortex neighbors (scaled comparison)
+              const neighborLimit = isTouch ? 4 : 8;
+              for (let j = i + 1; j < Math.min(i + neighborLimit, vortexParticles.length); j++) {
                 const p2 = vortexParticles[j];
                 const p2x = vortexCenterX + Math.cos(p2.angle) * p2.distance;
                 const p2y = vortexCenterY + Math.sin(p2.angle) * (p2.distance * 0.7);
@@ -1475,13 +1577,13 @@
                 const dy = py - p2y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 110) {
+                if (dist < 100) {
                   ctx.beginPath();
                   ctx.moveTo(px, py);
                   ctx.lineTo(p2x, p2y);
                   ctx.strokeStyle = p.color;
-                  ctx.globalAlpha = (1 - dist / 110) * 0.28;
-                  ctx.lineWidth = 0.85;
+                  ctx.globalAlpha = (1 - dist / 100) * 0.25;
+                  ctx.lineWidth = 0.8;
                   ctx.stroke();
                   ctx.globalAlpha = 1;
                 }
@@ -1497,8 +1599,12 @@
         return () => {
           cancelAnimationFrame(animId);
           window.removeEventListener('resize', onResize);
-          window.removeEventListener('mousemove', onMouseMove);
-          window.removeEventListener('mouseleave', onMouseLeave);
+          window.removeEventListener('scroll', onScroll);
+          document.removeEventListener('click', handleAnchorClick);
+          if (onMouseMove) {
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseleave', onMouseLeave);
+          }
         };
       }, [bgMode]);
 
@@ -1581,13 +1687,16 @@
 
           <div style={{ position: 'relative', zIndex: 1 }}>
             {/* Header Navbar */}
-          <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--bg-card)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border-color)' }}>
+          <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--bg-card)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border-color)' }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <a href="#hero" className="nav-brand-link">
                 <div style={{ position: 'relative', width: '42px', height: '42px' }}>
                   <img 
                     src={AVATAR_IMAGE} 
                     alt="Hayasinth M" 
+                    width="42"
+                    height="42"
+                    decoding="async"
                     style={{ 
                       width: '42px', 
                       height: '42px', 
@@ -1701,7 +1810,7 @@
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="glass-panel animate-float" style={{ width: '100%', maxWidth: '400px', padding: '28px', textAlign: 'center', border: '1px solid var(--border-accent)' }}>
                     <div style={{ width: '180px', height: '180px', margin: '0 auto 20px', borderRadius: '50%', padding: '4px', background: 'var(--accent-gradient)', boxShadow: 'var(--shadow-glow)' }}>
-                      <img src={AVATAR_IMAGE} alt="Hayasinth M" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                      <img src={AVATAR_IMAGE} alt="Hayasinth M" width="180" height="180" loading="eager" decoding="async" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
                     </div>
                     <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '4px' }}>Hayasinth M</h3>
                     <p style={{ color: 'var(--accent-cyan)', fontSize: '0.9rem', fontWeight: 600, marginBottom: '16px' }}>Computer Science & Engineering</p>
@@ -1793,7 +1902,7 @@
               {filteredProjects.map(p => (
                 <div key={p.id} className="glass-panel" style={{ overflow: 'hidden', cursor: 'pointer' }} onClick={() => setSelectedProject(p)}>
                   <div style={{ height: '190px', position: 'relative' }}>
-                    <img src={p.image || '/project1.jpg'} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={p.image || '/project1.jpg'} alt={p.title} loading="lazy" decoding="async" width="380" height="190" style={{ width: '100%', height: '100%', objectFit: 'cover', willChange: 'transform' }} />
                     <span className="badge badge-purple" style={{ position: 'absolute', top: '12px', left: '12px' }}>{p.category}</span>
                   </div>
                   <div style={{ padding: '20px' }}>
@@ -2053,7 +2162,7 @@
               <div className="glass-panel" style={{ width: '100%', maxWidth: '700px', padding: '24px', position: 'relative' }} onClick={e => e.stopPropagation()}>
                 <button onClick={() => setSelectedProject(null)} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '20px' }}>&times;</button>
                 <div style={{ height: '220px', borderRadius: '12px', overflow: 'hidden', marginBottom: '20px' }}>
-                  <img src={selectedProject.image} alt={selectedProject.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={selectedProject.image} alt={selectedProject.title} loading="lazy" decoding="async" width="600" height="220" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <h2 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '8px' }}>{selectedProject.title}</h2>
                 <span className="badge badge-cyan" style={{ marginBottom: '16px' }}>{selectedProject.category}</span>
@@ -2107,7 +2216,7 @@
           {/* Footer */}
           <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', padding: '30px 24px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
-              <img src={AVATAR_IMAGE} alt="Hayasinth M" style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-cyan)' }} />
+              <img src={AVATAR_IMAGE} alt="Hayasinth M" width="36" height="36" loading="lazy" decoding="async" style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-cyan)' }} />
               <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '1.05rem' }}>Hayasinth M</div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '14px' }}>

@@ -77,11 +77,16 @@ export default function ProjectsSection({ projects, onSelectProject }) {
                 <img
                   src={project.image || '/project1.jpg'}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  width="380"
+                  height="190"
                   style={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    transition: 'transform 0.5s ease'
+                    transition: 'transform 0.4s ease',
+                    willChange: 'transform'
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
                   onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}

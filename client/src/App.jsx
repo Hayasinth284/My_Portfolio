@@ -144,11 +144,55 @@ export default function App() {
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
 
+    const isMobile = typeof window !== 'undefined' && (
+      window.innerWidth <= 768 || 
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+    );
+    const prefersReducedMotion = typeof window !== 'undefined' && 
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let resizeTimer = null;
     const onResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }, 150);
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
+
+    let isScrolling = false;
+    let scrollTimeout = null;
+    let frameCount = 0;
+
+    const onScroll = () => {
+      isScrolling = true;
+      if (!document.body.classList.contains('is-scrolling')) {
+        document.body.classList.add('is-scrolling');
+      }
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        document.body.classList.remove('is-scrolling');
+      }, 100);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Smooth anchor scrolling handler for internal links without needing global scroll-behavior on html
+    const onAnchorClick = (e) => {
+      const anchor = e.target.closest && e.target.closest('a[href^="#"]');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        if (href && href.length > 1) {
+          const el = document.querySelector(href);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    };
+    document.addEventListener('click', onAnchorClick);
 
     let mouse = { x: null, y: null };
     let flightOffsetX = 0;
@@ -162,15 +206,18 @@ export default function App() {
       mouse.x = null;
       mouse.y = null;
     };
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseleave', onMouseLeave);
+
+    if (!isMobile) {
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      window.addEventListener('mouseleave', onMouseLeave, { passive: true });
+    }
 
     let time = 0;
 
     // ----------------------------------------------------
-    // 1. DEEP CYBER SPACE ENGINE STATE
+    // 1. DEEP CYBER SPACE ENGINE STATE (Scaled for Performance)
     // ----------------------------------------------------
-    const numStars = Math.min(Math.floor(w * 0.4), 400);
+    const numStars = isMobile ? Math.min(Math.floor(w * 0.16), 85) : Math.min(Math.floor(w * 0.32), 220);
     const maxZ = 1200;
     const fov = 260;
     const stars = [];
@@ -196,7 +243,7 @@ export default function App() {
     ];
 
     const floatingCodes = [];
-    const numCodes = 18;
+    const numCodes = isMobile ? 8 : 16;
     for (let i = 0; i < numCodes; i++) {
       floatingCodes.push({
         text: spaceCodeWords[i % spaceCodeWords.length],
@@ -226,7 +273,7 @@ export default function App() {
     // 2. MAGNETIC NEBULA VORTEX PARTICLES
     // ----------------------------------------------------
     const vortexParticles = [];
-    const numVortex = Math.min(Math.floor(w / 10), 120);
+    const numVortex = isMobile ? Math.min(Math.floor(w / 18), 45) : Math.min(Math.floor(w / 12), 85);
     const vortexColors = ['#00f2fe', '#38bdf8', '#a855f7', '#c084fc', '#34d399', '#f43f5e'];
 
     for (let i = 0; i < numVortex; i++) {
@@ -235,7 +282,7 @@ export default function App() {
         distance: 40 + Math.random() * Math.min(w, h) * 0.48,
         speed: (Math.random() * 0.015 + 0.006) * (Math.random() > 0.5 ? 1 : -1),
         radialSpeed: (Math.random() - 0.5) * 0.4,
-        size: Math.random() * 2.5 + 1.2,
+        size: Math.random() * 2.2 + 1.1,
         color: vortexColors[i % vortexColors.length],
         trail: []
       });
@@ -249,7 +296,8 @@ export default function App() {
 
     const shapes = [];
     const shapeModels = [{ verts: cubeVerts, edges: cubeEdges }, { verts: octaVerts, edges: octaEdges }];
-    for (let i = 0; i < 6; i++) {
+    const numShapes = isMobile ? 3 : 6;
+    for (let i = 0; i < numShapes; i++) {
       shapes.push({
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
@@ -260,17 +308,27 @@ export default function App() {
     }
 
     // ----------------------------------------------------
-    // MAIN ANIMATION LOOP
+    // MAIN ANIMATION LOOP (Hardware-Accelerated & Throttled)
     // ----------------------------------------------------
     const render = () => {
+      frameCount++;
+
+      // When user is actively scrolling on mobile, throttle canvas updates to preserve 60/120fps scrolling
+      if (isScrolling && isMobile && (frameCount % 2 !== 0)) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
       time += 0.015;
       ctx.clearRect(0, 0, w, h);
 
-      // Smooth mouse camera tilt steering
-      const targetOffsetX = mouse.x ? (mouse.x - w / 2) * 0.18 : 0;
-      const targetOffsetY = mouse.y ? (mouse.y - h / 2) * 0.18 : 0;
-      flightOffsetX += (targetOffsetX - flightOffsetX) * 0.05;
-      flightOffsetY += (targetOffsetY - flightOffsetY) * 0.05;
+      // Smooth mouse camera tilt steering (Desktop only)
+      if (!isMobile) {
+        const targetOffsetX = mouse.x ? (mouse.x - w / 2) * 0.18 : 0;
+        const targetOffsetY = mouse.y ? (mouse.y - h / 2) * 0.18 : 0;
+        flightOffsetX += (targetOffsetX - flightOffsetX) * 0.05;
+        flightOffsetY += (targetOffsetY - flightOffsetY) * 0.05;
+      }
 
       const cx = w / 2 - flightOffsetX;
       const cy = h / 2 - flightOffsetY;
@@ -314,53 +372,57 @@ export default function App() {
             ctx.lineWidth = size * 0.9;
             ctx.stroke();
 
-            // Star node glow
+            // Vector halo glow without expensive Gaussian blur
+            if (s.z < 450) {
+              ctx.beginPath();
+              ctx.arc(sx, sy, size * 2.2, 0, Math.PI * 2);
+              ctx.fillStyle = s.color;
+              ctx.globalAlpha = alpha * 0.25;
+              ctx.fill();
+            }
+
+            // Star node core
             ctx.beginPath();
             ctx.arc(sx, sy, size, 0, Math.PI * 2);
             ctx.fillStyle = s.color;
             ctx.globalAlpha = alpha;
-            if (s.z < 450) {
-              ctx.shadowColor = s.color;
-              ctx.shadowBlur = 10;
-            }
             ctx.fill();
-            ctx.shadowBlur = 0;
           }
         }
         ctx.globalAlpha = 1;
 
-        // 2. Render 3D Floating Cyber Code Words in Space
-        for (let i = 0; i < floatingCodes.length; i++) {
-          const c = floatingCodes[i];
-          c.z -= speed * 0.95;
+        // 2. Render 3D Floating Cyber Code Words in Space (Skipped during fast scroll on mobile)
+        if (!isMobile || !isScrolling) {
+          for (let i = 0; i < floatingCodes.length; i++) {
+            const c = floatingCodes[i];
+            c.z -= speed * 0.95;
 
-          if (c.z <= 10) {
-            c.z = maxZ;
-            c.x = (Math.random() - 0.5) * w * 2.2;
-            c.y = (Math.random() - 0.5) * h * 2.2;
+            if (c.z <= 10) {
+              c.z = maxZ;
+              c.x = (Math.random() - 0.5) * w * 2.2;
+              c.y = (Math.random() - 0.5) * h * 2.2;
+            }
+
+            const k = fov / c.z;
+            const sx = c.x * k + cx;
+            const sy = c.y * k + cy;
+
+            if (sx >= -150 && sx <= w + 150 && sy >= -80 && sy <= h + 80) {
+              const fontSize = Math.max(10, Math.min(24, Math.round(k * 28)));
+              const alpha = Math.min(0.92, (1 - c.z / maxZ) * 1.15);
+
+              ctx.save();
+              ctx.translate(sx, sy);
+              ctx.rotate(c.rotZ);
+              ctx.font = `600 ${fontSize}px "JetBrains Mono", monospace`;
+              ctx.fillStyle = c.color;
+              ctx.globalAlpha = alpha;
+              ctx.fillText(c.text, 0, 0);
+              ctx.restore();
+            }
           }
-
-          const k = fov / c.z;
-          const sx = c.x * k + cx;
-          const sy = c.y * k + cy;
-
-          if (sx >= -150 && sx <= w + 150 && sy >= -80 && sy <= h + 80) {
-            const fontSize = Math.max(10, Math.min(24, k * 28));
-            const alpha = Math.min(0.92, (1 - c.z / maxZ) * 1.15);
-
-            ctx.save();
-            ctx.translate(sx, sy);
-            ctx.rotate(c.rotZ);
-            ctx.font = `600 ${fontSize}px "JetBrains Mono", monospace`;
-            ctx.fillStyle = c.color;
-            ctx.globalAlpha = alpha;
-            ctx.shadowColor = c.color;
-            ctx.shadowBlur = c.z < 550 ? 14 : 4;
-            ctx.fillText(c.text, 0, 0);
-            ctx.restore();
-          }
+          ctx.globalAlpha = 1;
         }
-        ctx.globalAlpha = 1;
 
         // 3. Shooting Star Comets
         if (Math.random() < 0.016 && comets.length < 3) {
@@ -391,10 +453,7 @@ export default function App() {
           ctx.lineTo(c.x, c.y);
           ctx.strokeStyle = cGrad;
           ctx.lineWidth = 2.8;
-          ctx.shadowColor = c.color;
-          ctx.shadowBlur = 14;
           ctx.stroke();
-          ctx.shadowBlur = 0;
         }
       }
 
@@ -403,8 +462,8 @@ export default function App() {
       // ====================================================
       else if (bgMode === 'quantum') {
         const waveConfigs = [
-          { yRatio: 0.35, freq1: 0.0028, freq2: 0.006, speed1: 0.8, speed2: -0.6, amp1: 50, amp2: 24, width: 2, c1: 'rgba(0,242,254,0.3)', c2: 'rgba(79,172,254,0.5)', c3: 'rgba(127,86,217,0.1)', glow: 'rgba(0,242,254,0.4)' },
-          { yRatio: 0.65, freq1: 0.0022, freq2: 0.005, speed1: -0.9, speed2: 0.7, amp1: 65, amp2: 30, width: 2.2, c1: 'rgba(127,86,217,0.1)', c2: 'rgba(168,85,247,0.5)', c3: 'rgba(0,242,254,0.35)', glow: 'rgba(168,85,247,0.4)' }
+          { yRatio: 0.35, freq1: 0.0028, freq2: 0.006, speed1: 0.8, speed2: -0.6, amp1: 50, amp2: 24, width: 2, c1: 'rgba(0,242,254,0.3)', c2: 'rgba(79,172,254,0.5)', c3: 'rgba(127,86,217,0.1)' },
+          { yRatio: 0.65, freq1: 0.0022, freq2: 0.005, speed1: -0.9, speed2: 0.7, amp1: 65, amp2: 30, width: 2.2, c1: 'rgba(127,86,217,0.1)', c2: 'rgba(168,85,247,0.5)', c3: 'rgba(0,242,254,0.35)' }
         ];
 
         waveConfigs.forEach(wave => {
@@ -415,10 +474,9 @@ export default function App() {
           grad.addColorStop(1, wave.c3);
           ctx.strokeStyle = grad;
           ctx.lineWidth = wave.width;
-          ctx.shadowColor = wave.glow;
-          ctx.shadowBlur = 14;
 
-          for (let x = 0; x <= w; x += 10) {
+          const step = isMobile ? 18 : 10;
+          for (let x = 0; x <= w; x += step) {
             const y = (h * wave.yRatio) +
               Math.sin(x * wave.freq1 + time * wave.speed1) * wave.amp1 +
               Math.cos(x * wave.freq2 + time * wave.speed2) * wave.amp2;
@@ -426,7 +484,6 @@ export default function App() {
             else ctx.lineTo(x, y);
           }
           ctx.stroke();
-          ctx.shadowBlur = 0;
         });
 
         shapes.forEach(s => {
@@ -475,17 +532,23 @@ export default function App() {
           const px = vortexCenterX + Math.cos(p.angle) * p.distance;
           const py = vortexCenterY + Math.sin(p.angle) * (p.distance * 0.7);
 
-          // Draw particle glow
+          // Draw particle halo and core
+          ctx.beginPath();
+          ctx.arc(px, py, p.size * 2, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = 0.25;
+          ctx.fill();
+
           ctx.beginPath();
           ctx.arc(px, py, p.size, 0, Math.PI * 2);
           ctx.fillStyle = p.color;
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = 10;
+          ctx.globalAlpha = 0.9;
           ctx.fill();
-          ctx.shadowBlur = 0;
+          ctx.globalAlpha = 1;
 
           // Connect near vortex neighbors
-          for (let j = i + 1; j < Math.min(i + 8, vortexParticles.length); j++) {
+          const neighborLimit = isMobile ? 4 : 8;
+          for (let j = i + 1; j < Math.min(i + neighborLimit, vortexParticles.length); j++) {
             const p2 = vortexParticles[j];
             const p2x = vortexCenterX + Math.cos(p2.angle) * p2.distance;
             const p2y = vortexCenterY + Math.sin(p2.angle) * (p2.distance * 0.7);
@@ -507,7 +570,9 @@ export default function App() {
         }
       }
 
-      animId = requestAnimationFrame(render);
+      if (!prefersReducedMotion) {
+        animId = requestAnimationFrame(render);
+      }
     };
 
     render();
@@ -515,8 +580,15 @@ export default function App() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', onResize);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('click', onAnchorClick);
+      if (!isMobile) {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseleave', onMouseLeave);
+      }
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (resizeTimer) clearTimeout(resizeTimer);
+      document.body.classList.remove('is-scrolling');
     };
   }, [bgMode]);
 

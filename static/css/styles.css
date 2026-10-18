@@ -59,7 +59,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -572,5 +571,35 @@ img, video, canvas, svg {
 @media (max-width: 360px) {
   .section-container {
     padding: 32px 10px;
+  }
+}
+
+/* Scroll Performance & Compositor Rules */
+body.is-scrolling * {
+  animation-play-state: paused !important;
+}
+
+body.is-scrolling .glass-panel,
+body.is-scrolling a,
+body.is-scrolling button {
+  pointer-events: none !important;
+}
+
+.section-container {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 550px;
+}
+
+#hero .section-container,
+.hero-section-container {
+  content-visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

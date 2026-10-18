@@ -19,6 +19,10 @@ export default function Footer() {
             <img
               src="/avatar.jpg"
               alt="Hayasinth M"
+              loading="lazy"
+              decoding="async"
+              width="38"
+              height="38"
               style={{
                 width: '38px',
                 height: '38px',

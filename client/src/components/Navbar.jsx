@@ -37,6 +37,9 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
             <img
               src="/avatar.jpg"
               alt="Hayasinth M"
+              width="42"
+              height="42"
+              decoding="async"
               style={{
                 width: '42px',
                 height: '42px',

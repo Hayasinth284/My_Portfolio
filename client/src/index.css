@@ -59,7 +59,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -115,13 +114,15 @@ img, video, canvas, svg {
 .glass-panel {
   position: relative;
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
-  transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease;
   overflow: hidden;
+  contain: layout style;
+  transform: translateZ(0);
 }
 
 .glass-panel::after {
@@ -266,6 +267,13 @@ img, video, canvas, svg {
   max-width: 1200px;
   margin: 0 auto;
   padding: 80px 24px;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 550px;
+}
+
+#hero .section-container,
+.hero-section-container {
+  content-visibility: visible !important;
 }
 
 .section-header {
@@ -444,10 +452,11 @@ img, video, canvas, svg {
 .aurora-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(24px);
   opacity: 0.32;
   pointer-events: none;
   mix-blend-mode: screen;
+  transform: translateZ(0);
   will-change: transform;
   z-index: 1;
 }
@@ -462,7 +471,7 @@ img, video, canvas, svg {
   left: -10%;
   width: 650px;
   height: 650px;
-  background: radial-gradient(circle, #00f2fe 0%, rgba(0, 242, 254, 0) 70%);
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.9) 0%, rgba(0, 242, 254, 0.4) 30%, rgba(0, 242, 254, 0.08) 55%, rgba(0, 242, 254, 0) 70%);
   animation: orbDrift1 22s ease-in-out infinite alternate;
 }
 
@@ -471,7 +480,7 @@ img, video, canvas, svg {
   right: -10%;
   width: 750px;
   height: 750px;
-  background: radial-gradient(circle, #7f56d9 0%, rgba(127, 86, 217, 0) 70%);
+  background: radial-gradient(circle, rgba(127, 86, 217, 0.9) 0%, rgba(127, 86, 217, 0.4) 30%, rgba(127, 86, 217, 0.08) 55%, rgba(0, 0, 0, 0) 70%);
   animation: orbDrift2 26s ease-in-out infinite alternate;
 }
 
@@ -480,7 +489,7 @@ img, video, canvas, svg {
   left: 35%;
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle, #4facfe 0%, rgba(79, 172, 254, 0) 70%);
+  background: radial-gradient(circle, rgba(79, 172, 254, 0.9) 0%, rgba(79, 172, 254, 0.35) 30%, rgba(79, 172, 254, 0.08) 55%, rgba(0, 0, 0, 0) 70%);
   animation: orbDrift3 19s ease-in-out infinite alternate;
 }
 
@@ -489,33 +498,33 @@ img, video, canvas, svg {
   left: 10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, #10b981 0%, rgba(16, 185, 129, 0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.9) 0%, rgba(16, 185, 129, 0.3) 30%, rgba(16, 185, 129, 0.06) 55%, rgba(0, 0, 0, 0) 70%);
   animation: orbDrift4 24s ease-in-out infinite alternate;
   opacity: 0.2;
 }
 
 @keyframes orbDrift1 {
-  0% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(110px, 80px) scale(1.15); }
-  100% { transform: translate(40px, 150px) scale(0.9); }
+  0% { transform: translate3d(0px, 0px, 0) scale(1); }
+  50% { transform: translate3d(110px, 80px, 0) scale(1.15); }
+  100% { transform: translate3d(40px, 150px, 0) scale(0.9); }
 }
 
 @keyframes orbDrift2 {
-  0% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(-130px, -70px) scale(1.2); }
-  100% { transform: translate(-60px, 100px) scale(0.85); }
+  0% { transform: translate3d(0px, 0px, 0) scale(1); }
+  50% { transform: translate3d(-130px, -70px, 0) scale(1.2); }
+  100% { transform: translate3d(-60px, 100px, 0) scale(0.85); }
 }
 
 @keyframes orbDrift3 {
-  0% { transform: translate(0px, 0px) scale(0.9); }
-  50% { transform: translate(-90px, 120px) scale(1.2); }
-  100% { transform: translate(80px, -50px) scale(1); }
+  0% { transform: translate3d(0px, 0px, 0) scale(0.9); }
+  50% { transform: translate3d(-90px, 120px, 0) scale(1.2); }
+  100% { transform: translate3d(80px, -50px, 0) scale(1); }
 }
 
 @keyframes orbDrift4 {
-  0% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(70px, -100px) scale(1.1); }
-  100% { transform: translate(-80px, 40px) scale(0.95); }
+  0% { transform: translate3d(0px, 0px, 0) scale(1); }
+  50% { transform: translate3d(70px, -100px, 0) scale(1.1); }
+  100% { transform: translate3d(-80px, 40px, 0) scale(0.95); }
 }
 
 .bg-grid-overlay {
@@ -530,7 +539,8 @@ img, video, canvas, svg {
   background-size: 50px 50px;
   mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
   -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
-  animation: gridShift 40s linear infinite;
+  transform: translateZ(0);
+  pointer-events: none;
   z-index: 1;
 }
 
@@ -538,11 +548,6 @@ img, video, canvas, svg {
   background-image: 
     linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-}
-
-@keyframes gridShift {
-  0% { background-position: 0 0; }
-  100% { background-position: 50px 50px; }
 }
 
 /* ====================================================
@@ -2578,6 +2583,70 @@ img, video, canvas, svg {
 
   .modal-header-img-wrapper {
     height: 155px;
+  }
+}
+
+/* ====================================================
+   ULTRA-SMOOTH SCROLL PERFORMANCE OPTIMIZATIONS
+   Zero Frame Drops, Passive Compositing, Mobile GPU Safe
+   ==================================================== */
+
+/* Pause heavy CSS animations and disable hover state calculations during active scroll */
+body.is-scrolling * {
+  animation-play-state: paused !important;
+}
+
+body.is-scrolling .glass-panel,
+body.is-scrolling a,
+body.is-scrolling button {
+  pointer-events: none !important;
+}
+
+/* Mobile & Tablet Compositor Safeguards (<= 768px) */
+@media (max-width: 768px) {
+  .glass-panel {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(18, 24, 38, 0.86) !important;
+  }
+
+  .light .glass-panel {
+    background: rgba(255, 255, 255, 0.94) !important;
+  }
+
+  .aurora-orb {
+    filter: blur(14px) !important;
+    mix-blend-mode: normal !important;
+    opacity: 0.2 !important;
+  }
+
+  /* Optimize floating card micro-animations on mobile touch screens */
+  .contact-chip {
+    animation: none !important;
+  }
+
+  .tech-tag-chip {
+    animation: none !important;
+  }
+
+  .skill-card-box-animated {
+    animation: none !important;
+  }
+}
+
+/* Accessibility: Respect User's Reduced-Motion Setting */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora-orb {
+    animation: none !important;
+  }
+  #ambient-canvas {
+    opacity: 0.5;
   }
 }
 

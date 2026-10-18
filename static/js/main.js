@@ -64,24 +64,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (canvas) {
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
 
-    window.addEventListener('resize', () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Passive scroll listener for animation freeze
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      document.body.classList.add('is-scrolling');
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.body.classList.remove('is-scrolling');
+      }, 150);
+    }, { passive: true });
+
+    // Smooth anchor clicks
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (a) {
+        const targetId = a.getAttribute('href');
+        if (targetId && targetId !== '#') {
+          const el = document.querySelector(targetId);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
     });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }, 120);
+    }, { passive: true });
 
     let mouseX = w / 2;
     let mouseY = h / 2;
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+    if (!isTouch) {
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }, { passive: true });
+    }
 
     // Space Mode Setup
-    const NUM_STARS = 260;
+    const NUM_STARS = prefersReducedMotion ? 25 : (isTouch ? 85 : 220);
     const stars = [];
     const techWords = ['Python', 'Django', 'SQL', 'JavaScript', 'HTML5', 'CSS3', 'React', 'SQLite', 'Node', 'REST API', 'Kanban'];
 

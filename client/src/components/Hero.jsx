@@ -19,7 +19,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="hero-section">
-      {/* Background Neon Accent Blobs */}
+      {/* Background Neon Accent Blobs (Hardware-feathered without expensive blur filter) */}
       <div style={{
         position: 'absolute',
         top: '-100px',
@@ -27,10 +27,10 @@ export default function Hero() {
         width: '400px',
         height: '400px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0,0,0,0) 70%)',
-        filter: 'blur(50px)',
+        background: 'radial-gradient(circle, rgba(0, 242, 254, 0.14) 0%, rgba(0, 242, 254, 0.04) 35%, rgba(0,0,0,0) 70%)',
         zIndex: -1,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        transform: 'translateZ(0)'
       }}></div>
 
       <div style={{
@@ -40,10 +40,10 @@ export default function Hero() {
         width: '450px',
         height: '450px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(127, 86, 217, 0.15) 0%, rgba(0,0,0,0) 70%)',
-        filter: 'blur(50px)',
+        background: 'radial-gradient(circle, rgba(127, 86, 217, 0.14) 0%, rgba(127, 86, 217, 0.04) 35%, rgba(0,0,0,0) 70%)',
         zIndex: -1,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        transform: 'translateZ(0)'
       }}></div>
 
       <div className="section-container hero-section-container">
@@ -152,6 +152,9 @@ export default function Hero() {
                   <img
                     src="/avatar.jpg"
                     alt="Hayasinth M"
+                    width="180"
+                    height="180"
+                    decoding="async"
                     style={{
                       width: '100%',
                       height: '100%',

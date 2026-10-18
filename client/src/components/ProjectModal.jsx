@@ -24,6 +24,10 @@ export default function ProjectModal({ project, onClose }) {
           <img
             src={project.image || '/project1.jpg'}
             alt={project.title}
+            loading="lazy"
+            decoding="async"
+            width="750"
+            height="260"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div style={{
