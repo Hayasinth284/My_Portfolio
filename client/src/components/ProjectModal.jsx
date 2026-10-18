@@ -66,7 +66,7 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Tags */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
-            {project.tags.split(',').map((tag) => (
+            {(project.tags ? project.tags.split(',') : []).map((tag) => (
               <span
                 key={tag}
                 style={{

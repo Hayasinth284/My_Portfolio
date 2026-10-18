@@ -2,8 +2,10 @@ import React from 'react';
 import { Code, Database, Terminal, Globe, Cpu, CheckCircle } from 'lucide-react';
 
 export default function SkillsSection({ skills }) {
-  // Group skills by category
-  const categories = skills.reduce((acc, skill) => {
+  // Group skills by category safely
+  const skillList = Array.isArray(skills) ? skills : [];
+  const categories = skillList.reduce((acc, skill) => {
+    if (!skill) return acc;
     const cat = skill.category || 'General';
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(skill);

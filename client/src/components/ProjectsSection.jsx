@@ -8,12 +8,14 @@ export default function ProjectsSection({ projects, onSelectProject }) {
 
   const categories = ['All', 'Python & SQL', 'Full Stack', 'Frontend', 'Database'];
 
-  const filteredProjects = projects.filter((project) => {
+  const filteredProjects = (Array.isArray(projects) ? projects : []).filter((project) => {
+    if (!project) return false;
     const matchesCategory = activeCategory === 'All' || project.category === activeCategory;
-    const matchesSearch =
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.tags.toLowerCase().includes(searchQuery.toLowerCase());
+    const title = (project.title || '').toLowerCase();
+    const desc = (project.description || '').toLowerCase();
+    const tags = (project.tags || '').toLowerCase();
+    const q = searchQuery.toLowerCase();
+    const matchesSearch = title.includes(q) || desc.includes(q) || tags.includes(q);
     return matchesCategory && matchesSearch;
   });
 
@@ -155,7 +157,7 @@ export default function ProjectsSection({ projects, onSelectProject }) {
                 <div>
                   {/* Tech Tags */}
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
-                    {project.tags.split(',').map((tag) => (
+                    {(project.tags ? project.tags.split(',') : []).map((tag) => (
                       <span
                         key={tag}
                         style={{

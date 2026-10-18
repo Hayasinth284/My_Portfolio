@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle, AlertCircle, Loader2, Linkedin, Globe } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Send, MessageSquare, CheckCircle, AlertCircle, Loader2, Linkedin, Globe } from 'lucide-react';
 
 export default function ContactSection({ showToast }) {
   const [formData, setFormData] = useState({

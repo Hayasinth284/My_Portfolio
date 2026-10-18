@@ -100,17 +100,17 @@ export default function App() {
 
       if (projRes.ok) {
         const projData = await projRes.json();
-        if (projData && projData.length > 0) setProjects(projData);
+        if (Array.isArray(projData) && projData.length > 0) setProjects(projData);
       }
 
       if (skillRes.ok) {
         const skillData = await skillRes.json();
-        if (skillData && skillData.length > 0) setSkills(skillData);
+        if (Array.isArray(skillData) && skillData.length > 0) setSkills(skillData);
       }
 
       if (statRes.ok) {
         const statData = await statRes.json();
-        setStats(statData);
+        if (statData && typeof statData === 'object') setStats(statData);
       }
     } catch (err) {
       console.log('Using local fallback portfolio data');
