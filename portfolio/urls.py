@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     # Main Page
     path('', views.index_view, name='index'),
+    path('index.html', views.index_view, name='index_html'),
 
     # REST / AJAX API Endpoints
     path('api/projects/', views.api_projects, name='api_projects'),
