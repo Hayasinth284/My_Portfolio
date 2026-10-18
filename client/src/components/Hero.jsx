@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Phone, MapPin, Sparkles, Terminal, Code2, Database } from 'lucide-react';
 
 export default function Hero() {
+  const roles = [
+    'Full Stack & Python Developer',
+    'SQL & Database Specialist',
+    'BE CSE (4th Year) @ Jeppiaar',
+    'Modern Web & React Engineer'
+  ];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, [roles.length]);
+
   return (
     <section id="hero" style={{ position: 'relative', overflow: 'hidden', padding: '100px 24px 60px' }}>
       {/* Background Neon Accent Blobs */}
@@ -40,24 +55,24 @@ export default function Hero() {
           {/* Left Column: Bio & Headline */}
           <div>
             <div className="badge badge-cyan" style={{ marginBottom: '18px', padding: '6px 14px' }}>
-              <Sparkles size={14} /> <span>Aspiring Software Engineer</span>
+              <Sparkles size={14} className="animate-spin" style={{ animationDuration: '4s' }} />
+              <span>Aspiring Software Engineer</span>
             </div>
 
+            {/* Main Animated Headline & Name */}
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.15, marginBottom: '20px' }}>
-              Hi, I'm <span className="gradient-text">Hayasinth M</span>
+              Hi, I'm <span className="hero-name-animated">Hayasinth M</span>
             </h1>
 
-            <div style={{
-              fontSize: '1.25rem',
-              color: 'var(--text-secondary)',
-              fontWeight: 500,
-              marginBottom: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px'
-            }}>
-              <Terminal size={20} color="var(--accent-cyan)" />
-              <span>Full Stack & Python Developer | BE CSE (4th Year)</span>
+            {/* Dynamic Animated Role Ticker */}
+            <div className="role-ticker-box">
+              <Terminal size={18} color="var(--accent-cyan)" />
+              <div className="role-ticker-text">
+                <span key={currentRoleIndex} className="role-ticker-badge">
+                  {roles[currentRoleIndex]}
+                </span>
+                <span className="terminal-cursor"></span>
+              </div>
             </div>
 
             <p style={{
@@ -70,20 +85,23 @@ export default function Hero() {
               Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <strong>Jeppiaar Engineering College</strong>. Passionate about building modern full-stack web applications, database-driven systems using <strong>SQL</strong> and <strong>Python</strong>, and clean responsive frontends with <strong>JavaScript, HTML, CSS, and React</strong>.
             </p>
 
-            {/* CTA Action Buttons */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '32px' }}>
+            {/* CTA Action Buttons with Animated LinkedIn Focus */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '32px', alignItems: 'center' }}>
               <a href="#projects" className="btn-primary">
                 Explore My Work <ArrowRight size={18} />
               </a>
 
+              {/* Animated LinkedIn Button */}
               <a
                 href="https://www.linkedin.com/in/hayasinth284"
                 target="_blank"
                 rel="noreferrer"
-                className="btn-secondary"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                className="btn-linkedin-animated"
+                title="Connect with Hayasinth on LinkedIn"
               >
-                <Linkedin size={18} color="#00f2fe" /> LinkedIn
+                <Linkedin size={18} />
+                <span>LinkedIn Connect</span>
+                <span className="linkedin-radar-pulse"></span>
               </a>
 
               <a
@@ -97,7 +115,7 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Quick Contact & Info Grid */}
+            {/* Quick Contact & Info Grid with Floating Micro-Animations */}
             <div style={{
               display: 'flex',
               flexWrap: 'wrap',
@@ -105,62 +123,77 @@ export default function Hero() {
               paddingTop: '20px',
               borderTop: '1px solid var(--border-color)'
             }}>
-              <a href="mailto:hayasinth284@gmail.com" className="contact-chip">
+              <a href="mailto:hayasinth284@gmail.com" className="contact-chip contact-chip-email" title="Click to email">
                 <Mail size={16} color="var(--accent-cyan)" />
                 <span>hayasinth284@gmail.com</span>
               </a>
 
-              <a href="tel:+918122208962" className="contact-chip">
-                <Phone size={16} color="var(--accent-cyan)" />
+              <a href="tel:+918122208962" className="contact-chip contact-chip-phone" title="Click to call">
+                <Phone size={16} color="#10b981" />
                 <span>+91 8122208962</span>
               </a>
 
-              <a href="https://www.linkedin.com/in/hayasinth284" target="_blank" rel="noreferrer" className="contact-chip">
+              <a
+                href="https://www.linkedin.com/in/hayasinth284"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-chip contact-chip-linkedin"
+                title="View LinkedIn Profile"
+              >
                 <Linkedin size={16} color="#00f2fe" />
-                <span>hayasinth284</span>
+                <span>linkedin.com/in/hayasinth284</span>
               </a>
 
-              <div className="contact-chip">
-                <MapPin size={16} color="var(--accent-cyan)" />
+              <div className="contact-chip contact-chip-location">
+                <MapPin size={16} color="#c084fc" />
                 <span>Chennai, Tamil Nadu</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Developer Card & Tech Stack Badges */}
+          {/* Right Column: Developer Card & Tech Stack Badges with Orbital Avatar */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="glass-panel animate-float" style={{
               position: 'relative',
               width: '100%',
               maxWidth: '420px',
-              padding: '24px',
+              padding: '28px 24px',
               textAlign: 'center',
               border: '1px solid var(--border-accent)'
             }}>
-              {/* Profile Avatar Image */}
-              <div style={{
-                position: 'relative',
-                width: '180px',
-                height: '180px',
-                margin: '0 auto 20px',
-                borderRadius: '50%',
-                padding: '4px',
-                background: 'var(--accent-gradient)',
-                boxShadow: 'var(--shadow-glow)'
-              }}>
-                <img
-                  src="/avatar.jpg"
-                  alt="Hayasinth M"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    objectFit: 'cover'
-                  }}
-                />
+              {/* Cyberpunk Futuristic Orbital Avatar */}
+              <div className="avatar-orbit-wrapper">
+                <div className="avatar-orbit-ring"></div>
+                <div className="avatar-orbit-ring-outer"></div>
+                <div className="avatar-img-frame">
+                  <img
+                    src="/avatar.jpg"
+                    alt="Hayasinth M"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                </div>
+                <div style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  right: '20px',
+                  width: '16px',
+                  height: '16px',
+                  borderRadius: '50%',
+                  background: 'var(--accent-emerald)',
+                  border: '3px solid var(--bg-card)',
+                  boxShadow: '0 0 10px var(--accent-emerald)',
+                  zIndex: 4
+                }} title="Open to Opportunities"></div>
               </div>
 
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '6px' }}>Hayasinth M</h3>
+              <h3 style={{ fontSize: '1.45rem', fontWeight: 800, marginBottom: '6px' }}>
+                <span className="hero-name-animated" style={{ fontSize: '1.45rem' }}>Hayasinth M</span>
+              </h3>
               <p style={{ color: 'var(--accent-cyan)', fontSize: '0.9rem', fontWeight: 600, marginBottom: '16px' }}>
                 Computer Science & Engineering
               </p>

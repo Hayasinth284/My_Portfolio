@@ -71,16 +71,38 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
         </a>
 
         {/* Desktop Links */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="desktop-nav">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="nav-link"
-            >
-              {link.name}
-            </a>
-          ))}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '10px' }} className="desktop-nav">
+          {navLinks.map((link) => {
+            const isAbout = link.name === 'About';
+            const isProjects = link.name === 'Projects';
+            const linkClass = isAbout
+              ? 'nav-link nav-link-about'
+              : isProjects
+              ? 'nav-link nav-link-projects'
+              : 'nav-link';
+
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={linkClass}
+              >
+                {isAbout && (
+                  <>
+                    <span className="nav-btn-indicator"></span>
+                    <Sparkles size={13} color="#00f2fe" style={{ marginRight: '2px' }} />
+                  </>
+                )}
+                {isProjects && (
+                  <>
+                    <span className="nav-btn-indicator"></span>
+                    <Code2 size={13} color="#c084fc" style={{ marginRight: '2px' }} />
+                  </>
+                )}
+                <span>{link.name}</span>
+              </a>
+            );
+          })}
         </nav>
 
         {/* Action Controls */}
@@ -139,6 +161,43 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
           </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Drawer with Smooth Slide-in */}
+      {mobileMenuOpen && (
+        <div style={{
+          padding: '16px 24px 20px',
+          background: 'var(--bg-secondary)',
+          borderTop: '1px solid var(--border-color)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          animation: 'fadeIn 0.25s ease'
+        }}>
+          {navLinks.map((link) => {
+            const isAbout = link.name === 'About';
+            const isProjects = link.name === 'Projects';
+            const linkClass = isAbout
+              ? 'nav-link nav-link-about'
+              : isProjects
+              ? 'nav-link nav-link-projects'
+              : 'nav-link';
+
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={linkClass}
+                style={{ padding: '10px 16px', width: '100%', justifyContent: 'flex-start' }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {isAbout && <Sparkles size={14} color="#00f2fe" />}
+                {isProjects && <Code2 size={14} color="#c084fc" />}
+                <span>{link.name}</span>
+              </a>
+            );
+          })}
+        </div>
+      )}
     </header>
   );
 }
