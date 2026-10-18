@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Download, Github, Linkedin, Mail, Phone, MapPin, Sparkles, Terminal, Code2, Database } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Mail, Phone, MapPin, Sparkles, Terminal, Code2, Database, GraduationCap } from 'lucide-react';
 
 export default function Hero() {
   const roles = [
     'Full Stack & Python Developer',
     'SQL & Database Specialist',
-    'BE CSE (4th Year) @ Jeppiaar',
-    'Modern Web & React Engineer'
+    'BE CSE (4th Year) @ JPR',
+    'Frontend & Web Interface Engineer'
   ];
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
 
@@ -34,7 +34,7 @@ export default function Hero() {
 
       <div style={{
         position: 'absolute',
-        bottom: '0',
+        bottom: '10%',
         right: '-100px',
         width: '450px',
         height: '450px',
@@ -82,7 +82,7 @@ export default function Hero() {
               marginBottom: '32px',
               maxWidth: '560px'
             }}>
-              Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <strong>Jeppiaar Engineering College</strong>. Passionate about building modern full-stack web applications, database-driven systems using <strong>SQL</strong> and <strong>Python</strong>, and clean responsive frontends with <strong>JavaScript, HTML, CSS, and React</strong>.
+              Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <span className="jpr-college-badge-animated">🎓 Jeppiaar Engineering College (JPR)</span>. Passionate about building modern database-driven systems using <strong className="tech-chip-text tech-text-sql">SQL</strong> and <strong className="tech-chip-text tech-text-python">Python</strong>, and clean responsive frontends with <strong className="tech-chip-text tech-text-js">JavaScript</strong>, <strong className="tech-chip-text tech-text-html">HTML5</strong>, and <strong className="tech-chip-text tech-text-css">CSS3</strong>.
             </p>
 
             {/* CTA Action Buttons with Unified Cohesive Animation */}
@@ -158,9 +158,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Developer Card & Tech Stack Badges with Orbital Avatar */}
+          {/* Right Column: Developer Card with Holographic Portal Profile & Animated Tech Tags */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="glass-panel animate-float" style={{
+            <div className="glass-panel profile-card-glow" style={{
               position: 'relative',
               width: '100%',
               maxWidth: '420px',
@@ -168,11 +168,12 @@ export default function Hero() {
               textAlign: 'center',
               border: '1px solid var(--border-accent)'
             }}>
-              {/* Cyberpunk Futuristic Orbital Avatar */}
-              <div className="avatar-orbit-wrapper">
-                <div className="avatar-orbit-ring"></div>
-                <div className="avatar-orbit-ring-outer"></div>
-                <div className="avatar-img-frame">
+              {/* Cyberpunk Holographic Portal Avatar */}
+              <div className="avatar-portal-wrapper">
+                <div className="avatar-portal-ring"></div>
+                <div className="avatar-portal-halo"></div>
+                <div className="avatar-portal-shimmer-sweep"></div>
+                <div className="avatar-portal-frame">
                   <img
                     src="/avatar.jpg"
                     alt="Hayasinth M"
@@ -205,27 +206,26 @@ export default function Hero() {
                 Computer Science & Engineering
               </p>
 
-              {/* College Pill */}
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid var(--border-color)',
-                padding: '8px 14px',
-                borderRadius: 'var(--radius-sm)',
-                fontSize: '0.85rem',
-                color: 'var(--text-secondary)',
-                marginBottom: '20px'
-              }}>
-                🎓 Jeppiaar Engineering College (2023 - 2027)
+              {/* Animated JPR College Card Badge */}
+              <div className="jpr-college-card-badge-animated">
+                <GraduationCap size={16} className="jpr-cap-icon" />
+                <span>Jeppiaar Engineering College (JPR) • 2023 - 2027</span>
               </div>
 
-              {/* Core Skill Tickers */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-                {['Python', 'SQL', 'JavaScript', 'HTML5', 'CSS3', 'Node.js', 'Express', 'React', 'SQLite'].map((tech) => (
+              {/* Core Skill Tickers - Python, SQL, JavaScript, HTML5, CSS3 */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
+                {[
+                  { name: 'Python', cls: 'tech-tag-python' },
+                  { name: 'SQL', cls: 'tech-tag-sql' },
+                  { name: 'JavaScript', cls: 'tech-tag-javascript' },
+                  { name: 'HTML5', cls: 'tech-tag-html5' },
+                  { name: 'CSS3', cls: 'tech-tag-css3' }
+                ].map((tech) => (
                   <span
-                    key={tech}
-                    className="tech-tag-chip"
+                    key={tech.name}
+                    className={`tech-tag-chip ${tech.cls}`}
                   >
-                    #{tech}
+                    #{tech.name}
                   </span>
                 ))}
               </div>

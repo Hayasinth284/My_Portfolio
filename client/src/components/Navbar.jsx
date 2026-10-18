@@ -63,24 +63,25 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
             <span className="nav-brand-name-violet">
               Hayasinth M
             </span>
-            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-              BE CSE Student @ Jeppiaar
+            <div className="nav-brand-subtitle-visible">
+              <span className="subtitle-live-dot"></span>
+              <span>CSE Student @ JPR (Jeppiaar)</span>
             </div>
           </div>
         </a>
 
-        {/* Desktop Links with Same Unified Animation */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="desktop-nav">
+        {/* Desktop Links with Compact Sizing & Unified Animation */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '6px' }} className="desktop-nav">
           {navLinks.map((link) => {
             const Icon = link.icon;
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className="nav-link nav-link-unified"
+                className="nav-link nav-link-unified nav-link-compact"
               >
                 <span className="nav-btn-indicator"></span>
-                <Icon size={13} className="nav-btn-icon" />
+                <Icon size={12} className="nav-btn-icon" />
                 <span>{link.name}</span>
               </a>
             );
@@ -88,7 +89,7 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
         </nav>
 
         {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {/* Animated Background Mode Switcher Button */}
           {cycleBgMode && (
             <button
@@ -100,12 +101,6 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
               <span>{bgModeNames ? bgModeNames[bgMode] : 'Effects'}</span>
             </button>
           )}
-
-          {/* Status Badge */}
-          <div className="badge badge-cyan" style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 14px', cursor: 'default' }}>
-            <span className="status-dot-pulse" style={{ marginRight: '4px' }}></span>
-            <span>4th Year CSE</span>
-          </div>
 
           {/* Animated Theme Switcher Button */}
           <button

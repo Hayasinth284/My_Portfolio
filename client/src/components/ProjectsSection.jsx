@@ -24,25 +24,26 @@ export default function ProjectsSection({ projects, onSelectProject }) {
         <h2><span className="gradient-text">Projects</span></h2>
       </div>
 
-      {/* Centered Search Bar */}
+      {/* Centered Futuristic Animated Search Bar */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '40px'
       }}>
-        <div className="search-wrapper">
-          <Search size={16} className="search-icon-left" />
+        <div className="project-search-wrapper-animated">
+          <div className="project-search-glow-beam"></div>
+          <Search size={18} className="project-search-icon-animated" />
           <input
             type="text"
-            className="search-input-field"
-            placeholder="Search projects or tech..."
+            className="project-search-input-animated"
+            placeholder="⚡ Search projects by name, tags, Python, SQL..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           {searchQuery && (
             <button
-              className="search-clear-btn"
+              className="project-search-clear-btn"
               onClick={() => setSearchQuery('')}
               title="Clear search"
             >

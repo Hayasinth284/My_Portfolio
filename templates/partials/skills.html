@@ -10,21 +10,22 @@
 
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;">
     {% for category_name, category_skills in categories_skills.items %}
-    <div class="glass-panel" style="padding: 24px;">
+    <div class="glass-panel skill-card-box-animated" style="padding: 24px;">
+      <div class="skill-card-shine"></div>
       <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 18px; color: var(--accent-cyan); display: flex; align-items: center; gap: 8px;">
         <span>🚀</span> {{ category_name }}
       </h3>
 
       <div style="display: flex; flex-direction: column; gap: 16px;">
         {% for skill in category_skills %}
-        <div>
+        <div class="skill-item-hover-group">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <span style="font-weight: 600; font-size: 0.92rem;">{{ skill.name }}</span>
-            <span style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">{{ skill.proficiency }}%</span>
+            <span class="skill-percentage-pill">{{ skill.proficiency }}%</span>
           </div>
           <!-- Progress Bar Meter -->
-          <div style="width: 100%; height: 7px; background: rgba(255, 255, 255, 0.06); border-radius: 4px; overflow: hidden;">
-            <div style="width: {{ skill.proficiency }}%; height: 100%; background: var(--accent-gradient); border-radius: 4px;"></div>
+          <div class="skill-bar-track">
+            <div class="skill-bar-fill-animated" style="width: {{ skill.proficiency }}%;"></div>
           </div>
         </div>
         {% endfor %}

@@ -34,44 +34,39 @@ export default function SkillsSection({ skills }) {
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
         gap: '28px'
       }}>
-        {Object.entries(categories).map(([catName, catSkills]) => (
-          <div key={catName} className="glass-panel" style={{ padding: '28px' }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '20px',
-              paddingBottom: '12px',
-              borderBottom: '1px solid var(--border-color)'
-            }}>
-              {categoryIcons[catName] || <Code size={20} color="var(--accent-cyan)" />}
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>{catName}</h3>
+        {Object.entries(categories).map(([catName, catSkills], index) => (
+          <div
+            key={catName}
+            className="glass-panel skill-card-box-animated"
+            style={{ animationDelay: `${index * 0.4}s` }}
+          >
+            <div className="skill-card-shine"></div>
+            <div className="skill-category-header">
+              <div className="skill-category-icon-box">
+                {categoryIcons[catName] || <Code size={20} color="var(--accent-cyan)" />}
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.22rem', fontWeight: 700, margin: 0 }}>{catName}</h3>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                  {catSkills.length} Core Competencies
+                </span>
+              </div>
             </div>
 
             <div style={{ display: 'grid', gap: '18px' }}>
               {catSkills.map((skill) => (
-                <div key={skill.name}>
+                <div key={skill.name} className="skill-item-hover-group">
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                     <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>{skill.name}</span>
-                    <span style={{
-                      fontSize: '0.82rem',
-                      fontFamily: 'var(--font-mono)',
-                      color: 'var(--accent-cyan)'
-                    }}>
+                    <span className="skill-percentage-pill">
                       {skill.proficiency}%
                     </span>
                   </div>
 
                   {/* Progress Bar Container */}
-                  <div style={{
-                    width: '100%',
-                    height: '8px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    borderRadius: 'var(--radius-full)',
-                    overflow: 'hidden'
-                  }}>
+                  <div className="skill-bar-track">
                     <div
-                      className="skill-bar-fill"
+                      className="skill-bar-fill-animated"
                       style={{ width: `${skill.proficiency}%` }}
                     ></div>
                   </div>
