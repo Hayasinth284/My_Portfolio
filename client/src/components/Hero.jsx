@@ -168,12 +168,9 @@ export default function Hero() {
               textAlign: 'center',
               border: '1px solid var(--border-accent)'
             }}>
-              {/* Cyberpunk Holographic Portal Avatar */}
-              <div className="avatar-portal-wrapper">
-                <div className="avatar-portal-ring"></div>
-                <div className="avatar-portal-halo"></div>
-                <div className="avatar-portal-shimmer-sweep"></div>
-                <div className="avatar-portal-frame">
+              {/* Clean Static Profile Photo (No Animation) */}
+              <div className="avatar-static-wrapper">
+                <div className="avatar-static-frame">
                   <img
                     src="/avatar.jpg"
                     alt="Hayasinth M"
@@ -181,20 +178,21 @@ export default function Hero() {
                       width: '100%',
                       height: '100%',
                       borderRadius: '50%',
-                      objectFit: 'cover'
+                      objectFit: 'cover',
+                      display: 'block'
                     }}
                   />
                 </div>
                 <div style={{
                   position: 'absolute',
-                  bottom: '12px',
-                  right: '20px',
+                  bottom: '8px',
+                  right: '12px',
                   width: '16px',
                   height: '16px',
                   borderRadius: '50%',
                   background: 'var(--accent-emerald)',
                   border: '3px solid var(--bg-card)',
-                  boxShadow: '0 0 10px var(--accent-emerald)',
+                  boxShadow: '0 0 8px var(--accent-emerald)',
                   zIndex: 4
                 }} title="Open to Opportunities"></div>
               </div>
@@ -212,20 +210,14 @@ export default function Hero() {
                 <span>Jeppiaar Engineering College (JPR) • 2023 - 2027</span>
               </div>
 
-              {/* Core Skill Tickers - Python, SQL, JavaScript, HTML5, CSS3 */}
+              {/* Core Skill Tickers - All sharing the exact same animation as #Python */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
-                {[
-                  { name: 'Python', cls: 'tech-tag-python' },
-                  { name: 'SQL', cls: 'tech-tag-sql' },
-                  { name: 'JavaScript', cls: 'tech-tag-javascript' },
-                  { name: 'HTML5', cls: 'tech-tag-html5' },
-                  { name: 'CSS3', cls: 'tech-tag-css3' }
-                ].map((tech) => (
+                {['Python', 'SQL', 'JavaScript', 'HTML5', 'CSS3'].map((tech) => (
                   <span
-                    key={tech.name}
-                    className={`tech-tag-chip ${tech.cls}`}
+                    key={tech}
+                    className="tech-tag-chip tech-tag-python"
                   >
-                    #{tech.name}
+                    #{tech}
                   </span>
                 ))}
               </div>

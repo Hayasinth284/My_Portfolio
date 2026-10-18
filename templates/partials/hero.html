@@ -67,19 +67,16 @@
       <!-- Right Column: Developer Profile Card -->
       <div style="display: flex; justify-content: center;">
         <div class="glass-panel profile-card-glow" style="position: relative; width: 100%; max-width: 420px; padding: 28px 24px; text-align: center; border: 1px solid var(--border-accent);">
-          <!-- Cyberpunk Holographic Portal Avatar -->
-          <div class="avatar-portal-wrapper">
-            <div class="avatar-portal-ring"></div>
-            <div class="avatar-portal-halo"></div>
-            <div class="avatar-portal-shimmer-sweep"></div>
-            <div class="avatar-portal-frame">
+          <!-- Clean Static Profile Photo (No Animation) -->
+          <div class="avatar-static-wrapper">
+            <div class="avatar-static-frame">
               <img
                 src="{% static 'images/avatar.jpg' %}"
                 alt="{{ profile.name }}"
-                style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+                style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;"
               >
             </div>
-            <div style="position: absolute; bottom: 12px; right: 20px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-emerald); border: 3px solid var(--bg-card); box-shadow: 0 0 10px var(--accent-emerald); z-index: 4;" title="Open to Opportunities"></div>
+            <div style="position: absolute; bottom: 8px; right: 12px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-emerald); border: 3px solid var(--bg-card); box-shadow: 0 0 8px var(--accent-emerald); z-index: 4;" title="Open to Opportunities"></div>
           </div>
 
           <h3 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 6px;">{{ profile.name }}</h3>
@@ -92,13 +89,13 @@
             <span>🎓 Jeppiaar Engineering College (JPR) • 2023 - 2027</span>
           </div>
 
-          <!-- Core Skills Badges (Python, SQL, JavaScript, HTML5, CSS3) -->
+          <!-- Core Skills Badges - All sharing the exact same animation as #Python -->
           <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
             <span class="tech-tag-chip tech-tag-python">#Python</span>
-            <span class="tech-tag-chip tech-tag-sql">#SQL</span>
-            <span class="tech-tag-chip tech-tag-javascript">#JavaScript</span>
-            <span class="tech-tag-chip tech-tag-html5">#HTML5</span>
-            <span class="tech-tag-chip tech-tag-css3">#CSS3</span>
+            <span class="tech-tag-chip tech-tag-python">#SQL</span>
+            <span class="tech-tag-chip tech-tag-python">#JavaScript</span>
+            <span class="tech-tag-chip tech-tag-python">#HTML5</span>
+            <span class="tech-tag-chip tech-tag-python">#CSS3</span>
           </div>
         </div>
       </div>
