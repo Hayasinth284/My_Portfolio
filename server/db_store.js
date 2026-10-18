@@ -1,7 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const dbPath = path.join(__dirname, 'database.json');
+const isVercel = !!process.env.VERCEL;
+const tmpDbPath = path.join('/tmp', 'database.json');
+const defaultDbPath = path.join(__dirname, 'database.json');
+const dbPath = isVercel ? tmpDbPath : defaultDbPath;
 
 const initialData = {
   projects: [
@@ -86,15 +89,32 @@ const initialData = {
 
 let inMemoryData = JSON.parse(JSON.stringify(initialData));
 
+function getActiveDbPath() {
+  if (isVercel) {
+    if (fs.existsSync(tmpDbPath)) return tmpDbPath;
+    if (fs.existsSync(defaultDbPath)) {
+      try {
+        fs.copyFileSync(defaultDbPath, tmpDbPath);
+        return tmpDbPath;
+      } catch (e) {
+        return defaultDbPath;
+      }
+    }
+    return tmpDbPath;
+  }
+  return defaultDbPath;
+}
+
 function readDB() {
   try {
-    if (fs.existsSync(dbPath)) {
-      const raw = fs.readFileSync(dbPath, 'utf8');
+    const targetPath = getActiveDbPath();
+    if (fs.existsSync(targetPath)) {
+      const raw = fs.readFileSync(targetPath, 'utf8');
       inMemoryData = JSON.parse(raw);
       return inMemoryData;
     } else {
       try {
-        fs.writeFileSync(dbPath, JSON.stringify(inMemoryData, null, 2));
+        fs.writeFileSync(targetPath, JSON.stringify(inMemoryData, null, 2));
       } catch (err) {
         // Fallback to in-memory if write is blocked
       }
@@ -108,10 +128,15 @@ function readDB() {
 function writeDB(data) {
   inMemoryData = data;
   try {
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    const targetPath = isVercel ? tmpDbPath : defaultDbPath;
+    fs.writeFileSync(targetPath, JSON.stringify(data, null, 2));
   } catch (err) {
-    // If disk write fails, memory state is safely preserved
-    console.warn('Warning: Could not save database.json to disk, using in-memory store:', err.message);
+    try {
+      fs.writeFileSync(tmpDbPath, JSON.stringify(data, null, 2));
+    } catch (e2) {
+      // If disk write fails, memory state is safely preserved
+      console.warn('Notice: Using in-memory store for update:', err.message);
+    }
   }
 }
 

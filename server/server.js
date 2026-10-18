@@ -19,6 +19,16 @@ function sendJSON(res, statusCode, data) {
 }
 
 function parseBody(req) {
+  if (req.body && typeof req.body === 'object') {
+    return Promise.resolve(req.body);
+  }
+  if (req.body && typeof req.body === 'string') {
+    try {
+      return Promise.resolve(JSON.parse(req.body));
+    } catch (e) {
+      return Promise.resolve({});
+    }
+  }
   return new Promise((resolve, reject) => {
     let body = '';
     req.on('data', chunk => body += chunk);
@@ -54,10 +64,14 @@ const mimeTypes = {
   '.ico': 'image/x-icon'
 };
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   const parsedUrl = url.parse(req.url, true);
-  const pathname = parsedUrl.pathname;
-  const method = req.method.toUpperCase();
+  let pathname = parsedUrl.pathname || '/';
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    pathname = pathname.slice(0, -1);
+  }
+  const apiRoute = pathname.startsWith('/api') ? pathname : '/api' + pathname;
+  const method = req.method ? req.method.toUpperCase() : 'GET';
 
   setCorsHeaders(res);
   if (method === 'OPTIONS') {
@@ -69,7 +83,7 @@ const server = http.createServer(async (req, res) => {
   const db = readDB();
 
   // API Endpoints
-  if (pathname === '/api/projects') {
+  if (apiRoute === '/api/projects') {
     if (method === 'GET') {
       const { category, search } = parsedUrl.query;
       let projects = db.projects || [];
@@ -112,8 +126,8 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Single Project Route (/api/projects/:id)
-  if (pathname.startsWith('/api/projects/')) {
-    const id = parseInt(pathname.split('/')[3]);
+  if (apiRoute.startsWith('/api/projects/')) {
+    const id = parseInt(apiRoute.split('/')[3]);
     if (method === 'DELETE') {
       db.projects = db.projects.filter(p => p.id !== id);
       writeDB(db);
@@ -122,14 +136,14 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Skills Endpoint
-  if (pathname === '/api/skills') {
+  if (apiRoute === '/api/skills') {
     if (method === 'GET') {
       return sendJSON(res, 200, db.skills || []);
     }
   }
 
   // Contact Endpoint
-  if (pathname === '/api/contact') {
+  if (apiRoute === '/api/contact') {
     if (method === 'POST') {
       const body = await parseBody(req);
       if (!body.name || !body.email || !body.message) {
@@ -151,7 +165,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Stats Endpoint
-  if (pathname === '/api/stats') {
+  if (apiRoute === '/api/stats') {
     return sendJSON(res, 200, {
       projectsCompleted: db.projects.length,
       technologiesMastered: db.skills.length,
@@ -162,7 +176,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Health Endpoint
-  if (pathname === '/api/health') {
+  if (apiRoute === '/api/health' || apiRoute === '/api') {
     return sendJSON(res, 200, {
       status: 'OK',
       developer: 'Hayasinth M',
@@ -229,12 +243,17 @@ const server = http.createServer(async (req, res) => {
       <li><a href="/api/health">/api/health</a></li>
     </ul>
   `);
-});
+}
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`=======================================================`);
-  console.log(`  Hayasinth M Portfolio Server running on http://localhost:${PORT}`);
-  console.log(`  College: Jeppiaar Engineering College (BE CSE 4th Year)`);
-  console.log(`  Database: Persistent SQL/JSON Store Active`);
-  console.log(`=======================================================`);
-});
+if (require.main === module) {
+  const server = http.createServer(handleRequest);
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`=======================================================`);
+    console.log(`  Hayasinth M Portfolio Server running on http://localhost:${PORT}`);
+    console.log(`  College: Jeppiaar Engineering College (BE CSE 4th Year)`);
+    console.log(`  Database: Persistent SQL/JSON Store Active`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = handleRequest;

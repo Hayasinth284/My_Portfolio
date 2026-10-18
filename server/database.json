@@ -156,5 +156,15 @@
       "type": "Education"
     }
   ],
-  "messages": []
+  "messages": [
+    {
+      "id": 1792338737451,
+      "name": "Test Recruiter",
+      "email": "recruiter@example.com",
+      "phone": "",
+      "subject": "",
+      "message": "Hello Hayasinth!",
+      "date": "2026-10-18T15:52:17.451Z"
+    }
+  ]
 }
