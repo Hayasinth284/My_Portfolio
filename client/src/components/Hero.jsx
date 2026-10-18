@@ -82,7 +82,7 @@ export default function Hero() {
               marginBottom: '32px',
               maxWidth: '560px'
             }}>
-              Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <span className="jpr-college-badge-animated">🎓 Jeppiaar Engineering College (JPR)</span>. Passionate about building modern database-driven systems using <strong className="tech-chip-text tech-text-sql">SQL</strong> and <strong className="tech-chip-text tech-text-python">Python</strong>, and clean responsive frontends with <strong className="tech-chip-text tech-text-js">JavaScript</strong>, <strong className="tech-chip-text tech-text-html">HTML5</strong>, and <strong className="tech-chip-text tech-text-css">CSS3</strong>.
+              Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <strong>Jeppiaar Engineering College</strong>. Passionate about building modern database-driven systems using <strong>SQL</strong> and <strong>Python</strong>, and clean responsive frontends with <strong>JavaScript, HTML5, and CSS3</strong>.
             </p>
 
             {/* CTA Action Buttons with Unified Cohesive Animation */}
