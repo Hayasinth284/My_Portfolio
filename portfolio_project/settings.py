@@ -11,6 +11,13 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-hayasinth-port
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://hayasinthportfolio.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:8000'
+]
 
 # Application definition
 INSTALLED_APPS = [
