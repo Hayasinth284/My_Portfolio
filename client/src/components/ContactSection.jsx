@@ -60,15 +60,11 @@ export default function ContactSection({ showToast }) {
         <p>Feel free to reach out for opportunities, projects, collaboration, or inquiries.</p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '40px'
-      }}>
+      <div className="contact-main-grid">
         {/* Left Column: Direct Contact Info Cards */}
-        <div style={{ display: 'grid', gap: '20px' }}>
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{
+        <div className="contact-info-column" style={{ display: 'grid', gap: '20px' }}>
+          <div className="glass-panel contact-info-card">
+            <div className="contact-info-icon-box" style={{
               width: '48px',
               height: '48px',
               borderRadius: '12px',
@@ -77,20 +73,21 @@ export default function ContactSection({ showToast }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--accent-cyan)'
+              color: 'var(--accent-cyan)',
+              flexShrink: 0
             }}>
               <Mail size={22} />
             </div>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Email Address</div>
-              <a href="mailto:hayasinth284@gmail.com" style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
+              <a href="mailto:hayasinth284@gmail.com" className="contact-card-link" style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
                 hayasinth284@gmail.com
               </a>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{
+          <div className="glass-panel contact-info-card">
+            <div className="contact-info-icon-box" style={{
               width: '48px',
               height: '48px',
               borderRadius: '12px',
@@ -99,20 +96,21 @@ export default function ContactSection({ showToast }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--accent-blue)'
+              color: 'var(--accent-blue)',
+              flexShrink: 0
             }}>
               <Phone size={22} />
             </div>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Mobile Number</div>
-              <a href="tel:+918122208962" style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
+              <a href="tel:+918122208962" className="contact-card-link" style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
                 +91 8122208962
               </a>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{
+          <div className="glass-panel contact-info-card">
+            <div className="contact-info-icon-box" style={{
               width: '48px',
               height: '48px',
               borderRadius: '12px',
@@ -121,20 +119,21 @@ export default function ContactSection({ showToast }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--accent-cyan)'
+              color: 'var(--accent-cyan)',
+              flexShrink: 0
             }}>
               <Linkedin size={22} />
             </div>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>LinkedIn Profile</div>
-              <a href="https://www.linkedin.com/in/hayasinth284" target="_blank" rel="noreferrer" style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
+              <a href="https://www.linkedin.com/in/hayasinth284" target="_blank" rel="noreferrer" className="contact-card-link" style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
                 linkedin.com/in/hayasinth284
               </a>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{
+          <div className="glass-panel contact-info-card">
+            <div className="contact-info-icon-box" style={{
               width: '48px',
               height: '48px',
               borderRadius: '12px',
@@ -143,11 +142,12 @@ export default function ContactSection({ showToast }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--accent-purple)'
+              color: 'var(--accent-purple)',
+              flexShrink: 0
             }}>
               <MapPin size={22} />
             </div>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>College & Location</div>
               <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 Jeppiaar Engineering College
@@ -158,7 +158,7 @@ export default function ContactSection({ showToast }) {
         </div>
 
         {/* Right Column: Contact Form */}
-        <div className="glass-panel" style={{ padding: '32px' }}>
+        <div className="glass-panel contact-form-card">
           <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '20px' }}>
             Send Me a Message
           </h3>
@@ -198,7 +198,7 @@ export default function ContactSection({ showToast }) {
                 </div>
               )}
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+              <div className="contact-form-row">
                 <div className="input-group-animated">
                   <User size={16} className="form-input-icon" />
                   <input
@@ -226,7 +226,7 @@ export default function ContactSection({ showToast }) {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+              <div className="contact-form-row">
                 <div className="input-group-animated">
                   <Phone size={16} className="form-input-icon" />
                   <input

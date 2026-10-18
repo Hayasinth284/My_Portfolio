@@ -29,11 +29,7 @@ export default function SkillsSection({ skills }) {
         <p>Comprehensive overview of core programming languages, database systems, web frameworks, and developer tools.</p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '28px'
-      }}>
+      <div className="skills-grid">
         {Object.entries(categories).map(([catName, catSkills], index) => (
           <div
             key={catName}

@@ -18,7 +18,7 @@ export default function Hero() {
   }, [roles.length]);
 
   return (
-    <section id="hero" style={{ position: 'relative', overflow: 'hidden', padding: '100px 24px 60px' }}>
+    <section id="hero" className="hero-section">
       {/* Background Neon Accent Blobs */}
       <div style={{
         position: 'absolute',
@@ -29,7 +29,8 @@ export default function Hero() {
         borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0,0,0,0) 70%)',
         filter: 'blur(50px)',
-        zIndex: -1
+        zIndex: -1,
+        pointerEvents: 'none'
       }}></div>
 
       <div style={{
@@ -41,26 +42,22 @@ export default function Hero() {
         borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(127, 86, 217, 0.15) 0%, rgba(0,0,0,0) 70%)',
         filter: 'blur(50px)',
-        zIndex: -1
+        zIndex: -1,
+        pointerEvents: 'none'
       }}></div>
 
-      <div className="section-container" style={{ padding: '0' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '48px',
-          alignItems: 'center'
-        }}>
+      <div className="section-container hero-section-container">
+        <div className="hero-main-grid">
           
           {/* Left Column: Bio & Headline */}
-          <div>
+          <div className="hero-left-col">
             <div className="badge badge-cyan" style={{ marginBottom: '18px', padding: '6px 14px' }}>
               <Sparkles size={14} className="animate-spin" style={{ animationDuration: '4s' }} />
               <span>Aspiring Software Engineer</span>
             </div>
 
             {/* Main Animated Headline & Name */}
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.15, marginBottom: '20px' }}>
+            <h1 className="hero-main-title">
               Hi, I'm <span className="hero-name-animated">Hayasinth M</span>
             </h1>
 
@@ -75,18 +72,12 @@ export default function Hero() {
               </div>
             </div>
 
-            <p style={{
-              color: 'var(--text-secondary)',
-              fontSize: '1.05rem',
-              lineHeight: 1.7,
-              marginBottom: '32px',
-              maxWidth: '560px'
-            }}>
+            <p className="hero-bio-text">
               Currently pursuing <strong>B.E. Computer Science and Engineering</strong> at <strong>Jeppiaar Engineering College</strong>. Passionate about building modern database-driven systems using <strong>SQL</strong> and <strong>Python</strong>, and clean responsive frontends with <strong>JavaScript, HTML5, and CSS3</strong>.
             </p>
 
             {/* CTA Action Buttons with Unified Cohesive Animation */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '32px', alignItems: 'center' }}>
+            <div className="hero-cta-group">
               <a
                 href="#projects"
                 className="hero-cta-btn hero-cta-explore"
@@ -123,21 +114,15 @@ export default function Hero() {
             </div>
 
             {/* Quick Contact & Info Grid with Floating Micro-Animations */}
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '10px',
-              paddingTop: '20px',
-              borderTop: '1px solid var(--border-color)'
-            }}>
+            <div className="hero-contact-chips-group">
               <a href="mailto:hayasinth284@gmail.com" className="contact-chip contact-chip-email" title="Click to email">
                 <Mail size={16} color="var(--accent-cyan)" />
-                <span>hayasinth284@gmail.com</span>
+                <span className="chip-text">hayasinth284@gmail.com</span>
               </a>
 
               <a href="tel:+918122208962" className="contact-chip contact-chip-phone" title="Click to call">
                 <Phone size={16} color="#10b981" />
-                <span>+91 8122208962</span>
+                <span className="chip-text">+91 8122208962</span>
               </a>
 
               <a
@@ -148,26 +133,19 @@ export default function Hero() {
                 title="View LinkedIn Profile"
               >
                 <Linkedin size={16} color="#00f2fe" />
-                <span>linkedin.com/in/hayasinth284</span>
+                <span className="chip-text">linkedin.com/in/hayasinth284</span>
               </a>
 
               <div className="contact-chip contact-chip-location">
                 <MapPin size={16} color="#c084fc" />
-                <span>Chennai, Tamil Nadu</span>
+                <span className="chip-text">Chennai, Tamil Nadu</span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Developer Card with Holographic Portal Profile & Animated Tech Tags */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="glass-panel profile-card-glow" style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '420px',
-              padding: '28px 24px',
-              textAlign: 'center',
-              border: '1px solid var(--border-accent)'
-            }}>
+          <div className="hero-right-col" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <div className="glass-panel profile-card-glow hero-profile-card">
               {/* Clean Static Profile Photo (No Animation) */}
               <div className="avatar-static-wrapper">
                 <div className="avatar-static-frame">

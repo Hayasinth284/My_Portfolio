@@ -30,15 +30,11 @@ export default function StatsSection({ stats }) {
   ];
 
   return (
-    <div style={{ background: 'var(--bg-secondary)', padding: '60px 24px', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
-      <div className="section-container" style={{ padding: '0' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: '24px'
-        }}>
+    <div className="stats-section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
+      <div className="section-container stats-section-container">
+        <div className="stats-grid">
           {statCards.map((card, idx) => (
-            <div key={idx} className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
+            <div key={idx} className="glass-panel stat-card">
               <div style={{
                 width: '56px',
                 height: '56px',

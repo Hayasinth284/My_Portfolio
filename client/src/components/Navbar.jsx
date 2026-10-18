@@ -22,17 +22,18 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
       borderBottom: '1px solid var(--border-color)',
       transition: 'all 0.3s ease'
     }}>
-      <div style={{
+      <div className="navbar-inner-container" style={{
         maxWidth: '1200px',
         margin: '0 auto',
         padding: '16px 24px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        gap: '12px'
       }}>
         {/* Brand Logo with Violet Name Styling */}
-        <a href="#hero" className="nav-brand-link" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
-          <div style={{ position: 'relative', width: '42px', height: '42px' }}>
+        <a href="#hero" className="nav-brand-link" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', minWidth: 0, flexShrink: 1 }}>
+          <div style={{ position: 'relative', width: '42px', height: '42px', flexShrink: 0 }}>
             <img
               src="/avatar.jpg"
               alt="Hayasinth M"
@@ -59,13 +60,13 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
               boxShadow: '0 0 8px var(--accent-emerald)'
             }}></div>
           </div>
-          <div>
+          <div style={{ minWidth: 0 }}>
             <span className="nav-brand-name-violet">
               Hayasinth M
             </span>
             <div className="nav-brand-subtitle-visible">
               <span className="subtitle-live-dot"></span>
-              <span>CSE Student @ JPR (Jeppiaar)</span>
+              <span className="subtitle-text">CSE Student @ JPR (Jeppiaar)</span>
             </div>
           </div>
         </a>
@@ -89,7 +90,7 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
         </nav>
 
         {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div className="nav-actions-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
           {/* Animated Background Mode Switcher Button */}
           {cycleBgMode && (
             <button
@@ -98,7 +99,7 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
               title="Click to Switch Background Animation (3D Quantum, Code Matrix, Aurora)"
             >
               <Sparkles size={14} className="nav-fx-icon" />
-              <span>{bgModeNames ? bgModeNames[bgMode] : 'Effects'}</span>
+              <span className="nav-fx-text">{bgModeNames ? bgModeNames[bgMode] : 'Effects'}</span>
             </button>
           )}
 
@@ -107,31 +108,27 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
             onClick={toggleTheme}
             className="nav-icon-btn nav-theme-btn"
             title="Toggle Light/Dark Theme"
+            aria-label="Toggle Light or Dark Theme"
           >
             {theme === 'dark' ? <Sun size={18} className="theme-icon-animated" /> : <Moon size={18} className="theme-icon-animated" />}
           </button>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--text-primary)',
-              cursor: 'pointer',
-              display: 'none'
-            }}
             className="mobile-toggle"
+            aria-label="Toggle Navigation Menu"
+            title="Menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Navigation Drawer with Smooth Slide-in */}
       {mobileMenuOpen && (
-        <div style={{
-          padding: '16px 24px 20px',
+        <div className="mobile-nav-drawer" style={{
+          padding: '16px 20px 22px',
           background: 'var(--bg-secondary)',
           borderTop: '1px solid var(--border-color)',
           display: 'flex',
@@ -146,12 +143,12 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
                 key={link.name}
                 href={link.href}
                 className="nav-link nav-link-unified"
-                style={{ padding: '10px 16px', width: '100%', justifyContent: 'flex-start' }}
+                style={{ padding: '12px 18px', width: '100%', justifyContent: 'flex-start', minHeight: '44px' }}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="nav-btn-indicator"></span>
-                <Icon size={14} className="nav-btn-icon" />
-                <span>{link.name}</span>
+                <Icon size={16} className="nav-btn-icon" />
+                <span style={{ fontSize: '1rem', fontWeight: 600 }}>{link.name}</span>
               </a>
             );
           })}

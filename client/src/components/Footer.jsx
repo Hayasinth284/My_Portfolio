@@ -7,23 +7,15 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{
+    <footer className="footer-section" style={{
       background: 'var(--bg-secondary)',
       borderTop: '1px solid var(--border-color)',
-      padding: '40px 24px 20px',
       color: 'var(--text-secondary)'
     }}>
-      <div className="section-container" style={{ padding: '0' }}>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '20px',
-          marginBottom: '30px'
-        }}>
+      <div className="section-container footer-container">
+        <div className="footer-top-row">
           {/* Logo & Profile Avatar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="footer-brand" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img
               src="/avatar.jpg"
               alt="Hayasinth M"
@@ -43,11 +35,11 @@ export default function Footer() {
           </div>
 
           {/* Social Links & Navigation */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', fontSize: '0.9rem' }}>
-            <a href="#hero" style={{ color: 'inherit', textDecoration: 'none' }}>About</a>
-            <a href="#projects" style={{ color: 'inherit', textDecoration: 'none' }}>Projects</a>
-            <a href="#skills" style={{ color: 'inherit', textDecoration: 'none' }}>Skills</a>
-            <a href="#contact" style={{ color: 'inherit', textDecoration: 'none' }}>Contact</a>
+          <div className="footer-nav-links">
+            <a href="#hero">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
             <a href="https://www.linkedin.com/in/hayasinth284" target="_blank" rel="noreferrer" title="LinkedIn" style={{ color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center' }}>
               <Linkedin size={18} />
             </a>

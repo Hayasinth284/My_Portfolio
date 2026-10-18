@@ -7,43 +7,20 @@ export default function ProjectModal({ project, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
-        className="glass-panel"
-        style={{
-          width: '100%',
-          maxWidth: '750px',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          padding: '0',
-          position: 'relative',
-          border: '1px solid var(--border-accent)'
-        }}
+        className="glass-panel project-modal-content"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '16px',
-            right: '16px',
-            zIndex: 10,
-            background: 'rgba(0, 0, 0, 0.6)',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '50%',
-            width: '36px',
-            height: '36px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
+          className="modal-close-btn"
+          aria-label="Close project modal"
         >
           <X size={20} />
         </button>
 
         {/* Modal Header Image */}
-        <div style={{ position: 'relative', height: '260px', width: '100%' }}>
+        <div className="modal-header-img-wrapper">
           <img
             src={project.image || '/project1.jpg'}
             alt={project.title}
@@ -59,8 +36,8 @@ export default function ProjectModal({ project, onClose }) {
         </div>
 
         {/* Modal Body */}
-        <div style={{ padding: '28px' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '12px' }}>
+        <div className="modal-body-container">
+          <h2 className="modal-project-title">
             {project.title}
           </h2>
 
@@ -86,7 +63,7 @@ export default function ProjectModal({ project, onClose }) {
           <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>
             Overview
           </h4>
-          <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '24px' }}>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '24px', fontSize: '0.95rem' }}>
             {project.description}
           </p>
 
@@ -124,20 +101,15 @@ export default function ProjectModal({ project, onClose }) {
           )}
 
           {/* Links Footer */}
-          <div style={{
-            display: 'flex',
-            gap: '16px',
-            paddingTop: '20px',
-            borderTop: '1px solid var(--border-color)'
-          }}>
+          <div className="modal-links-footer">
             {project.github_url && project.github_url !== '#' && (
-              <a href={project.github_url} target="_blank" rel="noreferrer" className="btn-primary">
+              <a href={project.github_url} target="_blank" rel="noreferrer" className="btn-primary modal-action-btn">
                 <Github size={18} /> View Code on GitHub
               </a>
             )}
 
             {project.demo_url && project.demo_url !== '#' && (
-              <a href={project.demo_url} target="_blank" rel="noreferrer" className="btn-secondary">
+              <a href={project.demo_url} target="_blank" rel="noreferrer" className="btn-secondary modal-action-btn">
                 <ExternalLink size={18} /> Live Demonstration
               </a>
             )}

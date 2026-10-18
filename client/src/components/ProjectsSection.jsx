@@ -55,19 +55,15 @@ export default function ProjectsSection({ projects, onSelectProject }) {
 
       {/* Project Grid */}
       {filteredProjects.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-muted)' }}>
+        <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--text-muted)' }}>
           <p>No projects found matching "{searchQuery}".</p>
         </div>
       ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: '28px'
-        }}>
+        <div className="projects-grid">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="glass-panel"
+              className="glass-panel project-card-item"
               style={{
                 overflow: 'hidden',
                 display: 'flex',

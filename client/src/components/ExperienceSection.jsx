@@ -27,48 +27,21 @@ export default function ExperienceSection() {
         <p>Academic foundation at Jeppiaar Engineering College and practical software engineering milestones.</p>
       </div>
 
-      <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
+      <div className="timeline-container">
         {/* Timeline Line */}
-        <div style={{
-          position: 'absolute',
-          left: '28px',
-          top: '0',
-          bottom: '0',
-          width: '2px',
-          background: 'linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple))',
-          opacity: 0.4
-        }}></div>
+        <div className="timeline-spine"></div>
 
         <div style={{ display: 'grid', gap: '36px' }}>
           {roadmapItems.map((item, index) => (
-            <div key={index} style={{ display: 'flex', gap: '24px', position: 'relative' }}>
+            <div key={index} className="timeline-item">
               {/* Timeline Icon Badge */}
-              <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '50%',
-                background: 'var(--bg-secondary)',
-                border: '2px solid var(--accent-cyan)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--accent-cyan)',
-                flexShrink: 0,
-                zIndex: 2,
-                boxShadow: '0 0 15px rgba(0, 242, 254, 0.2)'
-              }}>
-                {item.type === 'Education' ? <GraduationCap size={24} /> : <Briefcase size={24} />}
+              <div className="timeline-icon-badge">
+                {item.type === 'Education' ? <GraduationCap size={22} /> : <Briefcase size={22} />}
               </div>
 
               {/* Card Container */}
-              <div className="glass-panel" style={{ padding: '24px', flex: 1 }}>
-                <div style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '8px'
-                }}>
+              <div className="glass-panel timeline-card">
+                <div className="timeline-card-header">
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>{item.title}</h3>
                   <span style={{
                     fontSize: '0.82rem',
