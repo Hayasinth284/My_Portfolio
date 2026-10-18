@@ -26,21 +26,24 @@
           Currently pursuing <strong>{{ profile.degree }}</strong> at <strong>{{ profile.institution }}</strong>. Passionate about building modern full-stack web applications, database-driven systems using <strong>SQL</strong> and <strong>Python / Django</strong>, and responsive interfaces with <strong>JavaScript, HTML5, and CSS3</strong>.
         </p>
 
-        <!-- CTA Action Buttons -->
-        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
-          <a href="#projects" class="btn-primary">
-            Explore My Work →
+        <!-- CTA Action Buttons with Unified Cohesive Animation -->
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 32px; align-items: center;">
+          <a href="#projects" class="hero-cta-btn hero-cta-explore" title="Explore My Work">
+            <span>Explore My Work</span>
+            <span class="hero-btn-pulse-dot"></span>
           </a>
 
           {% if profile.linkedin_url %}
-          <a href="{{ profile.linkedin_url }}" target="_blank" rel="noreferrer" class="btn-secondary">
-            💼 LinkedIn
+          <a href="{{ profile.linkedin_url }}" target="_blank" rel="noreferrer" class="hero-cta-btn hero-cta-linkedin" title="Connect on LinkedIn">
+            <span>LinkedIn</span>
+            <span class="hero-btn-pulse-dot"></span>
           </a>
           {% endif %}
 
           {% if profile.github_url %}
-          <a href="{{ profile.github_url }}" target="_blank" rel="noreferrer" class="btn-secondary">
-            🐙 GitHub
+          <a href="{{ profile.github_url }}" target="_blank" rel="noreferrer" class="hero-cta-btn hero-cta-github" title="View GitHub">
+            <span>GitHub</span>
+            <span class="hero-btn-pulse-dot"></span>
           </a>
           {% endif %}
         </div>

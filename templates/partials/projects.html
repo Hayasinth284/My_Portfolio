@@ -1,29 +1,15 @@
 {% load static %}
 <section id="projects" class="section-container">
   <!-- Section Header -->
-  <div class="section-header">
+  <div class="section-header" style="margin-bottom: 32px;">
     <div class="badge badge-cyan" style="margin-bottom: 12px;">
       <span>✨ Featured Engineering Work</span>
     </div>
-    <h2>Portfolio <span class="gradient-text">Projects</span></h2>
-    <p>Explore software engineering projects built with Python, Django, SQL, JavaScript, HTML5, CSS3, and React.</p>
+    <h2><span class="gradient-text">Projects</span></h2>
   </div>
 
-  <!-- Filter Controls & Search -->
-  <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center; margin-bottom: 36px;">
-    <!-- Category Tabs -->
-    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-      {% for cat in categories %}
-      <button
-        class="filter-btn {% if forloop.first %}active{% endif %}"
-        data-category="{{ cat }}"
-      >
-        {% if cat == 'All' %}⚡ All Projects{% else %}{{ cat }}{% endif %}
-      </button>
-      {% endfor %}
-    </div>
-
-    <!-- Search Bar -->
+  <!-- Search Bar -->
+  <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 40px;">
     <div class="search-wrapper">
       <span class="search-icon-left">🔍</span>
       <input
