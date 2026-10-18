@@ -81,6 +81,7 @@ def _load_fallback_data():
         pass
     return {'projects': [], 'skills': []}
 
+@csrf_exempt
 def api_projects(request):
     """GET filterable projects or POST new project"""
     if request.method == 'GET':
@@ -157,6 +158,7 @@ def api_projects(request):
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
+@csrf_exempt
 def api_project_detail(request, pk):
     """GET single project, or DELETE project"""
     try:
@@ -239,6 +241,7 @@ def api_stats(request):
     })
 
 
+@csrf_exempt
 def api_contact(request):
     """POST contact message submission"""
     if request.method == 'POST':
