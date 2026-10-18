@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Sun, Moon, Code2, Menu, X, Settings, Sparkles } from 'lucide-react';
+import { Sun, Moon, Code2, Menu, X, Settings, Sparkles, User, Cpu, GraduationCap, Mail } from 'lucide-react';
 
 export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgMode, bgModeNames }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'About', href: '#hero' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', href: '#hero', icon: User },
+    { name: 'Projects', href: '#projects', icon: Code2 },
+    { name: 'Skills', href: '#skills', icon: Cpu },
+    { name: 'Experience', href: '#experience', icon: GraduationCap },
+    { name: 'Contact', href: '#contact', icon: Mail },
   ];
 
   return (
@@ -30,9 +30,8 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        {/* Brand Logo */}
-        {/* Brand Logo with Profile Image */}
-        <a href="#hero" className="nav-brand-link">
+        {/* Brand Logo with Violet Name Styling */}
+        <a href="#hero" className="nav-brand-link" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
           <div style={{ position: 'relative', width: '42px', height: '42px' }}>
             <img
               src="/avatar.jpg"
@@ -42,8 +41,8 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
                 height: '42px',
                 borderRadius: '50%',
                 objectFit: 'cover',
-                border: '2px solid var(--accent-cyan)',
-                boxShadow: '0 0 14px rgba(0, 242, 254, 0.45)',
+                border: '2px solid #c084fc',
+                boxShadow: '0 0 14px rgba(192, 132, 252, 0.55)',
                 display: 'block',
                 transition: 'all 0.3s ease'
               }}
@@ -61,8 +60,8 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
             }}></div>
           </div>
           <div>
-            <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px' }}>
-              Hayasinth<span className="gradient-text">.M</span>
+            <span className="nav-brand-name-violet">
+              Hayasinth<span className="nav-brand-dot-violet">.M</span>
             </span>
             <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
               BE CSE Student @ Jeppiaar
@@ -70,35 +69,18 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
           </div>
         </a>
 
-        {/* Desktop Links */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '10px' }} className="desktop-nav">
+        {/* Desktop Links with Same Unified Animation */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="desktop-nav">
           {navLinks.map((link) => {
-            const isAbout = link.name === 'About';
-            const isProjects = link.name === 'Projects';
-            const linkClass = isAbout
-              ? 'nav-link nav-link-about'
-              : isProjects
-              ? 'nav-link nav-link-projects'
-              : 'nav-link';
-
+            const Icon = link.icon;
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={linkClass}
+                className="nav-link nav-link-unified"
               >
-                {isAbout && (
-                  <>
-                    <span className="nav-btn-indicator"></span>
-                    <Sparkles size={13} color="#00f2fe" style={{ marginRight: '2px' }} />
-                  </>
-                )}
-                {isProjects && (
-                  <>
-                    <span className="nav-btn-indicator"></span>
-                    <Code2 size={13} color="#c084fc" style={{ marginRight: '2px' }} />
-                  </>
-                )}
+                <span className="nav-btn-indicator"></span>
+                <Icon size={13} className="nav-btn-icon" />
                 <span>{link.name}</span>
               </a>
             );
@@ -174,24 +156,17 @@ export default function Navbar({ theme, toggleTheme, openAdmin, bgMode, cycleBgM
           animation: 'fadeIn 0.25s ease'
         }}>
           {navLinks.map((link) => {
-            const isAbout = link.name === 'About';
-            const isProjects = link.name === 'Projects';
-            const linkClass = isAbout
-              ? 'nav-link nav-link-about'
-              : isProjects
-              ? 'nav-link nav-link-projects'
-              : 'nav-link';
-
+            const Icon = link.icon;
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={linkClass}
+                className="nav-link nav-link-unified"
                 style={{ padding: '10px 16px', width: '100%', justifyContent: 'flex-start' }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {isAbout && <Sparkles size={14} color="#00f2fe" />}
-                {isProjects && <Code2 size={14} color="#c084fc" />}
+                <span className="nav-btn-indicator"></span>
+                <Icon size={14} className="nav-btn-icon" />
                 <span>{link.name}</span>
               </a>
             );
